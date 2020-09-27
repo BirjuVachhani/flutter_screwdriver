@@ -29,33 +29,42 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
+// Author: Birju Vachhani
+// Created Date: September 03, 2020
 
-import 'dart:ui';
+part of flutter_screwdriver;
 
-import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+/// Hides keyboard on tap outside tap-able widgets.
+/// This should be used as the parent of your [MaterialApp]. This way, it will
+/// detect any touches outside text fields and other touchable areas and will
+/// close the soft keyboard if open.
+/// Flag [hide] can be used to toggle this behavior.
+/// e.g.
+///
+/// HideKeyboard(
+///   child: MaterialApp(
+///     ...
+///   ),
+/// );
+///
+class HideKeyboard extends StatelessWidget {
+  /// flag to toggle hiding of keyboard
+  final bool hide;
 
-import 'src/helpers/helpers.dart' as nav show navigator;
+  /// child widget, in most cases, [MaterialApp]
+  final Widget child;
 
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
+  /// Default Constructor
+  const HideKeyboard({Key key, @required this.child, this.hide = true})
+      : assert(child != null),
+        assert(hide != null),
+        super(key: key);
 
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'widget/widget.dart';
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: hide ? context.hideKeyboard : null,
+      child: child,
+    );
+  }
+}

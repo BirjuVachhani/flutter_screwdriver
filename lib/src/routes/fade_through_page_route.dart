@@ -29,33 +29,27 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
-
-import 'dart:ui';
-
 import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import 'src/helpers/helpers.dart' as nav show navigator;
+/// Provides page route with fade-through material transition
+/// from animations package.
+class FadeThroughPageRoute<T> extends PageRouteBuilder<T> {
+  @override
+  final Duration transitionDuration;
 
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
+  /// duration is in milliseconds
+  FadeThroughPageRoute({@required Widget child, double duration})
+      : transitionDuration = Duration(milliseconds: duration ?? 300),
+        super(pageBuilder: (context, animation, secondaryAnimation) => child);
 
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'widget/widget.dart';
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    return FadeThroughTransition(
+      animation: animation,
+      secondaryAnimation: secondaryAnimation,
+      child: child,
+    );
+  }
+}

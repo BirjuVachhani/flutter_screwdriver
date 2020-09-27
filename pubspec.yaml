@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  animations: ^1.1.2
 
 dev_dependencies:
   flutter_test:
