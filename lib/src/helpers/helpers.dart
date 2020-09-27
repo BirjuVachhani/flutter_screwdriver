@@ -29,33 +29,20 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
+// Author: Birju Vachhani
+// Created Date: September 01, 2020
 
-import 'dart:ui';
-
-import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'src/helpers/helpers.dart' as nav show navigator;
+/// Alias for closing the app by invoking [SystemNavigator.pop]
+Future<void> closeApp({bool animated = true}) =>
+    SystemNavigator.pop(animated: animated);
 
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
+/// supposed to be used as `navigatorKey` when initializing [MaterialApp].
+/// This allows to use [Navigator] without requiring [BuildContext].
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'widget/widget.dart';
+/// provides direct access to current [Navigator] state which can be used
+/// for navigation without requiring [BuildContext]
+NavigatorState get navigator => navigatorKey.currentState;

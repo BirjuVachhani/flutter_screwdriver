@@ -29,33 +29,28 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
+// Author: Birju Vachhani
+// Created Date: September 02, 2020
 
-import 'dart:ui';
+part of flutter_screwdriver;
 
-import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+/// provides extensions for [Route]
+extension RouteFS<T> on Route<T> {
+  /// pushes [this] route to the [Navigator].
+  /// If [context] is provided then it locates [Navigator] from the tree and
+  /// uses it.
+  /// If [context] is not provided then it uses [navigator]
+  Future<T> push([BuildContext context]) => context == null
+      ? nav.navigator.push(this)
+      : Navigator.push(context, this);
 
-import 'src/helpers/helpers.dart' as nav show navigator;
-
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
-
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'widget/widget.dart';
+  /// pushes [this] route to the [Navigator].
+  /// If [context] is provided then it locates [Navigator] from the tree and
+  /// uses it.
+  /// If [context] is not provided then it uses [navigator]
+  Future<T> pushAndRemoveUntil(RoutePredicate predicate,
+          [BuildContext context]) =>
+      context == null
+          ? nav.navigator.pushAndRemoveUntil(this, predicate)
+          : Navigator.pushAndRemoveUntil(context, this, predicate);
+}

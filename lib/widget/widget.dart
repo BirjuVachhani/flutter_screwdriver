@@ -29,33 +29,20 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
+// Author: Birju Vachhani
+// Created Date: September 03, 2020
 
-import 'dart:ui';
+part of flutter_screwdriver;
 
-import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'src/helpers/helpers.dart' as nav show navigator;
-
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
-
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'widget/widget.dart';
+/// provides extensions for [Widget]
+extension WidgetFS<T> on Widget {
+  /// Displays [this] widget as a dialog on screen
+  Future<T> showAsDialog([BuildContext context]) {
+    return showModal<T>(
+      context: context ?? nav.navigator.context,
+      useRootNavigator: false,
+      configuration: FadeScaleTransitionConfiguration(),
+      builder: (context) => this,
+    );
+  }
+}

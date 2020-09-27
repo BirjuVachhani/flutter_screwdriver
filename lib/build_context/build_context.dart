@@ -29,33 +29,28 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
+// Author: Birju Vachhani
+// Created Date: September 02, 2020
 
-import 'dart:ui';
+part of flutter_screwdriver;
 
-import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+/// provides extension to get a dependency from provider
+extension ContextExtension on BuildContext {
+  /// allows to change field focus from one [FocusNode] to another
+  void changeFocus({@required FocusNode from, @required FocusNode to}) {
+    ArgumentError.checkNotNull(from);
+    ArgumentError.checkNotNull(to);
+    from.unfocus();
+    FocusScope.of(this).requestFocus(to);
+  }
 
-import 'src/helpers/helpers.dart' as nav show navigator;
-
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
-
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'widget/widget.dart';
+  /// hides soft keyboard using platform channel
+  void hideKeyboard() {
+    final currentFocus = FocusScope.of(this);
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+    if (currentFocus?.hasFocus ?? false) {
+      currentFocus.unfocus();
+      currentFocus.focusedChild?.unfocus();
+    }
+  }
+}
