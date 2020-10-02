@@ -29,36 +29,23 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
+// Author: Birju Vachhani
+// Created Date: October 01, 2020
 
-import 'dart:async';
-import 'dart:ui';
-
-import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_screwdriver/flutter_screwdriver.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-import 'src/helpers/helpers.dart' as nav show navigator;
-
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
-
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'text_editing_controller/text_editing_controller.dart';
-
-part 'widget/widget.dart';
+void main() {
+  test('color tests', () {
+    final controller = TextEditingController();
+    expect(controller.isBlank, isTrue);
+    expect(controller.isNotBlank, isFalse);
+    controller.text = '     ';
+    expect(controller.isBlank, isTrue);
+    expect(controller.isNotBlank, isFalse);
+    controller.text = 'Hello';
+    expect(controller.isBlank, isFalse);
+    expect(controller.isNotBlank, isTrue);
+  });
+}
