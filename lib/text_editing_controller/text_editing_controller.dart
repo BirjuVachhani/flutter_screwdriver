@@ -32,10 +32,7 @@
 // Author: Birju Vachhani
 // Created Date: September 03, 2020
 
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+part of flutter_screwdriver;
 
 /// provides extensions on [TextEditingController]
 extension TextEditingControllerFS on TextEditingController {
@@ -90,4 +87,19 @@ extension TextEditingControllerFS on TextEditingController {
     });
     return controller.stream;
   }
+
+  /// Returns trimmed [text]
+  String get trimmed => text.trim();
+
+  /// Returns true if the [text] is empty or only contains white-spaces
+  bool get isBlank => text.trim().isEmpty;
+
+  /// Returns true if the [text] is not empty or contains characters
+  /// other than white-spaces.
+  bool get isNotBlank => text.trim().isNotEmpty;
+
+  /// Executes [block] function only when [text] is blank.
+  void whenBlank(void block()) => onChanged((_) {
+        if (isBlank) block();
+      });
 }
