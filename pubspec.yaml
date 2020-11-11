@@ -13,6 +13,6 @@ dependencies:
   animations: ^1.1.2
 
 dev_dependencies:
+  effective_dart: ^1.3.0
   flutter_test:
     sdk: flutter
-  effective_dart:
