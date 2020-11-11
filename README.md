@@ -2,15 +2,160 @@
 
 A flutter package aiming to provide useful extensions and helper functions to ease and speed up development.
 
+[![Tests](https://github.com/BirjuVachhani/screwdriver/workflows/Tests/badge.svg?branch=master)](https://github.com/BirjuVachhani/screwdriver/actions) [![Code Quality](https://github.com/BirjuVachhani/flutter_screwdriver/workflows/Code%20Quality/badge.svg?branch=master)](https://github.com/BirjuVachhani/flutter_screwdriver/actions)
+
+
+
+- 📋  Well Documented
+- 🧪  Well Tested
+- 👌  Follows Code Quality Guidelines
+- 🦾  Production Ready
+- 🛹  Easy to Use
+
+
+
+To checkout all the available extensions, helper functions & classes, see [documentation][docs].
+
+
+
+## Installation
+
+1. Add as a dependency in your project's `pub spec.yaml`
+
+```yaml
+dependencies:
+  flutter_screwdriver: ^1.X.X
 ```
-// TODO
+
+2. Import library into your code.
+
+```dart
+import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 ```
+
+
+
+A Glimpse of **Flutter Screwdriver**
+
+```dart
+'#FF4433'.toColor(); // returns Color object
+context.theme; // short for Theme.of(context)
+myConfirmationView.showAsDialog(context);
+homeRoute.push(context); // short for Navigation.of(context).push(homeRoute);
+closeApp(); // closes the app
+
+Colors.red.hexString; // converts to hex string
+Color(0xFF4433).toMaterialColor(); // converts given color to material color with standard shades
+Color(0xFF4433).shade(300); // creates white based shades of given color
+Colors.red.tweenTo(Colors.blue); // creates ColorTween
+```
+
+
+
+#### State and Context Extensions
+
+Access common inherited widgets directly from state.
+
+```dart
+theme; // Short for Theme.of(context)
+mediaQuery; // Short for MediaQuery.of(context)
+focusScope; // Short for FocusScope.of(context)
+navigator; // Short for Navigator.of(context)
+hideKeyboard(); // hides soft input keyboard
+
+context.theme;
+context.mediaQuery;
+context.focusScope;
+context.navigator;
+context.hideKeyboard();
+```
+
+
+
+#### TextEditingController
+
+```dart
+emailController.trimmed;
+emailController.isBlank;
+emailController.onChanged((value) => print(value));
+emailController.onSelectionChanged((selection) => print(selection));
+emailController.textChanges(); // Returns a Stream<String>
+emailController.selectionChanges(); // Returns a Stream<TextSelection>
+```
+
+
+
+#### Routes
+
+```dart
+FadeScalePageRoute();
+FadeThroughPageRoute();
+SharedAxisPageRoute();
+```
+
+
+
+##### Hiding keyboard when clicked outside tap-able views
+
+```dart
+import 'package:flutter_screwdriver/flutter_screwdriver.dart';
+
+
+HideKeyboard(
+  MaterialApp(
+    theme: ThemeData.light(),
+    debugShowCheckedModeBanner: false,
+    home: Scaffold(
+      body: MyWidget(),
+    ),
+  ),
+);
+
+```
+
+
+
+##### Clearing focus when navigation happens (mainly to close keyboard if visible)
+
+```dart
+import 'package:flutter_screwdriver/flutter_screwdriver.dart';
+
+MaterialApp(
+  theme: ThemeData.light(),
+  debugShowCheckedModeBanner: false,
+  navigatorObservers: [
+    ClearFocusNavigatorObserver(),
+  ],
+  home: Scaffold(
+    body: MyWidget(),
+  ),
+);
+```
+
+
+
+Checkout [documentation][docs]
+
+
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: https://github.com/BirjuVachhani/flutter_screwdriver/issues
+[docs]: https://pub.dev/documentation/flutter_screwdriver/latest/
+
+
+
+#### Liked Flutter Screwdriver?
+
+Show some love and support by starring the [repository](https://github.com/birjuvachhani/flutter_screwdriver).
+
+Or You can
+
+<a href="https://www.buymeacoffee.com/birjuvachhani" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
+
 
 
 ## License
