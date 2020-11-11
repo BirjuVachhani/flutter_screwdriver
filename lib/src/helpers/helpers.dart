@@ -39,10 +39,12 @@ import 'package:flutter/services.dart';
 Future<void> closeApp({bool animated = true}) =>
     SystemNavigator.pop(animated: animated);
 
-/// supposed to be used as `navigatorKey` when initializing [MaterialApp].
-/// This allows to use [Navigator] without requiring [BuildContext].
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
-/// provides direct access to current [Navigator] state which can be used
-/// for navigation without requiring [BuildContext]
-NavigatorState get navigator => navigatorKey.currentState;
+/// hides soft keyboard using platform channel
+void hideKeyboard(BuildContext context) {
+  final currentFocus = FocusScope.of(context);
+  SystemChannels.textInput.invokeMethod('TextInput.hide');
+  if (currentFocus?.hasFocus ?? false) {
+    currentFocus.unfocus();
+    currentFocus.focusedChild?.unfocus();
+  }
+}

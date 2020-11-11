@@ -44,6 +44,28 @@ class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
   /// enum which determines the animation type
   final SharedAxisTransitionType type;
 
+  /// Secondary constructor which sets [type] to
+  /// [SharedAxisTransitionType.vertical]
+  SharedAxisPageRoute.vertical({@required Widget child, double duration})
+      : type = SharedAxisTransitionType.vertical,
+        transitionDuration = Duration(milliseconds: duration ?? 300),
+        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+
+  /// Secondary constructor which sets [type] to
+  /// [SharedAxisTransitionType.horizontal]
+  SharedAxisPageRoute.horizontal({@required Widget child, double duration})
+      : type = SharedAxisTransitionType.horizontal,
+        transitionDuration = Duration(milliseconds: duration ?? 300),
+        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+
+  /// Secondary constructor which sets [type] to
+  /// [SharedAxisTransitionType.scaled]
+  SharedAxisPageRoute.scaled({@required Widget child, double duration})
+      : type = SharedAxisTransitionType.scaled,
+        transitionDuration = Duration(milliseconds: duration ?? 300),
+        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+
+  /// Primary constructor
   /// duration is in milliseconds
   SharedAxisPageRoute(
       {@required Widget child, @required this.type, double duration})

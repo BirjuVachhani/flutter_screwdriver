@@ -70,12 +70,10 @@ extension ColorFS on Color {
   }
 
   /// Returns hex string of [this] color
-  String get hexString {
-    return '#'
-        '${red.toRadixString(16)}'
-        '${green.toRadixString(16)}'
-        '${blue.toRadixString(16)}';
-  }
+  String get hexString => '#'
+      '${red.toRadixString(16)}'
+      '${green.toRadixString(16)}'
+      '${blue.toRadixString(16)}';
 
   /// allows to create a tween that start with [this] color
   /// and ends with [color].

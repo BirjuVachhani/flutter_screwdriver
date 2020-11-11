@@ -35,11 +35,10 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'src/helpers/helpers.dart' as nav show navigator;
+import 'src/helpers/helpers.dart' as helpers;
 
 export 'src/helpers/clear_focus_navigator_observer.dart';
 export 'src/helpers/helpers.dart';
