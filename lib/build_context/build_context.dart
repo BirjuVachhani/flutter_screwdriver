@@ -36,21 +36,18 @@ part of flutter_screwdriver;
 
 /// provides extension to get a dependency from provider
 extension ContextExtension on BuildContext {
-  /// allows to change field focus from one [FocusNode] to another
-  void changeFocus({@required FocusNode from, @required FocusNode to}) {
-    ArgumentError.checkNotNull(from);
-    ArgumentError.checkNotNull(to);
-    from.unfocus();
-    FocusScope.of(this).requestFocus(to);
-  }
+  /// Short for `Theme.of(context)`.
+  ThemeData get theme => Theme.of(this);
+
+  /// Short for `MediaQuery.of(context)`.
+  MediaQueryData get mediaQuery => MediaQuery.of(this);
+
+  /// Short for `FocusScope.of(context)`.
+  FocusScopeNode get focusScope => FocusScope.of(this);
+
+  /// Short for `Navigator.of(context)`.
+  NavigatorState get navigator => Navigator.of(this);
 
   /// hides soft keyboard using platform channel
-  void hideKeyboard() {
-    final currentFocus = FocusScope.of(this);
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
-    if (currentFocus?.hasFocus ?? false) {
-      currentFocus.unfocus();
-      currentFocus.focusedChild?.unfocus();
-    }
-  }
+  void hideKeyboard() => helpers.hideKeyboard(this);
 }

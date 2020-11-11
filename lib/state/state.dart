@@ -36,21 +36,18 @@ part of flutter_screwdriver;
 
 /// provides extensions for [State]
 extension StateFS<T extends StatefulWidget> on State<T> {
-  /// allows to change field focus from one [FocusNode] to another
-  void changeFocus({@required FocusNode from, @required FocusNode to}) {
-    ArgumentError.checkNotNull(from);
-    ArgumentError.checkNotNull(to);
-    from.unfocus();
-    FocusScope.of(context).requestFocus(to);
-  }
+  /// Short for `Theme.of(context)`.
+  ThemeData get theme => Theme.of(context);
+
+  /// Short for `MediaQuery.of(context)`.
+  MediaQueryData get mediaQuery => MediaQuery.of(context);
+
+  /// Short for `FocusScope.of(context)`.
+  FocusScopeNode get focusScope => FocusScope.of(context);
+
+  /// Short for `Navigator.of(context)`.
+  NavigatorState get navigator => Navigator.of(context);
 
   /// hides soft keyboard using platform channel
-  void hideKeyboard() {
-    final currentFocus = FocusScope.of(context);
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
-    if (currentFocus?.hasFocus ?? false) {
-      currentFocus.unfocus();
-      currentFocus.focusedChild?.unfocus();
-    }
-  }
+  void hideKeyboard() => helpers.hideKeyboard(context);
 }

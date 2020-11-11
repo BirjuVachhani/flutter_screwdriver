@@ -99,7 +99,7 @@ extension TextEditingControllerFS on TextEditingController {
   bool get isNotBlank => text.trim().isNotEmpty;
 
   /// Executes [block] function only when [text] is blank.
-  void whenBlank(void block()) => onChanged((_) {
+  void whenBlank(VoidCallback block) => onChanged((_) {
         if (isBlank) block();
       });
 }

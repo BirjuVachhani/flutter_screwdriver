@@ -36,21 +36,15 @@ part of flutter_screwdriver;
 
 /// provides extensions for [Route]
 extension RouteFS<T> on Route<T> {
-  /// pushes [this] route to the [Navigator].
-  /// If [context] is provided then it locates [Navigator] from the tree and
-  /// uses it.
-  /// If [context] is not provided then it uses [navigator]
-  Future<T> push([BuildContext context]) => context == null
-      ? nav.navigator.push(this)
-      : Navigator.push(context, this);
+  /// Short for [Navigator.push]
+  Future<T> push(BuildContext context) => Navigator.push(context, this);
 
-  /// pushes [this] route to the [Navigator].
-  /// If [context] is provided then it locates [Navigator] from the tree and
-  /// uses it.
-  /// If [context] is not provided then it uses [navigator]
-  Future<T> pushAndRemoveUntil(RoutePredicate predicate,
-          [BuildContext context]) =>
-      context == null
-          ? nav.navigator.pushAndRemoveUntil(this, predicate)
-          : Navigator.pushAndRemoveUntil(context, this, predicate);
+  /// Short for [Navigator.pushAndRemoveUntil]
+  Future<T> pushAndRemoveUntil(
+          BuildContext context, RoutePredicate predicate) =>
+      Navigator.pushAndRemoveUntil(context, this, predicate);
+
+  /// Short for [Navigator.pushReplacement]
+  Future<T> pushReplacement(BuildContext context) =>
+      Navigator.pushReplacement(context, this);
 }
