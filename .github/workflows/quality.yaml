@@ -22,6 +22,6 @@ jobs:
       - name: Analyzer
         run: flutter analyze
       - name: Dartfmt
-        run: dartfmt --set-exit-if-changed -w --fix .
+        run: dart format --set-exit-if-changed --fix .
       - name: Dry Run
         run: flutter pub publish --dry-run
