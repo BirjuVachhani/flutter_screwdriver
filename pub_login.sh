@@ -24,8 +24,10 @@ if [ -z "${PUB_DEV_PUBLISH_EXPIRATION}" ]; then
 fi
 
 # Create credentials.json file.
-mkdir -p ~/.pub-cache
-cat <<EOF >~/.pub-cache/credentials.json
+flutter_home=`which flutter`
+pub_cache_dir='$flutter_home/.pub-cache'
+mkdir -p $pub_cache_dir
+cat <<EOF >$pub_cache_dir/credentials.json
 {
   "accessToken":"${PUB_DEV_PUBLISH_ACCESS_TOKEN}",
   "refreshToken":"${PUB_DEV_PUBLISH_REFRESH_TOKEN}",
