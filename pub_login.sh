@@ -24,7 +24,6 @@ if [ -z "${PUB_DEV_PUBLISH_EXPIRATION}" ]; then
 fi
 
 # Create credentials.json file.
-pub logout
 pub_cache_dir='~/.pub-cache'
 mkdir -p $pub_cache_dir
 cat <<EOF >$pub_cache_dir/credentials.json
@@ -36,3 +35,5 @@ cat <<EOF >$pub_cache_dir/credentials.json
   "expiration":${PUB_DEV_PUBLISH_EXPIRATION}
 }
 EOF
+
+cat $pub_cache_dir/credentials.json
