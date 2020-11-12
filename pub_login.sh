@@ -35,5 +35,3 @@ cat <<EOF >$pub_cache_dir/credentials.json
   "expiration":${PUB_DEV_PUBLISH_EXPIRATION}
 }
 EOF
-
-cat $pub_cache_dir/credentials.json
