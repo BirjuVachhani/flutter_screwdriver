@@ -19,9 +19,9 @@ jobs:
         uses: subosito/flutter-action@v1
       - name: Install dependencies
         run: flutter packages get
-      - name: Analyzer
+      - name: Code Analysis
         run: flutter analyze
-      - name: Dartfmt
-        run: dart format --set-exit-if-changed --fix .
+      - name: Code Formatting
+        run: dart format --set-exit-if-changed .
       - name: Dry Run
         run: flutter pub publish --dry-run
