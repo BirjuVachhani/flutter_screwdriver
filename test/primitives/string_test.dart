@@ -6,7 +6,7 @@ import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('color tests', () {
+  test('string to color tests', () {
     expect('#000000'.toColor(), Colors.black);
     expect('000000'.toColor(), Colors.black);
     expect('000r000'.toColor(), null);

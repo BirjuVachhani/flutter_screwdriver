@@ -60,4 +60,4 @@ part 'state/state.dart';
 
 part 'text_editing_controller/text_editing_controller.dart';
 
-part 'widget/widget.dart';
+part 'ui/widget.dart';

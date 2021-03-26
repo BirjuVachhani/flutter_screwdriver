@@ -37,7 +37,7 @@ import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('color tests', () {
+  test('TextEditingController tests', () {
     final controller = TextEditingController();
     expect(controller.isBlank, isTrue);
     expect(controller.isNotBlank, isFalse);

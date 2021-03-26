@@ -14,7 +14,7 @@ A flutter package aiming to provide useful extensions and helper functions to ea
 - 👌  Follows Code Quality Guidelines
 - 🦾  Production Ready
 - 🛹  Easy to Use
-- 💯  Sound Null Safety ️
+- 🛡  Sound Null Safety ️
 
 
 
