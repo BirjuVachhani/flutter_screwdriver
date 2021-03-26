@@ -14,6 +14,7 @@ A flutter package aiming to provide useful extensions and helper functions to ea
 - 👌  Follows Code Quality Guidelines
 - 🦾  Production Ready
 - 🛹  Easy to Use
+- 💯  Sound Null Safety ️
 
 
 
@@ -27,7 +28,7 @@ To checkout all the available extensions, helper functions & classes, see [docum
 
 ```yaml
 dependencies:
-  flutter_screwdriver: ^1.X.X
+  flutter_screwdriver: <latest_version>
 ```
 
 2. Import library into your code.
