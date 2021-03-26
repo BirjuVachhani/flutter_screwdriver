@@ -22,4 +22,4 @@ jobs:
           credential: ${{ secrets.CREDENTIAL_JSON }}
           flutter_package: true
           skip_test: false
-          dry_run: true
+          dry_run: false
