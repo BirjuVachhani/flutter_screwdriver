@@ -39,8 +39,8 @@ extension ColorFS on Color {
   /// converts a normal [Color] to material color with proper shades mixed
   /// with base color (white).
   MaterialColor toMaterialColor() {
-    List strengths = <double>[.05];
-    Map swatch = <int, Color>{};
+    final strengths = <double>[.05];
+    final swatch = <int, Color>{};
 
     for (var i = 1; i < 10; i++) {
       strengths.add(0.1 * i);

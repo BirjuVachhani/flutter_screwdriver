@@ -37,12 +37,15 @@ part of flutter_screwdriver;
 /// provides extensions for [Widget]
 extension WidgetFS<T> on Widget {
   /// Displays [this] widget as a dialog on screen
-  Future<T> showAsDialog(BuildContext context,
-      {bool useRootNavigator, ModalConfiguration configuration}) {
+  Future<T?> showAsDialog(
+    BuildContext context, {
+    bool useRootNavigator = false,
+    ModalConfiguration configuration = const FadeScaleTransitionConfiguration(),
+  }) {
     return showModal<T>(
       context: context,
-      useRootNavigator: useRootNavigator ?? false,
-      configuration: configuration ?? FadeScaleTransitionConfiguration(),
+      useRootNavigator: useRootNavigator,
+      configuration: configuration,
       builder: (context) => this,
     );
   }

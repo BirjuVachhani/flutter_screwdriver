@@ -42,8 +42,8 @@ Future<void> closeApp({bool animated = true}) =>
 /// hides soft keyboard using platform channel
 void hideKeyboard(BuildContext context) {
   final currentFocus = FocusScope.of(context);
-  SystemChannels.textInput.invokeMethod('TextInput.hide');
-  if (currentFocus?.hasFocus ?? false) {
+  SystemChannels.textInput.invokeMethod<dynamic>('TextInput.hide');
+  if (currentFocus.hasFocus) {
     currentFocus.unfocus();
     currentFocus.focusedChild?.unfocus();
   }

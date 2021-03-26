@@ -1,12 +1,16 @@
 include: package:effective_dart/analysis_options.yaml
 
+analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  exclude:
+    - test/.test_coverage.dart
+
 linter:
   rules:
     camel_case_types: true
     package_api_docs: true
     prefer_single_quotes: true
     avoid_catches_without_on_clauses: false
-
-analyzer:
-  exclude:
-    - test/.test_coverage.dart
+    omit_local_variable_types: true

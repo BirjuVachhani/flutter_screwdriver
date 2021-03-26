@@ -46,30 +46,32 @@ class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
 
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.vertical]
-  SharedAxisPageRoute.vertical({@required Widget child, double duration})
+  SharedAxisPageRoute.vertical({required Widget child, int duration = 300})
       : type = SharedAxisTransitionType.vertical,
-        transitionDuration = Duration(milliseconds: duration ?? 300),
+        transitionDuration = Duration(milliseconds: duration),
         super(pageBuilder: (context, animation, secondaryAnimation) => child);
 
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.horizontal]
-  SharedAxisPageRoute.horizontal({@required Widget child, double duration})
+  SharedAxisPageRoute.horizontal({required Widget child, int duration = 300})
       : type = SharedAxisTransitionType.horizontal,
-        transitionDuration = Duration(milliseconds: duration ?? 300),
+        transitionDuration = Duration(milliseconds: duration),
         super(pageBuilder: (context, animation, secondaryAnimation) => child);
 
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.scaled]
-  SharedAxisPageRoute.scaled({@required Widget child, double duration})
+  SharedAxisPageRoute.scaled({required Widget child, int duration = 300})
       : type = SharedAxisTransitionType.scaled,
-        transitionDuration = Duration(milliseconds: duration ?? 300),
+        transitionDuration = Duration(milliseconds: duration),
         super(pageBuilder: (context, animation, secondaryAnimation) => child);
 
   /// Primary constructor
   /// duration is in milliseconds
-  SharedAxisPageRoute(
-      {@required Widget child, @required this.type, double duration})
-      : transitionDuration = Duration(milliseconds: duration ?? 300),
+  SharedAxisPageRoute({
+    required Widget child,
+    required this.type,
+    int duration = 300,
+  })  : transitionDuration = Duration(milliseconds: duration),
         super(pageBuilder: (context, animation, secondaryAnimation) => child);
 
   @override

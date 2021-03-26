@@ -39,8 +39,8 @@ class FadeScalePageRoute<T> extends PageRouteBuilder<T> {
   final Duration transitionDuration;
 
   /// duration is in milliseconds
-  FadeScalePageRoute({@required Widget child, double duration})
-      : transitionDuration = Duration(milliseconds: duration ?? 300),
+  FadeScalePageRoute({required Widget child, int duration = 300})
+      : transitionDuration = Duration(milliseconds: duration),
         super(pageBuilder: (context, animation, secondaryAnimation) => child);
 
   @override

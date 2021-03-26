@@ -39,7 +39,7 @@ extension StringFS on String {
   /// allows to convert a hex string to [Color]. Returns null if unable
   /// to convert.
   /// 3 digit hex codes are also supported.
-  Color toColor() {
+  Color? toColor() {
     try {
       var colorString = startsWith('#') ? substring(1) : this;
       if (colorString.length == 3) {

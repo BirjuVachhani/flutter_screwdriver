@@ -55,10 +55,11 @@ class HideKeyboard extends StatelessWidget {
   final Widget child;
 
   /// Default Constructor
-  const HideKeyboard({Key key, @required this.child, this.hide = true})
-      : assert(child != null),
-        assert(hide != null),
-        super(key: key);
+  const HideKeyboard({
+    Key? key,
+    required this.child,
+    this.hide = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
