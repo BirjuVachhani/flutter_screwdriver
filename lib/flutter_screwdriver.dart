@@ -40,6 +40,7 @@ import 'package:flutter/services.dart';
 
 import 'src/helpers/helpers.dart' as helpers;
 
+export 'src/helpers/app_lifecycle_observer_mixin.dart';
 export 'src/helpers/clear_focus_navigator_observer.dart';
 export 'src/helpers/helpers.dart';
 export 'src/routes/fade_scale_page_route.dart';
@@ -50,6 +51,10 @@ part 'build_context/build_context.dart';
 
 part 'color/color.dart';
 
+part 'primitives/double.dart';
+
+part 'primitives/int.dart';
+
 part 'primitives/string.dart';
 
 part 'route/route.dart';
@@ -59,5 +64,7 @@ part 'src/helpers/hide_keyboard.dart';
 part 'state/state.dart';
 
 part 'text_editing_controller/text_editing_controller.dart';
+
+part 'ui/brightness.dart';
 
 part 'ui/widget.dart';
