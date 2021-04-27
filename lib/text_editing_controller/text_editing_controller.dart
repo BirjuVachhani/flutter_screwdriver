@@ -34,32 +34,46 @@
 
 part of flutter_screwdriver;
 
+/// Represents a function that is responsible for disposing listeners.
+typedef Disposable = void Function();
+
 /// provides extensions on [TextEditingController]
 extension TextEditingControllerFS on TextEditingController {
   /// Unlike [addListener], this only calls [block] when the [text]
   /// actually changes. This won't be invoked when the focus or selection of
   /// the text changes in [TextField] or [TextFormField].
-  void onChanged(void block(String text)) {
+  ///
+  /// Returns [Disposable] function which can be called to
+  /// dispose this listener.
+  Disposable onChanged(void block(String text)) {
     var previousValue = text;
-    addListener(() {
+    void onChanged() {
       if (text != previousValue) {
         block(text);
       }
       previousValue = text;
-    });
+    }
+    addListener(onChanged);
+    return () => removeListener(onChanged);
   }
 
   /// Unlike [addListener], this only calls [block] when the selection of
   /// [text] actually changes. This won't be invoked when the focus or text
   /// value of the [text] changes in [TextField] or [TextFormField].
-  void onSelectionChanged(void block(TextSelection selection)) {
+  ///
+  /// Returns [Disposable] function which can be called to
+  /// dispose this listener.
+  Disposable onSelectionChanged(void block(TextSelection selection)) {
     var previousValue = selection;
-    addListener(() {
+    void onSelectionChanged() {
       if (selection != previousValue) {
         block(selection);
       }
       previousValue = selection;
-    });
+    }
+
+    addListener(onSelectionChanged);
+    return () => removeListener(onSelectionChanged);
   }
 
   /// Returns a stream of text changes.
