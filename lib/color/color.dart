@@ -82,4 +82,13 @@ extension ColorFS on Color {
   /// allows to create a tween that start with [color] color
   /// and ends with [this].
   ColorTween tweenFrom(Color color) => ColorTween(begin: color, end: this);
+
+  /// Returns the brightness of this color
+  Brightness get brightness => ThemeData.estimateBrightnessForColor(this);
+
+  /// Returns true if this color is a light color and has light brightness.
+  bool get isLight => brightness == Brightness.light;
+
+  /// Returns true if this color is a dark color and has dark brightness.
+  bool get isDark => brightness == Brightness.dark;
 }
