@@ -1,4 +1,4 @@
-![Banner](https://raw.githubusercontent.com/BirjuVachhani/flutter_screwdriver/main/banner.png)
+![Banner](https://raw.githubusercontent.com/BirjuVachhani/flutter_screwdriver/main/.github/banner.png?raw=true)
 
 
 # Flutter Screwdriver
