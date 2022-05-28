@@ -20,7 +20,22 @@ A flutter package aiming to provide useful extensions and helper functions to ea
 
 To checkout all the available extensions, helper functions & classes, see [documentation][docs].
 
+## Stats
 
+<!---stats_start-->
+```yaml  
+Extensions:                    39
+Helper Classes:                6
+Helper Functions & Getters:    2
+Typedefs:                      1
+Mixins:                        1
+```
+
+> *Last Updated: Sat, May 28, 2022 - 02:21 PM*
+
+<!---stats_end-->
+
+*Stats auto generated using [Github Workflow](https://github.com/BirjuVachhani/screwdriver/blob/main/.github/workflows/stats.yaml).
 
 ## Installation
 
