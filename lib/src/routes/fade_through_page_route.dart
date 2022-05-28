@@ -35,13 +35,12 @@ import 'package:flutter/material.dart';
 /// Provides page route with fade-through material transition
 /// from animations package.
 class FadeThroughPageRoute<T> extends PageRouteBuilder<T> {
-  @override
-  final Duration transitionDuration;
-
   /// duration is in milliseconds
   FadeThroughPageRoute({required Widget child, int duration = 300})
-      : transitionDuration = Duration(milliseconds: duration),
-        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+      : super(
+          pageBuilder: (context, animation, secondaryAnimation) => child,
+          transitionDuration: Duration(milliseconds: duration),
+        );
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,

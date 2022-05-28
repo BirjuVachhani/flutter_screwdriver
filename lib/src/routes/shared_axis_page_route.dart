@@ -38,9 +38,6 @@ import 'package:flutter/material.dart';
 /// User [SharedAxisTransitionType.horizontal] for (x-axis) page transition.
 /// User [SharedAxisTransitionType.scaled] for (z-axis) page transition.
 class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
-  @override
-  final Duration transitionDuration;
-
   /// enum which determines the animation type
   final SharedAxisTransitionType type;
 
@@ -48,22 +45,28 @@ class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
   /// [SharedAxisTransitionType.vertical]
   SharedAxisPageRoute.vertical({required Widget child, int duration = 300})
       : type = SharedAxisTransitionType.vertical,
-        transitionDuration = Duration(milliseconds: duration),
-        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+        super(
+          pageBuilder: (context, animation, secondaryAnimation) => child,
+          transitionDuration: Duration(milliseconds: duration),
+        );
 
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.horizontal]
   SharedAxisPageRoute.horizontal({required Widget child, int duration = 300})
       : type = SharedAxisTransitionType.horizontal,
-        transitionDuration = Duration(milliseconds: duration),
-        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+        super(
+          pageBuilder: (context, animation, secondaryAnimation) => child,
+          transitionDuration: Duration(milliseconds: duration),
+        );
 
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.scaled]
   SharedAxisPageRoute.scaled({required Widget child, int duration = 300})
       : type = SharedAxisTransitionType.scaled,
-        transitionDuration = Duration(milliseconds: duration),
-        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+        super(
+          pageBuilder: (context, animation, secondaryAnimation) => child,
+          transitionDuration: Duration(milliseconds: duration),
+        );
 
   /// Primary constructor
   /// duration is in milliseconds
@@ -71,8 +74,10 @@ class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
     required Widget child,
     required this.type,
     int duration = 300,
-  })  : transitionDuration = Duration(milliseconds: duration),
-        super(pageBuilder: (context, animation, secondaryAnimation) => child);
+  }) : super(
+          pageBuilder: (context, animation, secondaryAnimation) => child,
+          transitionDuration: Duration(milliseconds: duration),
+        );
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
@@ -80,8 +85,8 @@ class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
     return SharedAxisTransition(
       animation: animation,
       secondaryAnimation: secondaryAnimation,
-      child: child,
       transitionType: type,
+      child: child,
     );
   }
 }

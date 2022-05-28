@@ -45,7 +45,7 @@ extension TextEditingControllerFS on TextEditingController {
   ///
   /// Returns [Disposable] function which can be called to
   /// dispose this listener.
-  Disposable onChanged(void block(String text)) {
+  Disposable onChanged(void Function(String text) block) {
     var previousValue = text;
     void onChanged() {
       if (text != previousValue) {
@@ -53,6 +53,7 @@ extension TextEditingControllerFS on TextEditingController {
       }
       previousValue = text;
     }
+
     addListener(onChanged);
     return () => removeListener(onChanged);
   }
@@ -63,7 +64,7 @@ extension TextEditingControllerFS on TextEditingController {
   ///
   /// Returns [Disposable] function which can be called to
   /// dispose this listener.
-  Disposable onSelectionChanged(void block(TextSelection selection)) {
+  Disposable onSelectionChanged(void Function(TextSelection selection) block) {
     var previousValue = selection;
     void onSelectionChanged() {
       if (selection != previousValue) {

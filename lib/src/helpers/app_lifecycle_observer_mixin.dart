@@ -45,7 +45,7 @@ mixin AppLifecycleObserver<T extends StatefulWidget> on State<T> {
   void initState() {
     super.initState();
     _listener = _AppLifecycleListener(this);
-    WidgetsBinding.instance?.addObserver(_listener);
+    WidgetsBinding.instance.addObserver(_listener);
   }
 
   /// Called when app lifecycle state is changed to [AppLifecycleState.resumed]
@@ -66,7 +66,7 @@ mixin AppLifecycleObserver<T extends StatefulWidget> on State<T> {
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(_listener);
+    WidgetsBinding.instance.removeObserver(_listener);
     super.dispose();
   }
 }
