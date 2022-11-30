@@ -29,42 +29,20 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-library flutter_screwdriver;
+// Author: Birju Vachhani
+// Created Date: May 28, 2022
 
-import 'dart:async';
+part of flutter_screwdriver;
 
-import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
-
-import 'src/helpers/helpers.dart' as helpers;
-
-export 'src/helpers/app_lifecycle_observer_mixin.dart';
-export 'src/helpers/clear_focus_navigator_observer.dart';
-export 'src/helpers/helpers.dart';
-export 'src/routes/fade_scale_page_route.dart';
-export 'src/routes/fade_through_page_route.dart';
-export 'src/routes/shared_axis_page_route.dart';
-
-part 'build_context/build_context.dart';
-
-part 'color/color.dart';
-
-part 'primitives/double.dart';
-
-part 'primitives/int.dart';
-
-part 'primitives/string.dart';
-
-part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
-
-part 'state/state.dart';
-
-part 'text_editing_controller/text_editing_controller.dart';
-
-part 'ui/brightness.dart';
-
-part 'ui/global_key.dart';
-
-part 'ui/widget.dart';
+extension GlobalKeyExtension on GlobalKey {
+  Rect? get globalPaintBounds {
+    final renderObject = currentContext?.findRenderObject();
+    var translation = renderObject?.getTransformTo(null).getTranslation();
+    if (translation != null && renderObject?.paintBounds != null) {
+      return renderObject!.paintBounds
+          .shift(Offset(translation.x, translation.y));
+    } else {
+      return null;
+    }
+  }
+}
