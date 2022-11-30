@@ -1,15 +1,17 @@
-// Copyright © 2022 Birju Vachhani. All rights reserved.
-// Use of this source code is governed by a BSD 3-Clause License that can be
-// found in the LICENSE file.
+/*
+ * Copyright © 2022 Birju Vachhani. All rights reserved.
+ * Use of this source code is governed by a BSD 3-Clause License that can be
+ * found in the LICENSE file.
+ */
 
 // Author: Birju Vachhani
 // Created Date: November 30, 2022
 
 import 'package:flutter/widgets.dart';
 
-/// Builder function type for [HoverBuilder] where [hovering] is a boolean
+/// Builder function type for [Hoverable] where [hovering] is a boolean
 /// indicating whether the widget is currently being hovered or not.
-/// [child] is the child widget of [HoverBuilder] which won't be rebuilt
+/// [child] is the child widget of [Hoverable] which won't be rebuilt
 /// when [hovering] changes.
 typedef HoverWidgetBuilder = Widget Function(
   BuildContext context,
@@ -20,7 +22,23 @@ typedef HoverWidgetBuilder = Widget Function(
 /// A widget that detects mouse hover events and notifies its child.
 /// This widget is useful when you want to change the appearance of a widget
 /// when the mouse hovers over it.
-class HoverBuilder extends StatefulWidget {
+///
+/// Example:
+///   HoverBuilder(
+///     builder: (context, hovering, child) {
+///       return AnimatedContainer(
+///         duration: const Duration(milliseconds: 200),
+///         width: 100,
+///         height: 100,
+///         color: hovering ? Colors.orange : Colors.red,
+///         alignment: Alignment.center,
+///         child: child,
+///       );
+///     },
+///     child: const Text('Hover Me'),
+///   ),
+///
+class Hoverable extends StatefulWidget {
   final HoverWidgetBuilder builder;
 
   /// Refers to the [MouseRegion.opaque] property.
@@ -34,7 +52,7 @@ class HoverBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  const HoverBuilder({
+  const Hoverable({
     super.key,
     required this.builder,
     this.opaque = true,
@@ -44,10 +62,10 @@ class HoverBuilder extends StatefulWidget {
   });
 
   @override
-  State<HoverBuilder> createState() => _HoverBuilderState();
+  State<Hoverable> createState() => _HoverableState();
 }
 
-class _HoverBuilderState extends State<HoverBuilder> {
+class _HoverableState extends State<Hoverable> {
   bool hovering = false;
 
   @override

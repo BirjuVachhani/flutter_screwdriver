@@ -5,9 +5,10 @@
 - Added extensions for `Brightness`.
 - Added brightness related extensions for `Color`.
 - Added globalPaintBounds extension for `GlobalKey`.
-- Fix `hexString` extension for `Color`.
-- Add `HoverBuilder` widget.
-- Upgrade dependencies.
+- Fixed `hexString` extension for `Color`. It includes opacity in the hex string now.
+- Added `Hoverable` widget for reacting to hover events in an easy way.
+- Added `Gap`|`Space` widget for painless creation of gaps between widgets with flex parents such as row, column, scrollable.
+- Upgraded dependencies.
 
 ## 2.0.0
 

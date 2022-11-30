@@ -8,5 +8,6 @@
 export 'app_lifecycle_observer_mixin.dart';
 export 'clear_focus_navigator_observer.dart';
 export 'helper_functions.dart';
-export 'hide_keyboard.dart';
-export 'hover_builder.dart';
+export 'widgets/hide_keyboard.dart';
+export 'widgets/hoverable.dart';
+export 'widgets/gap.dart';
