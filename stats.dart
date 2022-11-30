@@ -38,9 +38,15 @@ class Stats {
       );
 }
 
-void main() async {
+/// Script to generate stats for this package.
+/// Usage: dart stats.dart [--dry]
+/// --dry: if provided, it will not update README.md file. It will only print
+/// the stats to console.
+void main(List<String> args) async {
   final screwdriverStats =
       await getStats('package:flutter_screwdriver/flutter_screwdriver.dart');
+
+  final isDry = args.contains('--dry');
 
   final stats = screwdriverStats;
 
@@ -58,17 +64,21 @@ Mixins:                        ${stats.mixins}
 
 ''';
 
-  final readMeFile = File('README.md');
-  var content = readMeFile.readAsStringSync();
-  const prefix = '<!---stats_start-->';
-  const suffix = '<!---stats_end-->';
+  if (!isDry) {
+    final readMeFile = File('README.md');
+    var content = readMeFile.readAsStringSync();
+    const prefix = '<!---stats_start-->';
+    const suffix = '<!---stats_end-->';
 
-  final start = content.indexOf(prefix) + prefix.length;
-  final end = content.indexOf(suffix);
-  content = content.replaceRange(start, end, output);
-  readMeFile.writeAsStringSync(content);
+    final start = content.indexOf(prefix) + prefix.length;
+    final end = content.indexOf(suffix);
+    content = content.replaceRange(start, end, output);
+    readMeFile.writeAsStringSync(content);
+  } else {
+    print('Dry run, not updating README.md...');
+  }
 
-  print('\n\n');
+  print('');
   print('==================================================================');
   print('STATS');
   print('==================================================================');
@@ -96,7 +106,7 @@ Future<Stats> getStats(String library) async {
   var extensions = 0;
   var typedefs = 0;
   var mixins = 0;
-  for (final part in result.element.parts) {
+  for (final part in result.element.units) {
     helpersFunctions += part.functions.map((e) => e.displayName).toList();
     extensions += part.extensions.expand((element) => element.fields).length;
     extensions += part.extensions.expand((element) => element.methods).length;
@@ -119,10 +129,12 @@ Future<Stats> getStats(String library) async {
   return stats;
 }
 
-void collectExports(LibraryElement element, Stats stats,
+void collectExports(LibraryOrAugmentationElement element, Stats stats,
     {bool checkForSrcDir = false}) {
-  for (final exp in element.exports) {
-    if (!checkForSrcDir || exp.uri?.startsWith('src') == true) {
+  for (final exp in element.libraryExports) {
+    final uri = exp.uri;
+    if (uri is! DirectiveUriWithLibrary) continue;
+    if (!checkForSrcDir || uri.relativeUriString.startsWith('src') == true) {
       for (final unit in exp.exportedLibrary!.units) {
         stats.classes.addAll(unit.classes.map((e) => e.displayName));
         stats.functions.addAll(unit.functions.map((e) => e.displayName));
@@ -134,7 +146,7 @@ void collectExports(LibraryElement element, Stats stats,
         stats.typedefs += unit.typeAliases.length;
         stats.mixins += unit.mixins.length;
 
-        if (unit.enclosingElement.exports.isNotEmpty) {
+        if (unit.enclosingElement.libraryExports.isNotEmpty) {
           collectExports(unit.enclosingElement, stats);
         }
       }
