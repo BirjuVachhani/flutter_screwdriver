@@ -14,11 +14,11 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Install Flutter
-        uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v2
       - name: Install dependencies
-        run: flutter packages get
+        run: flutter pub get
       - name: Code Analysis
         run: flutter analyze
       - name: Code Formatting
