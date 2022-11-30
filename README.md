@@ -25,13 +25,13 @@ To checkout all the available extensions, helper functions & classes, see [docum
 <!---stats_start-->
 ```yaml  
 Extensions:                    40
-Helper Classes:                10
+Helper Classes:                7
 Helper Functions & Getters:    2
 Typedefs:                      3
 Mixins:                        1
 ```
 
-> *Last Updated: Wed, Nov 30, 2022 - 10:02 AM*
+> *Last Updated: Wed, Nov 30, 2022 - 10:22 AM*
 
 <!---stats_end-->
 
