@@ -6,6 +6,7 @@
 - Added brightness related extensions for `Color`.
 - Added globalPaintBounds extension for `GlobalKey`.
 - Fix `hexString` extension for `Color`.
+- Add `HoverBuilder` widget.
 - Upgrade dependencies.
 
 ## 2.0.0
