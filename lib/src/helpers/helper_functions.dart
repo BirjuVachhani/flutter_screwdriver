@@ -30,48 +30,21 @@
  */
 
 // Author: Birju Vachhani
-// Created Date: September 03, 2020
+// Created Date: September 01, 2020
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screwdriver/flutter_screwdriver.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-/// Hides keyboard on tap outside tap-able widgets.
-/// This should be used as the parent of your [MaterialApp]. This way, it will
-/// detect any touches outside text fields and other touchable areas and will
-/// close the soft keyboard if open.
-/// Flag [hide] can be used to toggle this behavior.
-/// e.g.
-///
-/// HideKeyboard(
-///   child: MaterialApp(
-///     ...
-///   ),
-/// );
-///
-class HideKeyboard extends StatelessWidget {
-  /// flag to toggle hiding of keyboard
-  final bool hide;
+/// Alias for closing the app by invoking [SystemNavigator.pop]
+Future<void> closeApp({bool animated = true}) =>
+    SystemNavigator.pop(animated: animated);
 
-  /// child widget, in most cases, [MaterialApp]
-  final Widget child;
-
-  /// Refers to the [GestureDetector.behavior] property.
-  final HitTestBehavior? behavior;
-
-  /// Default Constructor
-  const HideKeyboard({
-    Key? key,
-    required this.child,
-    this.hide = true,
-    this.behavior,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: behavior,
-      onTap: hide ? context.hideKeyboard : null,
-      child: child,
-    );
+/// hides soft keyboard using platform channel
+void hideKeyboard(BuildContext context) {
+  final currentFocus = FocusScope.of(context);
+  SystemChannels.textInput.invokeMethod<dynamic>('TextInput.hide');
+  if (currentFocus.hasFocus) {
+    currentFocus.unfocus();
+    currentFocus.focusedChild?.unfocus();
   }
 }

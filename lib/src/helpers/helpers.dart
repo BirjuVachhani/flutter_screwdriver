@@ -32,19 +32,8 @@
 // Author: Birju Vachhani
 // Created Date: September 01, 2020
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-/// Alias for closing the app by invoking [SystemNavigator.pop]
-Future<void> closeApp({bool animated = true}) =>
-    SystemNavigator.pop(animated: animated);
-
-/// hides soft keyboard using platform channel
-void hideKeyboard(BuildContext context) {
-  final currentFocus = FocusScope.of(context);
-  SystemChannels.textInput.invokeMethod<dynamic>('TextInput.hide');
-  if (currentFocus.hasFocus) {
-    currentFocus.unfocus();
-    currentFocus.focusedChild?.unfocus();
-  }
-}
+export 'app_lifecycle_observer_mixin.dart';
+export 'clear_focus_navigator_observer.dart';
+export 'helper_functions.dart';
+export 'hide_keyboard.dart';
+export 'hover_builder.dart';

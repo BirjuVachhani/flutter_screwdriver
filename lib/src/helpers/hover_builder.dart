@@ -30,48 +30,66 @@
  */
 
 // Author: Birju Vachhani
-// Created Date: September 03, 2020
+// Created Date: November 30, 2022
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 
-/// Hides keyboard on tap outside tap-able widgets.
-/// This should be used as the parent of your [MaterialApp]. This way, it will
-/// detect any touches outside text fields and other touchable areas and will
-/// close the soft keyboard if open.
-/// Flag [hide] can be used to toggle this behavior.
-/// e.g.
-///
-/// HideKeyboard(
-///   child: MaterialApp(
-///     ...
-///   ),
-/// );
-///
-class HideKeyboard extends StatelessWidget {
-  /// flag to toggle hiding of keyboard
-  final bool hide;
+/// Builder function type for [HoverBuilder] where [hovering] is a boolean
+/// indicating whether the widget is currently being hovered or not.
+/// [child] is the child widget of [HoverBuilder] which won't be rebuilt
+/// when [hovering] changes.
+typedef HoverWidgetBuilder = Widget Function(
+  BuildContext context,
+  bool hovering,
+  Widget? child,
+);
 
-  /// child widget, in most cases, [MaterialApp]
-  final Widget child;
+/// A widget that detects mouse hover events and notifies its child.
+/// This widget is useful when you want to change the appearance of a widget
+/// when the mouse hovers over it.
+class HoverBuilder extends StatefulWidget {
+  final HoverWidgetBuilder builder;
 
-  /// Refers to the [GestureDetector.behavior] property.
-  final HitTestBehavior? behavior;
+  /// Refers to the [MouseRegion.opaque] property.
+  final bool opaque;
 
-  /// Default Constructor
-  const HideKeyboard({
-    Key? key,
-    required this.child,
-    this.hide = true,
-    this.behavior,
-  }) : super(key: key);
+  /// Refers to the [MouseRegion.cursor] property.
+  final MouseCursor cursor;
+
+  /// Refers to the [MouseRegion.onEnter] property.
+  final HitTestBehavior? hitTestBehavior;
+
+  final Widget? child;
+
+  const HoverBuilder({
+    super.key,
+    required this.builder,
+    this.opaque = true,
+    this.cursor = MouseCursor.defer,
+    this.hitTestBehavior,
+    this.child,
+  });
+
+  @override
+  State<HoverBuilder> createState() => _HoverBuilderState();
+}
+
+class _HoverBuilderState extends State<HoverBuilder> {
+  bool hovering = false;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: behavior,
-      onTap: hide ? context.hideKeyboard : null,
-      child: child,
+    return MouseRegion(
+      opaque: widget.opaque,
+      cursor: widget.cursor,
+      hitTestBehavior: widget.hitTestBehavior,
+      onEnter: (_) => setState(() => hovering = true),
+      onHover: (event) {
+        if (hovering) return;
+        setState(() => hovering = true);
+      },
+      onExit: (event) => setState(() => hovering = false),
+      child: widget.builder(context, hovering, widget.child),
     );
   }
 }

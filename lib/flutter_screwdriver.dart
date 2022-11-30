@@ -38,8 +38,6 @@ import 'package:flutter/material.dart';
 
 import 'src/helpers/helpers.dart' as helpers;
 
-export 'src/helpers/app_lifecycle_observer_mixin.dart';
-export 'src/helpers/clear_focus_navigator_observer.dart';
 export 'src/helpers/helpers.dart';
 export 'src/routes/fade_scale_page_route.dart';
 export 'src/routes/fade_through_page_route.dart';
@@ -56,8 +54,6 @@ part 'primitives/int.dart';
 part 'primitives/string.dart';
 
 part 'route/route.dart';
-
-part 'src/helpers/hide_keyboard.dart';
 
 part 'state/state.dart';
 
