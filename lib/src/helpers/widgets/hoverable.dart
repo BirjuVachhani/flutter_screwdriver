@@ -1,8 +1,6 @@
-/*
- * Copyright © 2022 Birju Vachhani. All rights reserved.
- * Use of this source code is governed by a BSD 3-Clause License that can be
- * found in the LICENSE file.
- */
+// Copyright © 2022 Birju Vachhani. All rights reserved.
+// Use of this source code is governed by a BSD 3-Clause License that can be
+// found in the LICENSE file.
 
 // Author: Birju Vachhani
 // Created Date: November 30, 2022

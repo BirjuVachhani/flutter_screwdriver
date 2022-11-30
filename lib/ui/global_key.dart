@@ -7,7 +7,9 @@
 
 part of flutter_screwdriver;
 
+/// provides extensions for [Widget]
 extension GlobalKeyExtension on GlobalKey {
+  /// Returns the paint bounds of the widget associated with this key.
   Rect? get globalPaintBounds {
     final renderObject = currentContext?.findRenderObject();
     var translation = renderObject?.getTransformTo(null).getTranslation();
