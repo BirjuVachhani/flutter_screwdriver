@@ -1,4 +1,4 @@
-## 2.1.0 [Unpublished]
+## 2.1.0
 
 - Added `AppLifecycleObserver` helper mixin.
 - Added `tweenTo` and `tweenFrom` extensions for `int` and `double`.
