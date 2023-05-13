@@ -37,6 +37,7 @@ typedef HoverWidgetBuilder = Widget Function(
 ///   ),
 ///
 class Hoverable extends StatefulWidget {
+  /// Builder that builds the child.
   final HoverWidgetBuilder builder;
 
   /// Refers to the [MouseRegion.opaque] property.
@@ -48,8 +49,10 @@ class Hoverable extends StatefulWidget {
   /// Refers to the [MouseRegion.onEnter] property.
   final HitTestBehavior? hitTestBehavior;
 
+  /// Child of this widget.
   final Widget? child;
 
+  /// Creates Hoverable widget with given values.
   const Hoverable({
     super.key,
     required this.builder,

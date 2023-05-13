@@ -58,7 +58,7 @@ extension TextEditingControllerFS on TextEditingController {
     final controller = StreamController<String>();
     onChanged((text) {
       if (controller.isClosed) return;
-      controller.sink.add(text);
+      controller.add(text);
     });
     return controller.stream;
   }
@@ -71,7 +71,7 @@ extension TextEditingControllerFS on TextEditingController {
     final controller = StreamController<TextSelection>();
     onSelectionChanged((selection) {
       if (controller.isClosed) return;
-      controller.sink.add(selection);
+      controller.add(selection);
     });
     return controller.stream;
   }

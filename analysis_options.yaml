@@ -1,9 +1,9 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
+  language:
+    strict-casts: true
+    strict-raw-types: true
   exclude:
     - test/.test_coverage.dart
 
@@ -14,3 +14,5 @@ linter:
     prefer_single_quotes: true
     avoid_catches_without_on_clauses: false
     omit_local_variable_types: true
+    public_member_api_docs: true
+    use_super_parameters: true

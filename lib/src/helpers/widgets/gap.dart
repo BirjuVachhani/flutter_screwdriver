@@ -35,17 +35,18 @@ typedef Space = Gap;
 ///      ],
 ///    )
 class Gap extends LeafRenderObjectWidget {
+  /// Size of the gap.
   final double size;
 
+  /// Creates Gap instance with given [Size].
   const Gap(this.size, {super.key})
       : assert(size >= 0 && size < double.infinity);
 
   @override
   RenderObject createRenderObject(BuildContext context) {
     // Get axis direction from a scrollable parent if any.
-    final axisDirection = Scrollable.of(context)?.axisDirection;
-    final direction =
-        axisDirection == null ? null : axisDirectionToAxis(axisDirection);
+    final axisDirection = Scrollable.of(context).axisDirection;
+    final direction = axisDirectionToAxis(axisDirection);
     return _RenderGap(size, direction);
   }
 
@@ -53,9 +54,8 @@ class Gap extends LeafRenderObjectWidget {
   // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext context, _RenderGap renderObject) {
     // Get axis direction from a scrollable parent if any.
-    final axisDirection = Scrollable.of(context)?.axisDirection;
-    final direction =
-        axisDirection == null ? null : axisDirectionToAxis(axisDirection);
+    final axisDirection = Scrollable.of(context).axisDirection;
+    final direction = axisDirectionToAxis(axisDirection);
     renderObject
       ..gap = size
       ..direction = direction;
