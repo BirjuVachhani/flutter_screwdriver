@@ -1,3 +1,7 @@
+## 3.0.0
+
+- Upgrade to Dart 3 and Flutter 3.10.0.
+
 ## 2.1.0
 
 - Added `AppLifecycleObserver` helper mixin.
