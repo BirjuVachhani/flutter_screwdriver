@@ -1,0 +1,8 @@
+lcov: flutter test --coverage .
+cov:
+  - flutter test --coverage .
+  - genhtml coverage/lcov.info -o coverage/html
+open_cov:
+  - open coverage/html/index.html
+stats: dart stats.dart --dry
+format: dart format --fix .
