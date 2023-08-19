@@ -3,6 +3,7 @@
 - Add missing `AppLifecycleState.hidden` introduced in Flutter 3.13.
 - Add more BuildContext extensions: `colorScheme` and `textTheme`.
 - Add more state extensions: `colorScheme` and `textTheme`.
+- Add `DirectionalAffinity`, `VerticalAffinity` and `HorizontalAffinity` widgets.
 
 ## 3.0.0
 
@@ -17,7 +18,8 @@
 - Added globalPaintBounds extension for `GlobalKey`.
 - Fixed `hexString` extension for `Color`. It includes opacity in the hex string now.
 - Added `Hoverable` widget for reacting to hover events in an easy way.
-- Added `Gap`|`Space` widget for painless creation of gaps between widgets with flex parents such as row, column, scrollable.
+- Added `Gap`|`Space` widget for painless creation of gaps between widgets with flex parents such as row, column,
+  scrollable.
 - Upgraded dependencies.
 
 ## 2.0.0
