@@ -12,6 +12,12 @@ extension StateFS<T extends StatefulWidget> on State<T> {
   /// Short for `Theme.of(context)`.
   ThemeData get theme => Theme.of(context);
 
+  /// Short for `Theme.of(context).colorScheme`.
+  ColorScheme get colorScheme => Theme.of(context).colorScheme;
+
+  /// Short for `Theme.of(context).textTheme`.
+  TextTheme get textTheme => Theme.of(context).textTheme;
+
   /// Short for `MediaQuery.of(context)`.
   MediaQueryData get mediaQuery => MediaQuery.of(context);
 
