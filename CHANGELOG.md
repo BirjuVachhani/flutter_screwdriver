@@ -1,3 +1,9 @@
+## 3.1.0
+
+- Add missing `AppLifecycleState.hidden` introduced in Flutter 3.13.
+- Add more BuildContext extensions: `colorScheme` and `textTheme`.
+- Add more state extensions: `colorScheme` and `textTheme`.
+
 ## 3.0.0
 
 - Upgrade to Dart 3 and Flutter 3.10.0.
