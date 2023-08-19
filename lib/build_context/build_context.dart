@@ -27,9 +27,6 @@ extension ContextExtension on BuildContext {
   /// Short for `Navigator.of(context)`.
   NavigatorState get navigator => Navigator.of(this);
 
-  /// Short for `MediaQuery.sizeOf(context)`.
-  Size get size => MediaQuery.sizeOf(this);
-
   /// hides soft keyboard using platform channel
   void hideKeyboard() => helpers.hideKeyboard(this);
 }
