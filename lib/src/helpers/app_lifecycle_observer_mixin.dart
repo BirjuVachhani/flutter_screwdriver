@@ -33,6 +33,9 @@ mixin AppLifecycleObserver<T extends StatefulWidget> on State<T> {
   /// Called when app lifecycle state is changed to [AppLifecycleState.inactive]
   void onInactive() {}
 
+  /// Called when app lifecycle state is changed to [AppLifecycleState.hidden]
+  void onHidden() {}
+
   /// Called when app lifecycle state changes.
   /// [state] is the current state of the app.
   void didChangeAppLifecycleState(AppLifecycleState state) {}
@@ -57,16 +60,14 @@ class _AppLifecycleListener extends WidgetsBindingObserver {
     switch (state) {
       case AppLifecycleState.resumed:
         _observer.onResume();
-        break;
       case AppLifecycleState.inactive:
         _observer.onInactive();
-        break;
       case AppLifecycleState.paused:
         _observer.onPause();
-        break;
       case AppLifecycleState.detached:
         _observer.onDetach();
-        break;
+      case AppLifecycleState.hidden:
+        _observer.onHidden();
     }
   }
 }
