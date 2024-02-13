@@ -1,5 +1,11 @@
+## 3.2.0
+
+- Add `TickingWidget` for creating widgets that need to update on a regular interval.
+- Add `TickingStateMixin` for creating stateful widgets that need to update on a regular interval.
+
 ## 3.1.0
 
+- Add `Hoverable` widget for reacting to hover events in an easy way.
 - Add missing `AppLifecycleState.hidden` introduced in Flutter 3.13.
 - Add more BuildContext extensions: `colorScheme` and `textTheme`.
 - Add more state extensions: `colorScheme` and `textTheme`.
