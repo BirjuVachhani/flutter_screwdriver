@@ -164,6 +164,12 @@ class _TickingWidgetState extends State<TickingWidget>
   }
 
   @override
+  void didUpdateWidget(covariant TickingWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.mode != widget.mode) mode = widget.mode;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return widget.builder?.call(context, currentTime, widget.child) ??
         widget.child!;
