@@ -201,6 +201,9 @@ mixin TickingStateMixin<T extends StatefulWidget>
   late DateTime currentTime;
 
   @override
+  Duration elapsed = Duration.zero;
+
+  @override
   TickingMode mode = TickingMode.second;
 
   /// If true, the ticker will start automatically when the widget is initialized.
@@ -243,7 +246,10 @@ mixin TickingStateMixin<T extends StatefulWidget>
   }
 
   @override
-  void startTicker() => ticker.start();
+  void startTicker() {
+    elapsed = Duration.zero;
+    ticker.start();
+  }
 
   @override
   void stopTicker() => ticker.stop();
@@ -275,6 +281,8 @@ abstract interface class TickingInterface {
   /// For example, if the mode is set to [TickingMode.second],
   /// the widget will rebuild every second.
   abstract TickingMode mode;
+
+  abstract Duration elapsed;
 
   /// Starts the ticker.
   void startTicker();
