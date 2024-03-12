@@ -5,7 +5,7 @@
 // Author: Birju Vachhani
 // Created Date: May 28, 2022
 
-part of flutter_screwdriver;
+part of '../flutter_screwdriver.dart';
 
 /// provides extensions for [Widget]
 extension GlobalKeyExtension on GlobalKey {

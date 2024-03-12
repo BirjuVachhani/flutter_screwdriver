@@ -5,7 +5,7 @@
 // Author: Birju Vachhani
 // Created Date: September 02, 2020
 
-part of flutter_screwdriver;
+part of '../flutter_screwdriver.dart';
 
 /// provides extensions for [Route]
 extension RouteFS<T> on Route<T> {

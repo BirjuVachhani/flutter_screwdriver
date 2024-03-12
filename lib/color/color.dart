@@ -5,7 +5,7 @@
 // Author: Birju Vachhani
 // Created Date: September 01, 2020
 
-part of flutter_screwdriver;
+part of '../flutter_screwdriver.dart';
 
 /// Provides extensions for [Color]
 extension ColorFS on Color {

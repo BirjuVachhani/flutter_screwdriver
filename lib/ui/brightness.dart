@@ -5,7 +5,7 @@
 // Author: Birju Vachhani
 // Created Date: March 26, 2021
 
-part of flutter_screwdriver;
+part of '../flutter_screwdriver.dart';
 
 /// provides extensions for [Widget]
 extension BrightnessFS<T> on Brightness {

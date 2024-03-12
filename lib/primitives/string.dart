@@ -5,7 +5,7 @@
 // Author: Birju Vachhani
 // Created Date: August 31, 2020
 
-part of flutter_screwdriver;
+part of '../flutter_screwdriver.dart';
 
 /// provides extensions for [String]
 extension StringFS on String {

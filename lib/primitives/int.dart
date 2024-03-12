@@ -4,7 +4,7 @@
 
 // Author: Birju Vachhani
 // Created Date: April 26, 2021
-part of flutter_screwdriver;
+part of '../flutter_screwdriver.dart';
 
 /// provides extensions for [int]
 extension IntFS on int {

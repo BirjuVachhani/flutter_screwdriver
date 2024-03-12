@@ -5,7 +5,7 @@
 // Author: Birju Vachhani
 // Created Date: September 03, 2020
 
-part of flutter_screwdriver;
+part of '../flutter_screwdriver.dart';
 
 /// Represents a function that is responsible for disposing listeners.
 typedef Disposable = void Function();
