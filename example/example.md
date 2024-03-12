@@ -101,6 +101,52 @@ MaterialApp(
 );
 ```
 
+### Using TickingWidget
 
+Do you have a widget that needs to repaint as time passes? e.g. clocks, countdowns, etc. Use `TickingWidget` to create such widgets.
+
+```dart
+import 'package:flutter_screwdriver/flutter_screwdriver.dart';
+
+TickingWidget(
+  mode: TickingMode.seconds, // Specify when to repaint.
+  autoStart: true, // Start the timer automatically. Default is true.
+  builder: (context, time, child) {
+    // Widget that needs to repaint.
+    return Text(time.toString());
+  },
+  child: Text("Widget that doesn't need to repaint"),
+);
+```
+
+#### Custom start and stop
+
+`autoStart` is set to `true` by default. If you want to start the timer manually, set it to `false` and inside the
+builder, call `start()` by doing `TickingWidget.of(context).startTicker()`.
+
+#### Using elapsed duration
+
+`TickerWidget` provides the elapsed duration since the start of the timer. You can access it using `TickingWidget.of(context).elapsedDuration`
+inside the builder.
+
+```dart
+import 'package:flutter_screwdriver/flutter_screwdriver.dart';
+
+TickingWidget(
+  mode: TickingMode.seconds,
+  autoStart: true,
+  builder: (context, time, child) {
+    final elapsed = TickingWidget.of(context).elapsedDuration;
+    return Text("Elapsed: $elapsed");
+  },
+  child: Text("Widget that doesn't need to repaint"),
+);
+```
+
+### Adding ticking to existing widgets
+
+You can add ticking to existing stateful widgets using `TickingStateMixin`. The condition is that the state of the
+widget should be using either `TickerProviderStateMixin` or `SingleTickerProviderStateMixin`. For implementation details,
+look into `TickingWidget` source code.
 
 Checkout [documentation][docs]
