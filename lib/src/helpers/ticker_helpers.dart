@@ -282,6 +282,8 @@ abstract interface class TickingInterface {
   /// the widget will rebuild every second.
   abstract TickingMode mode;
 
+  /// Duration elapsed since the ticker started.
+  /// Resets to zero when ticker is started.
   abstract Duration elapsed;
 
   /// Starts the ticker.
