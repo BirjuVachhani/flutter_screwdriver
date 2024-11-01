@@ -16,6 +16,7 @@ import 'package:flutter/scheduler.dart';
 /// If the mode is set to [TickingMode.millisecond], the widget will rebuild every millisecond.
 /// The default mode is [TickingMode.second].
 /// The mode can be changed at runtime using [TickingInterface.setMode] method.
+@Deprecated('This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
 enum TickingMode {
   /// Represents the mode when the widget should rebuild every millisecond.
   /// This is the most frequent mode and should be used with caution.
@@ -54,6 +55,7 @@ enum TickingMode {
 }
 
 /// A builder function type that is used to build the ticking widget.
+@Deprecated('This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
 typedef TickingWidgetBuilder = Widget Function(
     BuildContext context, DateTime currentTime, Widget? child);
 
@@ -71,6 +73,7 @@ typedef TickingWidgetBuilder = Widget Function(
 ///   },
 ///  ),
 ///  ```
+@Deprecated('This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
 class TickingWidget extends StatefulWidget {
   /// The builder function that is used to build the ticking widget.
   /// This function is called every time the widget needs to be rebuilt.
@@ -171,8 +174,10 @@ class _TickingWidgetState extends State<TickingWidget>
 
   @override
   Widget build(BuildContext context) {
-    return widget.builder?.call(context, currentTime, widget.child) ??
-        widget.child!;
+    return Builder(
+        builder: (context) =>
+            widget.builder?.call(context, currentTime, widget.child) ??
+            widget.child!);
   }
 }
 
@@ -191,6 +196,7 @@ class _TickingWidgetState extends State<TickingWidget>
 ///
 /// Note that [SingleTickingStateMixin] must be defined after [TickerProvider]
 /// in the mixin list, otherwise, it will throw a compile-time error.
+@Deprecated('This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
 mixin TickingStateMixin<T extends StatefulWidget>
     on State<T>, TickerProvider
     implements TickingInterface {
@@ -230,6 +236,7 @@ mixin TickingStateMixin<T extends StatefulWidget>
 
   /// Called every time the ticker ticks. Determines when to rebuild the widget.
   void onTick(Duration elapsed) {
+    this.elapsed = elapsed;
     final newTime = DateTime.now();
     // rebuild only if change is detected on given mode instead of every frame.
     switch (mode) {
@@ -268,6 +275,7 @@ mixin TickingStateMixin<T extends StatefulWidget>
 }
 
 /// A ticking interface that provides methods to control the ticking of the widget.
+@Deprecated('This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
 abstract interface class TickingInterface {
   /// The ticker that is used to control the ticking of the widget.
   abstract Ticker ticker;
