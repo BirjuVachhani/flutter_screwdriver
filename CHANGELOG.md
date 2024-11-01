@@ -1,3 +1,10 @@
+## 3.3.0 (Unreleased)
+
+- [Deprecation] `TickingWidget` and `TickingStateMixin` are deprecated in favor of separate
+  package: [ticking_widget](https://pub.dev/packages/ticking_widget). This will be removed in the next major version.
+- Fix lint warnings.
+- Upgrade dev dependencies.
+
 ## 3.2.0
 
 - Add `TickingWidget` for creating widgets that need to update on a regular interval.
