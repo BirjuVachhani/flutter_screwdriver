@@ -9,6 +9,15 @@ part of '../flutter_screwdriver.dart';
 
 /// Provides extensions for [Color]
 extension ColorFS on Color {
+  /// The red channel of this color in an 8 bit value.
+  int get redValue => (0x00ff0000 & toARGB32()) >> 16;
+
+  /// The green channel of this color in an 8 bit value.
+  int get greenValue => (0x0000ff00 & toARGB32()) >> 8;
+
+  /// The blue channel of this color in an 8 bit value.
+  int get blueValue => (0x000000ff & toARGB32()) >> 0;
+
   /// converts a normal [Color] to material color with proper shades mixed
   /// with base color (white).
   MaterialColor toMaterialColor() {
@@ -21,13 +30,13 @@ extension ColorFS on Color {
     for (final strength in strengths) {
       final ds = 0.5 - strength;
       swatch[(strength * 1000).round()] = Color.fromRGBO(
-        red + ((ds < 0 ? red : (255 - red)) * ds).round(),
-        green + ((ds < 0 ? green : (255 - green)) * ds).round(),
-        blue + ((ds < 0 ? blue : (255 - blue)) * ds).round(),
+        redValue + ((ds < 0 ? redValue : (255 - redValue)) * ds).round(),
+        greenValue + ((ds < 0 ? greenValue : (255 - greenValue)) * ds).round(),
+        blueValue + ((ds < 0 ? blueValue : (255 - blueValue)) * ds).round(),
         1,
       );
     }
-    return MaterialColor(value, swatch);
+    return MaterialColor(toARGB32(), swatch);
   }
 
   /// Returns [Color] from [this] shaded to [shade] and mixed with white as
@@ -35,15 +44,15 @@ extension ColorFS on Color {
   Color shade(int shade) {
     final ds = 0.5 - (shade / 1000);
     return Color.fromRGBO(
-      red + ((ds < 0 ? red : (255 - red)) * ds).round(),
-      green + ((ds < 0 ? green : (255 - green)) * ds).round(),
-      blue + ((ds < 0 ? blue : (255 - blue)) * ds).round(),
+      redValue + ((ds < 0 ? redValue : (255 - redValue)) * ds).round(),
+      greenValue + ((ds < 0 ? greenValue : (255 - greenValue)) * ds).round(),
+      blueValue + ((ds < 0 ? blueValue : (255 - blueValue)) * ds).round(),
       1,
     );
   }
 
   /// Returns hex string of [this] color
-  String get hexString => '#${value.toRadixString(16).padLeft(8, '0')}';
+  String get hexString => '#${toARGB32().toRadixString(16).padLeft(8, '0')}';
 
   /// allows to create a tween that start with [this] color
   /// and ends with [color].

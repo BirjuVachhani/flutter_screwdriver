@@ -15,3 +15,4 @@ linter:
     omit_local_variable_types: true
     public_member_api_docs: true
     use_super_parameters: true
+    prefer_final_locals: true
