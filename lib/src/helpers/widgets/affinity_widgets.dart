@@ -111,10 +111,6 @@ class DirectionalAffinity extends Flex {
   /// which will be placed between the [leading] and [trailing] widgets.
   final Widget child;
 
-  /// Represents the spacing between the [leading] and [trailing] widgets
-  /// and the [child] widget.
-  final double spacing;
-
   /// Creates a [DirectionalAffinity] widget.
   DirectionalAffinity({
     super.key,
@@ -126,7 +122,7 @@ class DirectionalAffinity extends Flex {
     super.mainAxisSize = MainAxisSize.min,
     super.mainAxisAlignment = MainAxisAlignment.start,
     super.crossAxisAlignment = CrossAxisAlignment.center,
-    this.spacing = 8,
+    super.spacing = 8,
   })  : assert(leading != null || trailing != null,
             'Either leading or trailing widget must be provided.'),
         super(

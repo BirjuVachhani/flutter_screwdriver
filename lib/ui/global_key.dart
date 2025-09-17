@@ -12,7 +12,7 @@ extension GlobalKeyExtension on GlobalKey {
   /// Returns the paint bounds of the widget associated with this key.
   Rect? get globalPaintBounds {
     final renderObject = currentContext?.findRenderObject();
-    var translation = renderObject?.getTransformTo(null).getTranslation();
+    final translation = renderObject?.getTransformTo(null).getTranslation();
     if (translation != null && renderObject?.paintBounds != null) {
       return renderObject!.paintBounds
           .shift(Offset(translation.x, translation.y));

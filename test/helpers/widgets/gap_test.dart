@@ -95,10 +95,12 @@ void main() {
       final gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
       expect(gapRenderBox.size.width, equals(gapSize));
       // In horizontal ListView, Gap takes the full height but only the specified width
-      expect(gapRenderBox.size.height, greaterThan(0)); // Takes available height
+      expect(
+          gapRenderBox.size.height, greaterThan(0)); // Takes available height
     });
 
-    testWidgets('Gap throws error when not in Flex or scrollable', (tester) async {
+    testWidgets('Gap throws error when not in Flex or scrollable',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -247,7 +249,8 @@ void main() {
   });
 
   group('Gap in scrollable widgets', () {
-    testWidgets('Gap works in SingleChildScrollView with Column', (tester) async {
+    testWidgets('Gap works in SingleChildScrollView with Column',
+        (tester) async {
       const gapSize = 20.0;
 
       await tester.pumpWidget(
@@ -271,7 +274,8 @@ void main() {
       expect(gapRenderBox.size.height, equals(gapSize));
     });
 
-    testWidgets('Gap works in SingleChildScrollView with Row (horizontal)', (tester) async {
+    testWidgets('Gap works in SingleChildScrollView with Row (horizontal)',
+        (tester) async {
       const gapSize = 30.0;
 
       await tester.pumpWidget(
@@ -296,7 +300,8 @@ void main() {
       expect(gapRenderBox.size.height, equals(0));
     });
 
-    testWidgets('Gap works in CustomScrollView with SliverList', (tester) async {
+    testWidgets('Gap works in CustomScrollView with SliverList',
+        (tester) async {
       const gapSize = 25.0;
 
       await tester.pumpWidget(
@@ -322,7 +327,8 @@ void main() {
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
 
-    testWidgets('Gap works in CustomScrollView with horizontal SliverList', (tester) async {
+    testWidgets('Gap works in CustomScrollView with horizontal SliverList',
+        (tester) async {
       const gapSize = 35.0;
 
       await tester.pumpWidget(
@@ -346,7 +352,8 @@ void main() {
 
       final gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
       expect(gapRenderBox.size.width, equals(gapSize));
-      expect(gapRenderBox.size.height, greaterThan(0)); // Takes available height
+      expect(
+          gapRenderBox.size.height, greaterThan(0)); // Takes available height
     });
 
     testWidgets('Gap works in NestedScrollView', (tester) async {
@@ -441,7 +448,8 @@ void main() {
               itemCount: 3,
               itemBuilder: (context, index) {
                 if (index == 0) return const SizedBox(height: 50);
-                if (index == 1) return const Gap(gapSize, key: Key('builder-gap'));
+                if (index == 1)
+                  return const Gap(gapSize, key: Key('builder-gap'));
                 return const SizedBox(height: 50);
               },
             ),
@@ -449,7 +457,8 @@ void main() {
         ),
       );
 
-      final gapRenderBox = tester.renderObject<RenderBox>(find.byKey(const Key('builder-gap')));
+      final gapRenderBox =
+          tester.renderObject<RenderBox>(find.byKey(const Key('builder-gap')));
       expect(gapRenderBox.size.height, equals(gapSize));
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
@@ -462,14 +471,17 @@ void main() {
           home: Scaffold(
             body: ListView.separated(
               itemCount: 2,
-              itemBuilder: (context, index) => SizedBox(height: 50, child: Text('Item $index')),
-              separatorBuilder: (context, index) => const Gap(gapSize, key: Key('separator-gap')),
+              itemBuilder: (context, index) =>
+                  SizedBox(height: 50, child: Text('Item $index')),
+              separatorBuilder: (context, index) =>
+                  const Gap(gapSize, key: Key('separator-gap')),
             ),
           ),
         ),
       );
 
-      final gapRenderBox = tester.renderObject<RenderBox>(find.byKey(const Key('separator-gap')));
+      final gapRenderBox = tester
+          .renderObject<RenderBox>(find.byKey(const Key('separator-gap')));
       expect(gapRenderBox.size.height, equals(gapSize));
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
@@ -492,12 +504,14 @@ void main() {
         ),
       );
 
-      final gapRenderBox = tester.renderObject<RenderBox>(find.byKey(const Key('gap')));
+      final gapRenderBox =
+          tester.renderObject<RenderBox>(find.byKey(const Key('gap')));
       expect(gapRenderBox.size.height, equals(gapSize));
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
 
-    testWidgets('Gap works in complex nested scrollable structure', (tester) async {
+    testWidgets('Gap works in complex nested scrollable structure',
+        (tester) async {
       const outerGapSize = 30.0;
       const innerGapSize = 15.0;
 
@@ -528,8 +542,10 @@ void main() {
         ),
       );
 
-      final outerGapRenderBox = tester.renderObject<RenderBox>(find.byKey(const Key('outer-gap')));
-      final innerGapRenderBox = tester.renderObject<RenderBox>(find.byKey(const Key('inner-gap')));
+      final outerGapRenderBox =
+          tester.renderObject<RenderBox>(find.byKey(const Key('outer-gap')));
+      final innerGapRenderBox =
+          tester.renderObject<RenderBox>(find.byKey(const Key('inner-gap')));
 
       // Outer gap in CustomScrollView
       expect(outerGapRenderBox.size.height, equals(outerGapSize));
