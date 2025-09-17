@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Stats" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <option name="arguments" value="--dry" />
+    <option name="filePath" value="$PROJECT_DIR$/stats.dart" />
+    <method v="2" />
+  </configuration>
+</component>
