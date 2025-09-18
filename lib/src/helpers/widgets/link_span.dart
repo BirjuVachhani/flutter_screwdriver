@@ -168,7 +168,8 @@ class LinkSpan extends WidgetSpan {
                 ),
                 child: Container(
                   padding: padding ?? EdgeInsets.zero,
-                  decoration: hovering ? hoverBackground ?? background : background,
+                  decoration:
+                      hovering ? hoverBackground ?? background : background,
                   child: child,
                 ),
               ),
@@ -187,7 +188,8 @@ class LinkSpan extends WidgetSpan {
                 duration: duration,
                 curve: curve,
                 padding: padding ?? EdgeInsets.zero,
-                decoration: hovering ? hoverBackground ?? background : background,
+                decoration:
+                    hovering ? hoverBackground ?? background : background,
                 child: child,
               ),
             ),

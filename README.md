@@ -37,6 +37,8 @@ Mixins:                        3
 
 *Stats auto generated using [Github Workflow](https://github.com/BirjuVachhani/screwdriver/blob/main/.github/workflows/stats.yaml).
 
+### Checkout the [Playground](https://birjuvachhani.github.io/flutter_screwdriver/) for available helper widgets.
+
 ## Installation
 
 1. Add as a dependency in your project's `pub spec.yaml`
