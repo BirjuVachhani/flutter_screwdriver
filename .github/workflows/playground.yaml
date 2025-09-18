@@ -25,7 +25,7 @@ jobs:
         run: cd example && flutter build web --release -t lib/playground.dart
       - name: Upload static files as artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: example/build/web/
 
