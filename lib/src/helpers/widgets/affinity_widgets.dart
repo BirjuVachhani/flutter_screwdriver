@@ -71,7 +71,7 @@ class VerticalAffinity extends DirectionalAffinity {
     super.spacing = 8,
   })  : assert(leading != null || trailing != null,
             'Either leading or trailing widget must be provided.'),
-        super(direction: Axis.horizontal);
+        super(direction: Axis.vertical);
 }
 
 /// Represents a widget that allows to place a widget before and after the
@@ -129,9 +129,7 @@ class DirectionalAffinity extends Flex {
           children: [
             if (affinity == Affinity.start && leading != null) leading,
             if (affinity == Affinity.end && trailing != null) trailing,
-            SizedBox(width: spacing),
             child,
-            SizedBox(width: spacing),
             if (affinity == Affinity.end && leading != null) leading,
             if (affinity == Affinity.start && trailing != null) trailing,
           ],
