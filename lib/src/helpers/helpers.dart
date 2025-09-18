@@ -10,6 +10,7 @@ export 'clear_focus_navigator_observer.dart';
 export 'helper_functions.dart';
 export 'ticker_helpers.dart';
 export 'widgets/affinity_widgets.dart';
+export 'widgets/async_builder.dart';
 export 'widgets/gap.dart';
 export 'widgets/hide_keyboard.dart';
 export 'widgets/hoverable.dart';
