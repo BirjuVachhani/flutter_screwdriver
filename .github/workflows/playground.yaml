@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       - name: Build Playground
-        run: cd example && flutter build web --release -t lib/playground.dart
+        run: cd example && flutter build web --release -t lib/playground.dart --base-href /flutter_screwdriver/
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v4
