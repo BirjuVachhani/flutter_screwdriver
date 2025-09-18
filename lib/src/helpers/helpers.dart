@@ -14,4 +14,5 @@ export 'widgets/async_builder.dart';
 export 'widgets/gap.dart';
 export 'widgets/hide_keyboard.dart';
 export 'widgets/hoverable.dart';
+export 'widgets/link_span.dart';
 export 'widgets/post_frame.dart';
