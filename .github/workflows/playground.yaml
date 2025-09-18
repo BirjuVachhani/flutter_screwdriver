@@ -1,0 +1,44 @@
+name: Deploy Playground
+
+on:
+  push:
+    tags:
+      # must align with the tag-pattern configured on pub.dev, often just replace
+      #  with [0-9]+.[0-9]+.[0-9]+*
+      #    - 'v[0-9]+.[0-9]+.[0-9]+*' # tag-pattern on pub.dev: 'v'
+      # If you prefer tags like '1.2.3', without the 'v' prefix, then use:
+      - '[0-9]+.[0-9]+.[0-9]+*' # tag-pattern on pub.dev: ''
+    # If you repository contains multiple packages consider a pattern like:
+    # - 'my_package_name-v[0-9]+.[0-9]+.[0-9]+*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    permissions:
+      id-token: write # This is required for authentication using OIDC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Build Playground
+        run: cd example && flutter build web --release -t lib/playground.dart
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: example/build/web/
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
