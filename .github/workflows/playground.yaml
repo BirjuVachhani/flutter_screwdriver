@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish:
+  build:
     permissions:
       id-token: write # This is required for authentication using OIDC
     runs-on: ubuntu-latest
