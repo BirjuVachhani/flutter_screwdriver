@@ -7,16 +7,16 @@
 import 'package:flutter/material.dart';
 
 /// Represents the affinity of the widget's [leading] and [trailing] widgets
-/// in [HorizontalAffinity] widget.
+/// in affinity widgets ([HorizontalAffinity] and [VerticalAffinity]).
 enum Affinity {
   /// Indicates that the [leading] widget is placed before the [child] widget
   /// and the [trailing] widget is placed after the [child] widget in
-  /// [HorizontalAffinity] widget.
+  /// affinity widgets.
   start,
 
   /// Indicates that the [leading] widget is placed after the [child] widget
   /// and the [trailing] widget is placed before the [child] widget in
-  /// [HorizontalAffinity] widget.
+  /// affinity widgets.
   end;
 }
 
@@ -48,7 +48,7 @@ class HorizontalAffinity extends DirectionalAffinity {
 }
 
 /// Represents a widget that allows to place a widget above and below the
-/// child widget in horizontal direction which is controlled by [affinity].
+/// child widget in vertical direction which is controlled by [affinity].
 ///
 /// If [affinity] is set to [Affinity.start], the [leading] widget will be
 /// placed above the [child] widget and the [trailing] widget will be placed
@@ -58,7 +58,7 @@ class HorizontalAffinity extends DirectionalAffinity {
 /// placed below the [child] widget and the [trailing] widget will be placed
 /// above the [child] widget.
 class VerticalAffinity extends DirectionalAffinity {
-  /// Creates a [HorizontalAffinity] widget.
+  /// Creates a [VerticalAffinity] widget.
   VerticalAffinity({
     super.key,
     super.leading,
@@ -80,15 +80,13 @@ class VerticalAffinity extends DirectionalAffinity {
 ///
 /// Representation:
 ///
-/// Row [leading, gap, child, gap, trailing]
+/// Row [leading, child, trailing] (with spacing between widgets)
 ///
 /// Column[
 ///   leading,
-///   gap
 ///   child,
-///   gap,
 ///   trailing
-/// ]
+/// ] (with spacing between widgets)
 ///
 /// Placement of [leading] and [trailing] widgets is controlled by [affinity].
 class DirectionalAffinity extends Flex {

@@ -38,21 +38,20 @@ class AsyncLoadingBuilder extends StatefulWidget {
   });
 
   /// Returns the [AsyncLoadingBuilderState] of the nearest [AsyncLoadingBuilder] ancestor.
-  static AsyncLoadingBuilderState<T>? maybeOf<T>(BuildContext context) {
+  static AsyncLoadingBuilderState? maybeOf<T>(BuildContext context) {
     context.dependOnInheritedWidgetOfExactType<_AsyncInheritedState<T>>();
-    return context.findAncestorStateOfType<AsyncLoadingBuilderState<T>>();
+    return context.findAncestorStateOfType<AsyncLoadingBuilderState>();
   }
 
   /// Returns the [AsyncLoadingBuilderState] of the nearest [AsyncLoadingBuilder] ancestor.
-  static AsyncLoadingBuilderState<T> of<T>(BuildContext context) =>
-      maybeOf<T>(context)!;
+  static AsyncLoadingBuilderState of<T>(BuildContext context) => maybeOf<T>(context)!;
 
   @override
   State<AsyncLoadingBuilder> createState() => AsyncLoadingBuilderState._();
 }
 
 /// State for the [AsyncLoadingBuilder] widget.
-class AsyncLoadingBuilderState<T> extends State<AsyncLoadingBuilder> {
+class AsyncLoadingBuilderState extends State<AsyncLoadingBuilder> {
   AsyncLoadingBuilderState._();
 
   late Future<Object?>? _future = widget.initialFuture;
@@ -63,8 +62,7 @@ class AsyncLoadingBuilderState<T> extends State<AsyncLoadingBuilder> {
   AsyncSnapshot<Object?>? get snapshot => _snapshot;
 
   /// The current state of the future.
-  ConnectionState get state =>
-      _snapshot?.connectionState ?? ConnectionState.none;
+  ConnectionState get state => _snapshot?.connectionState ?? ConnectionState.none;
 
   /// Indicates whether the current state is loading.
   bool get isLoading => state == ConnectionState.waiting;
@@ -112,6 +110,5 @@ class _AsyncInheritedState<T> extends InheritedWidget {
   const _AsyncInheritedState({required this.snapshot, required super.child});
 
   @override
-  bool updateShouldNotify(covariant _AsyncInheritedState<T> oldWidget) =>
-      snapshot != oldWidget.snapshot;
+  bool updateShouldNotify(covariant _AsyncInheritedState<T> oldWidget) => snapshot != oldWidget.snapshot;
 }

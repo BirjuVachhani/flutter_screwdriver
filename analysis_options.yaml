@@ -12,7 +12,7 @@ linter:
     camel_case_types: true
     prefer_single_quotes: true
     avoid_catches_without_on_clauses: false
-    omit_local_variable_types: true
     public_member_api_docs: true
     use_super_parameters: true
     prefer_final_locals: true
+    omit_local_variable_types: false

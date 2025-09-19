@@ -3,6 +3,13 @@
 - [Deprecation] `TickingWidget` and `TickingStateMixin` are deprecated in favor of separate
   package: [ticking_widget](https://pub.dev/packages/ticking_widget). This will be removed in the next major version.
 - Fix lint warnings.
+- Fix `Gap` widget crash when used in non-scrollable parent.
+- Fix deprecations for color extensions.
+- Improve tests and coverage.
+- Add `AsyncLoadingBuilder` widget for handling isolated async loading states.
+- Add `LinkSpan` for clickable text spans.
+- Fix `VerticalAffinity` not using directionality correctly.
+- Refactor `VerticalAffinity` and `HorizontalAffinity` to use new spacing param from `Flex` widget.
 - Upgrade dev dependencies.
 
 ## 3.2.0
