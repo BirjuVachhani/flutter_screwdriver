@@ -1,6 +1,6 @@
 name: flutter_screwdriver
 description: A flutter package aiming to provide useful extensions and helper functions to ease and speed up development.
-version: 3.2.0
+version: 3.3.0
 homepage: https://github.com/birjuvachhani/flutter_screwdriver
 
 environment:
