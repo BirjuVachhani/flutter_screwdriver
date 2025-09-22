@@ -44,7 +44,8 @@ class AsyncLoadingBuilder extends StatefulWidget {
   }
 
   /// Returns the [AsyncLoadingBuilderState] of the nearest [AsyncLoadingBuilder] ancestor.
-  static AsyncLoadingBuilderState of<T>(BuildContext context) => maybeOf<T>(context)!;
+  static AsyncLoadingBuilderState of<T>(BuildContext context) =>
+      maybeOf<T>(context)!;
 
   @override
   State<AsyncLoadingBuilder> createState() => AsyncLoadingBuilderState._();
@@ -62,7 +63,8 @@ class AsyncLoadingBuilderState extends State<AsyncLoadingBuilder> {
   AsyncSnapshot<Object?>? get snapshot => _snapshot;
 
   /// The current state of the future.
-  ConnectionState get state => _snapshot?.connectionState ?? ConnectionState.none;
+  ConnectionState get state =>
+      _snapshot?.connectionState ?? ConnectionState.none;
 
   /// Indicates whether the current state is loading.
   bool get isLoading => state == ConnectionState.waiting;
@@ -110,5 +112,6 @@ class _AsyncInheritedState<T> extends InheritedWidget {
   const _AsyncInheritedState({required this.snapshot, required super.child});
 
   @override
-  bool updateShouldNotify(covariant _AsyncInheritedState<T> oldWidget) => snapshot != oldWidget.snapshot;
+  bool updateShouldNotify(covariant _AsyncInheritedState<T> oldWidget) =>
+      snapshot != oldWidget.snapshot;
 }

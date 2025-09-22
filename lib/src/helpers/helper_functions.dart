@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// Alias for closing the app by invoking [SystemNavigator.pop]
-Future<void> closeApp({bool animated = true}) => SystemNavigator.pop(animated: animated);
+Future<void> closeApp({bool animated = true}) =>
+    SystemNavigator.pop(animated: animated);
 
 /// hides soft keyboard using platform channel
 void hideKeyboard(BuildContext context) {

@@ -118,10 +118,12 @@ void main() {
       final exception = tester.takeException();
       expect(exception, isNotNull);
       // The exception might be wrapped by the test framework, so check the string content
-      expect(exception.toString(), anyOf([
-        contains('Gap widget can only be used inside a Flex widget'),
-        contains('Multiple exceptions'),  // Framework may wrap the error
-      ]));
+      expect(
+          exception.toString(),
+          anyOf([
+            contains('Gap widget can only be used inside a Flex widget'),
+            contains('Multiple exceptions'), // Framework may wrap the error
+          ]));
     });
 
     testWidgets('Gap handles zero size', (tester) async {
@@ -609,7 +611,8 @@ void main() {
   });
 
   group('Gap updateRenderObject tests', () {
-    testWidgets('Gap updates render object when scrollable context changes', (tester) async {
+    testWidgets('Gap updates render object when scrollable context changes',
+        (tester) async {
       const initialSize = 10.0;
       const updatedSize = 20.0;
 
@@ -651,7 +654,8 @@ void main() {
       expect(gapRenderBox.size.height, equals(updatedSize));
     });
 
-    testWidgets('Gap updateRenderObject handles context changes', (tester) async {
+    testWidgets('Gap updateRenderObject handles context changes',
+        (tester) async {
       const gapSize = 15.0;
 
       // Test that updateRenderObject is called when the widget rebuilds
@@ -695,7 +699,8 @@ void main() {
   });
 
   group('Gap debugFillProperties tests', () {
-    testWidgets('Gap debugFillProperties includes size property', (tester) async {
+    testWidgets('Gap debugFillProperties includes size property',
+        (tester) async {
       const gapSize = 25.0;
 
       await tester.pumpWidget(
@@ -723,7 +728,8 @@ void main() {
   });
 
   group('RenderGap setter tests', () {
-    testWidgets('RenderGap gap setter triggers layout when value changes', (tester) async {
+    testWidgets('RenderGap gap setter triggers layout when value changes',
+        (tester) async {
       const initialSize = 10.0;
       const newSize = 20.0;
 
@@ -759,7 +765,8 @@ void main() {
       expect(updatedRenderGap.size.width, equals(newSize));
     });
 
-    testWidgets('RenderGap direction setter triggers layout when value changes', (tester) async {
+    testWidgets('RenderGap direction setter triggers layout when value changes',
+        (tester) async {
       const gapSize = 15.0;
 
       // Test in a context where direction can be explicitly set through scrollable changes
@@ -799,7 +806,8 @@ void main() {
   });
 
   group('RenderGap intrinsic dimension tests', () {
-    testWidgets('RenderGap intrinsic dimensions work correctly in Row', (tester) async {
+    testWidgets('RenderGap intrinsic dimensions work correctly in Row',
+        (tester) async {
       const gapSize = 30.0;
 
       await tester.pumpWidget(
@@ -827,7 +835,8 @@ void main() {
       expect(gapRenderBox.getMaxIntrinsicHeight(gapSize), equals(0));
     });
 
-    testWidgets('RenderGap intrinsic dimensions work correctly in Column', (tester) async {
+    testWidgets('RenderGap intrinsic dimensions work correctly in Column',
+        (tester) async {
       const gapSize = 40.0;
 
       await tester.pumpWidget(
@@ -855,7 +864,8 @@ void main() {
       expect(gapRenderBox.getMaxIntrinsicWidth(gapSize), equals(0));
     });
 
-    testWidgets('RenderGap intrinsic dimensions work correctly in ListView', (tester) async {
+    testWidgets('RenderGap intrinsic dimensions work correctly in ListView',
+        (tester) async {
       const gapSize = 25.0;
 
       await tester.pumpWidget(
@@ -879,7 +889,9 @@ void main() {
       expect(gapRenderBox.getMaxIntrinsicHeight(0), equals(gapSize));
     });
 
-    testWidgets('RenderGap intrinsic dimensions work correctly in horizontal ListView', (tester) async {
+    testWidgets(
+        'RenderGap intrinsic dimensions work correctly in horizontal ListView',
+        (tester) async {
       const gapSize = 35.0;
 
       await tester.pumpWidget(
@@ -906,7 +918,8 @@ void main() {
   });
 
   group('RenderGap debugFillProperties tests', () {
-    testWidgets('RenderGap debugFillProperties includes gap property', (tester) async {
+    testWidgets('RenderGap debugFillProperties includes gap property',
+        (tester) async {
       const gapSize = 20.0;
 
       await tester.pumpWidget(
@@ -934,7 +947,8 @@ void main() {
   });
 
   group('RenderGap direction getter tests', () {
-    testWidgets('RenderGap direction getter returns correct value', (tester) async {
+    testWidgets('RenderGap direction getter returns correct value',
+        (tester) async {
       const gapSize = 10.0;
 
       // Test direction getter in vertical scrollable
@@ -969,7 +983,8 @@ void main() {
       );
 
       final renderGapHorizontal = tester.renderObject(find.byType(Gap));
-      expect((renderGapHorizontal as dynamic).direction, equals(Axis.horizontal));
+      expect(
+          (renderGapHorizontal as dynamic).direction, equals(Axis.horizontal));
 
       // Test direction getter in Flex widget (should be null)
       await tester.pumpWidget(
@@ -990,7 +1005,8 @@ void main() {
   });
 
   group('Gap setter edge cases', () {
-    testWidgets('RenderGap setter handles same value assignment correctly', (tester) async {
+    testWidgets('RenderGap setter handles same value assignment correctly',
+        (tester) async {
       const gapSize = 15.0;
 
       // Create a custom render widget to test setter behavior
@@ -1014,7 +1030,9 @@ void main() {
       expect(gapRenderBox.size.width, equals(gapSize));
     });
 
-    testWidgets('RenderGap direction setter executes assignment when direction actually changes', (tester) async {
+    testWidgets(
+        'RenderGap direction setter executes assignment when direction actually changes',
+        (tester) async {
       const gapSize = 20.0;
 
       // Start with a Row (horizontal direction)
@@ -1055,7 +1073,9 @@ void main() {
       expect(gapRenderBox.size.height, equals(gapSize));
     });
 
-    testWidgets('RenderGap direction setter executes assignment lines when direction value changes', (tester) async {
+    testWidgets(
+        'RenderGap direction setter executes assignment lines when direction value changes',
+        (tester) async {
       const gapSize = 25.0;
 
       // Start with a specific scrollable direction (vertical ListView)
@@ -1098,7 +1118,8 @@ void main() {
       expect(gapRenderBox.size.width, equals(gapSize));
     });
 
-    testWidgets('RenderGap direction setter from null to non-null value', (tester) async {
+    testWidgets('RenderGap direction setter from null to non-null value',
+        (tester) async {
       const gapSize = 30.0;
 
       // Start with a Flex widget (no scrollable context - direction will be null)
@@ -1140,7 +1161,9 @@ void main() {
       expect(gapRenderBox.size.height, equals(gapSize));
     });
 
-    testWidgets('RenderGap direction setter non-null to different non-null value', (tester) async {
+    testWidgets(
+        'RenderGap direction setter non-null to different non-null value',
+        (tester) async {
       const gapSize = 35.0;
 
       // This is the key test - start with a vertical PageView (scrollable context)

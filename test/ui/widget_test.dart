@@ -9,7 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('WidgetFS extension tests', () {
     group('showAsDialog method', () {
-      testWidgets('shows widget as dialog with default parameters', (WidgetTester tester) async {
+      testWidgets('shows widget as dialog with default parameters',
+          (WidgetTester tester) async {
         const testWidget = Text('Test Dialog Content');
         late BuildContext capturedContext;
 
@@ -37,7 +38,8 @@ void main() {
         expect(find.text('Test Dialog Content'), findsOneWidget);
       });
 
-      testWidgets('shows widget as dialog with custom configuration', (WidgetTester tester) async {
+      testWidgets('shows widget as dialog with custom configuration',
+          (WidgetTester tester) async {
         const testWidget = Text('Custom Dialog');
         const customConfig = FadeScaleTransitionConfiguration(
           transitionDuration: Duration(milliseconds: 100),
@@ -67,7 +69,8 @@ void main() {
         expect(find.text('Custom Dialog'), findsOneWidget);
       });
 
-      testWidgets('shows widget as dialog with useRootNavigator true', (WidgetTester tester) async {
+      testWidgets('shows widget as dialog with useRootNavigator true',
+          (WidgetTester tester) async {
         const testWidget = Text('Root Navigator Dialog');
 
         await tester.pumpWidget(
@@ -100,7 +103,8 @@ void main() {
         expect(find.text('Root Navigator Dialog'), findsOneWidget);
       });
 
-      testWidgets('returns Future that completes when dialog is dismissed', (WidgetTester tester) async {
+      testWidgets('returns Future that completes when dialog is dismissed',
+          (WidgetTester tester) async {
         const testWidget = Text('Dismissible Dialog');
         late Future result;
 
@@ -216,7 +220,8 @@ void main() {
         expect(find.text('Stateful Dialog'), findsOneWidget);
       });
 
-      testWidgets('multiple dialogs can be shown sequentially', (WidgetTester tester) async {
+      testWidgets('multiple dialogs can be shown sequentially',
+          (WidgetTester tester) async {
         const widget1 = Text('First Dialog');
         const widget2 = Text('Second Dialog');
 
@@ -252,7 +257,8 @@ void main() {
         expect(find.text('Show Second'), findsOneWidget);
       });
 
-      testWidgets('works with different modal configurations', (WidgetTester tester) async {
+      testWidgets('works with different modal configurations',
+          (WidgetTester tester) async {
         const testWidget = Text('Configured Dialog');
         const customConfig = FadeScaleTransitionConfiguration(
           transitionDuration: Duration(milliseconds: 200),
@@ -309,7 +315,8 @@ void main() {
         expect(find.byType(SizedBox), findsWidgets);
       });
 
-      testWidgets('handles widget with constraints', (WidgetTester tester) async {
+      testWidgets('handles widget with constraints',
+          (WidgetTester tester) async {
         final constrainedWidget = Container(
           width: 300,
           height: 200,
@@ -342,7 +349,8 @@ void main() {
     });
 
     group('integration tests', () {
-      testWidgets('showAsDialog integrates with navigation', (WidgetTester tester) async {
+      testWidgets('showAsDialog integrates with navigation',
+          (WidgetTester tester) async {
         const testWidget = Text('Navigation Dialog');
 
         await tester.pumpWidget(
@@ -418,7 +426,8 @@ void main() {
     });
 
     group('type safety', () {
-      testWidgets('returns correctly typed Future', (WidgetTester tester) async {
+      testWidgets('returns correctly typed Future',
+          (WidgetTester tester) async {
         const testWidget = Text('Typed Dialog');
 
         await tester.pumpWidget(
@@ -443,7 +452,8 @@ void main() {
         await tester.pumpAndSettle();
       });
 
-      testWidgets('accepts proper parameter types', (WidgetTester tester) async {
+      testWidgets('accepts proper parameter types',
+          (WidgetTester tester) async {
         const testWidget = Text('Parameter Dialog');
 
         await tester.pumpWidget(
@@ -454,11 +464,14 @@ void main() {
                   return ElevatedButton(
                     onPressed: () {
                       // Test that parameters are accepted
-                      expect(() => testWidget.showAsDialog(
-                        context,
-                        useRootNavigator: true,
-                        configuration: const FadeScaleTransitionConfiguration(),
-                      ), returnsNormally);
+                      expect(
+                          () => testWidget.showAsDialog(
+                                context,
+                                useRootNavigator: true,
+                                configuration:
+                                    const FadeScaleTransitionConfiguration(),
+                              ),
+                          returnsNormally);
                     },
                     child: const Text('Show Dialog'),
                   );

@@ -50,7 +50,8 @@ void main() {
         expect(observer, isA<NavigatorObserver>());
       });
 
-      testWidgets('integrates with MaterialApp navigator', (WidgetTester tester) async {
+      testWidgets('integrates with MaterialApp navigator',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -65,7 +66,8 @@ void main() {
     });
 
     group('didPush behavior', () {
-      testWidgets('clears focus when pushing new route', (WidgetTester tester) async {
+      testWidgets('clears focus when pushing new route',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -81,7 +83,8 @@ void main() {
         await tester.pumpAndSettle();
 
         // Verify text field has focus
-        final textField = tester.widget<TextField>(find.byKey(Key('Home_textfield')));
+        final textField =
+            tester.widget<TextField>(find.byKey(Key('Home_textfield')));
         expect(textField.autofocus, isTrue);
 
         // Push a new route
@@ -102,7 +105,8 @@ void main() {
         expect(find.text('Home'), findsNothing);
       });
 
-      testWidgets('handles push with null previousRoute', (WidgetTester tester) async {
+      testWidgets('handles push with null previousRoute',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -146,7 +150,8 @@ void main() {
     });
 
     group('didPop behavior', () {
-      testWidgets('clears focus when popping route', (WidgetTester tester) async {
+      testWidgets('clears focus when popping route',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -181,7 +186,8 @@ void main() {
         expect(find.text('Second'), findsNothing);
       });
 
-      testWidgets('handles pop with null previousRoute', (WidgetTester tester) async {
+      testWidgets('handles pop with null previousRoute',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -243,7 +249,8 @@ void main() {
     });
 
     group('didReplace behavior', () {
-      testWidgets('clears focus when replacing route', (WidgetTester tester) async {
+      testWidgets('clears focus when replacing route',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -273,7 +280,8 @@ void main() {
         expect(find.text('Home'), findsNothing);
       });
 
-      testWidgets('handles replace with null routes', (WidgetTester tester) async {
+      testWidgets('handles replace with null routes',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -305,7 +313,8 @@ void main() {
         expect(find.text('Temp'), findsNothing);
       });
 
-      testWidgets('handles multiple rapid replaces', (WidgetTester tester) async {
+      testWidgets('handles multiple rapid replaces',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -320,7 +329,8 @@ void main() {
         for (int i = 1; i <= 3; i++) {
           navigatorKey.currentState?.pushReplacement(
             MaterialPageRoute(
-              builder: (context) => TestPage(title: 'Replace $i', hasFocus: true),
+              builder: (context) =>
+                  TestPage(title: 'Replace $i', hasFocus: true),
             ),
           );
         }
@@ -334,7 +344,8 @@ void main() {
     });
 
     group('focus management', () {
-      testWidgets('unfocuses when there is a primary focus', (WidgetTester tester) async {
+      testWidgets('unfocuses when there is a primary focus',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -375,7 +386,8 @@ void main() {
         expect(find.text('New Page'), findsOneWidget);
       });
 
-      testWidgets('handles no primary focus gracefully', (WidgetTester tester) async {
+      testWidgets('handles no primary focus gracefully',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -400,7 +412,8 @@ void main() {
     });
 
     group('integration tests', () {
-      testWidgets('works with complex navigation stack', (WidgetTester tester) async {
+      testWidgets('works with complex navigation stack',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -485,7 +498,8 @@ void main() {
         expect(observer3.pushCalled, isTrue);
       });
 
-      testWidgets('works with different route types', (WidgetTester tester) async {
+      testWidgets('works with different route types',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -501,7 +515,8 @@ void main() {
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 TestPage(title: 'Custom Route'),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
               return FadeTransition(opacity: animation, child: child);
             },
           ),
@@ -514,7 +529,8 @@ void main() {
     });
 
     group('edge cases', () {
-      testWidgets('handles rapid navigation changes', (WidgetTester tester) async {
+      testWidgets('handles rapid navigation changes',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             navigatorKey: navigatorKey,
@@ -543,7 +559,8 @@ void main() {
         expect(find.byType(TestPage), findsOneWidget);
       });
 
-      testWidgets('handles disposal during navigation', (WidgetTester tester) async {
+      testWidgets('handles disposal during navigation',
+          (WidgetTester tester) async {
         bool showApp = true;
 
         await tester.pumpWidget(
@@ -575,7 +592,8 @@ void main() {
         expect(find.byType(TestPage), findsNothing);
       });
 
-      testWidgets('handles null navigator gracefully', (WidgetTester tester) async {
+      testWidgets('handles null navigator gracefully',
+          (WidgetTester tester) async {
         // Create observer without attaching to navigator initially
         final standaloneObserver = ClearFocusNavigatorObserver();
 
@@ -590,7 +608,8 @@ void main() {
     });
 
     group('type safety and inheritance', () {
-      testWidgets('correctly extends NavigatorObserver', (WidgetTester tester) async {
+      testWidgets('correctly extends NavigatorObserver',
+          (WidgetTester tester) async {
         expect(observer, isA<NavigatorObserver>());
         expect(observer.runtimeType, equals(ClearFocusNavigatorObserver));
       });

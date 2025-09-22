@@ -43,7 +43,8 @@ class Stats {
 /// --dry: if provided, it will not update README.md file. It will only print
 /// the stats to console.
 void main(List<String> args) async {
-  final screwdriverStats = await getStats('package:flutter_screwdriver/flutter_screwdriver.dart');
+  final screwdriverStats =
+      await getStats('package:flutter_screwdriver/flutter_screwdriver.dart');
 
   final isDry = args.contains('--dry');
 
@@ -92,7 +93,8 @@ Mixins:                        ${stats.mixins}
 
 Future<Stats> getStats(String library) async {
   final collection = AnalysisContextCollectionImpl(
-      includedPaths: <String>[Directory('lib').absolute.path], resourceProvider: PhysicalResourceProvider.INSTANCE);
+      includedPaths: <String>[Directory('lib').absolute.path],
+      resourceProvider: PhysicalResourceProvider.INSTANCE);
   final session = collection.contexts[0].currentSession;
   final libPath = session.uriConverter.uriToPath(Uri.parse(library)) ?? '';
   final result = await session.getResolvedUnit(libPath) as ResolvedUnitResult;
@@ -105,11 +107,31 @@ Future<Stats> getStats(String library) async {
 
   void collectStats(LibraryElement element) {
     for (final part in element.fragments) {
-      helpersFunctions += part.functions.wherePublic().map((e) => e.name).whereType<String>().toList();
-      extensions += part.extensions.wherePublic().expand((element) => element.fields).length.toInt();
-      extensions += part.extensions.wherePublic().expand((element) => element.methods).length.toInt();
-      helpersClasses += part.classes.wherePublic().map((e) => e.name).whereType<String>().toList();
-      helperVariables += part.topLevelVariables.wherePublic().map((e) => e.name).whereType<String>().toList();
+      helpersFunctions += part.functions
+          .wherePublic()
+          .map((e) => e.name)
+          .whereType<String>()
+          .toList();
+      extensions += part.extensions
+          .wherePublic()
+          .expand((element) => element.fields)
+          .length
+          .toInt();
+      extensions += part.extensions
+          .wherePublic()
+          .expand((element) => element.methods)
+          .length
+          .toInt();
+      helpersClasses += part.classes
+          .wherePublic()
+          .map((e) => e.name)
+          .whereType<String>()
+          .toList();
+      helperVariables += part.topLevelVariables
+          .wherePublic()
+          .map((e) => e.name)
+          .whereType<String>()
+          .toList();
       typedefs += part.typeAliases.wherePublic().length.toInt();
       mixins += part.mixins.wherePublic().length.toInt();
     }

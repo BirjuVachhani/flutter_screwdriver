@@ -63,7 +63,8 @@ void main() {
     late _TestWidgetState testState;
 
     group('mixin initialization', () {
-      testWidgets('creates widget with mixin successfully', (WidgetTester tester) async {
+      testWidgets('creates widget with mixin successfully',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -79,7 +80,8 @@ void main() {
         expect(find.text('Test Widget'), findsOneWidget);
       });
 
-      testWidgets('widget disposes without errors', (WidgetTester tester) async {
+      testWidgets('widget disposes without errors',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -103,7 +105,8 @@ void main() {
     });
 
     group('lifecycle method implementation', () {
-      testWidgets('onResume is called for resumed state', (WidgetTester tester) async {
+      testWidgets('onResume is called for resumed state',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -117,15 +120,18 @@ void main() {
         testState.receivedStates.clear();
 
         // Test the mixin methods directly
-        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+        TestWidgetsFlutterBinding.instance
+            .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
         await tester.pumpAndSettle();
 
         expect(testState.methodCalls, contains('onResume'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:resumed'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:resumed'));
         expect(testState.receivedStates, contains(AppLifecycleState.resumed));
       });
 
-      testWidgets('onPause is called for paused state', (WidgetTester tester) async {
+      testWidgets('onPause is called for paused state',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -138,15 +144,18 @@ void main() {
         testState.methodCalls.clear();
         testState.receivedStates.clear();
 
-        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+        TestWidgetsFlutterBinding.instance
+            .handleAppLifecycleStateChanged(AppLifecycleState.paused);
         await tester.pumpAndSettle();
 
         expect(testState.methodCalls, contains('onPause'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:paused'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:paused'));
         expect(testState.receivedStates, contains(AppLifecycleState.paused));
       });
 
-      testWidgets('onDetach is called for detached state', (WidgetTester tester) async {
+      testWidgets('onDetach is called for detached state',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -160,15 +169,18 @@ void main() {
         testState.methodCalls.clear();
         testState.receivedStates.clear();
 
-        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(AppLifecycleState.detached);
+        TestWidgetsFlutterBinding.instance
+            .handleAppLifecycleStateChanged(AppLifecycleState.detached);
         await tester.pumpAndSettle();
 
         expect(testState.methodCalls, contains('onDetach'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:detached'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:detached'));
         expect(testState.receivedStates, contains(AppLifecycleState.detached));
       });
 
-      testWidgets('onInactive is called for inactive state', (WidgetTester tester) async {
+      testWidgets('onInactive is called for inactive state',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -182,15 +194,18 @@ void main() {
         testState.methodCalls.clear();
         testState.receivedStates.clear();
 
-        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+        TestWidgetsFlutterBinding.instance
+            .handleAppLifecycleStateChanged(AppLifecycleState.inactive);
         await tester.pumpAndSettle();
 
         expect(testState.methodCalls, contains('onInactive'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:inactive'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:inactive'));
         expect(testState.receivedStates, contains(AppLifecycleState.inactive));
       });
 
-      testWidgets('onHidden is called for hidden state', (WidgetTester tester) async {
+      testWidgets('onHidden is called for hidden state',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -204,15 +219,18 @@ void main() {
         testState.methodCalls.clear();
         testState.receivedStates.clear();
 
-        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+        TestWidgetsFlutterBinding.instance
+            .handleAppLifecycleStateChanged(AppLifecycleState.hidden);
         await tester.pumpAndSettle();
 
         expect(testState.methodCalls, contains('onHidden'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:hidden'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:hidden'));
         expect(testState.receivedStates, contains(AppLifecycleState.hidden));
       });
 
-      testWidgets('handles multiple lifecycle state changes', (WidgetTester tester) async {
+      testWidgets('handles multiple lifecycle state changes',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -246,7 +264,8 @@ void main() {
             case AppLifecycleState.hidden:
               testState.onHidden();
           }
-          TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(state);
+          TestWidgetsFlutterBinding.instance
+              .handleAppLifecycleStateChanged(state);
           await tester.pumpAndSettle();
         }
 
@@ -257,7 +276,11 @@ void main() {
         expect(testState.methodCalls, contains('onDetach'));
 
         // Verify order of calls (each state triggers 2 calls: specific method + general callback)
-        expect(testState.methodCalls.where((call) => call.startsWith('didChangeAppLifecycleState')).length, equals(5));
+        expect(
+            testState.methodCalls
+                .where((call) => call.startsWith('didChangeAppLifecycleState'))
+                .length,
+            equals(5));
       });
     });
 
@@ -276,7 +299,8 @@ void main() {
         expect(find.byType(_MinimalTestWidget), findsOneWidget);
       });
 
-      testWidgets('works with different StatefulWidget types', (WidgetTester tester) async {
+      testWidgets('works with different StatefulWidget types',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -290,8 +314,10 @@ void main() {
           ),
         );
 
-        final testState1 = tester.state<_TestWidgetState>(find.byType(TestWidget));
-        final testState2 = tester.state<_AnotherTestWidgetState>(find.byType(_AnotherTestWidget));
+        final testState1 =
+            tester.state<_TestWidgetState>(find.byType(TestWidget));
+        final testState2 = tester
+            .state<_AnotherTestWidgetState>(find.byType(_AnotherTestWidget));
 
         testState1.methodCalls.clear();
         testState2.methodCalls.clear();
@@ -364,14 +390,17 @@ void main() {
         testState.methodCalls.clear();
         testState.receivedStates.clear();
 
-        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+        TestWidgetsFlutterBinding.instance
+            .handleAppLifecycleStateChanged(AppLifecycleState.inactive);
         await tester.pumpAndSettle();
 
         expect(testState.methodCalls, contains('onInactive'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:inactive'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:inactive'));
       });
 
-      testWidgets('handles widget creation and disposal rapidly', (WidgetTester tester) async {
+      testWidgets('handles widget creation and disposal rapidly',
+          (WidgetTester tester) async {
         for (int i = 0; i < 5; i++) {
           await tester.pumpWidget(
             MaterialApp(
@@ -396,7 +425,8 @@ void main() {
     });
 
     group('type safety', () {
-      testWidgets('mixin works with different generic types', (WidgetTester tester) async {
+      testWidgets('mixin works with different generic types',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -434,7 +464,8 @@ void main() {
     });
 
     group('callback validation', () {
-      testWidgets('all lifecycle callbacks are called correctly', (WidgetTester tester) async {
+      testWidgets('all lifecycle callbacks are called correctly',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -469,7 +500,8 @@ void main() {
             case AppLifecycleState.hidden:
               testState.onHidden();
           }
-          TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(state);
+          TestWidgetsFlutterBinding.instance
+              .handleAppLifecycleStateChanged(state);
           await tester.pumpAndSettle();
         }
 
@@ -482,7 +514,8 @@ void main() {
 
         // Check that general callback was called for all
         for (final state in allStates) {
-          expect(testState.methodCalls, contains('didChangeAppLifecycleState:${state.name}'));
+          expect(testState.methodCalls,
+              contains('didChangeAppLifecycleState:${state.name}'));
         }
 
         expect(testState.receivedStates, equals(allStates));
@@ -490,7 +523,8 @@ void main() {
     });
 
     group('WidgetsBinding integration', () {
-      testWidgets('observer is properly registered with WidgetsBinding', (WidgetTester tester) async {
+      testWidgets('observer is properly registered with WidgetsBinding',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -510,10 +544,12 @@ void main() {
         // The observer should receive the actual lifecycle event
         expect(testState.receivedStates, contains(AppLifecycleState.paused));
         expect(testState.methodCalls, contains('onPause'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:paused'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:paused'));
       });
 
-      testWidgets('multiple widgets with observers all receive events', (WidgetTester tester) async {
+      testWidgets('multiple widgets with observers all receive events',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -528,16 +564,20 @@ void main() {
           ),
         );
 
-        final testState1 = tester.state<_TestWidgetState>(find.byKey(const Key('widget1')));
-        final testState2 = tester.state<_TestWidgetState>(find.byKey(const Key('widget2')));
-        final testState3 = tester.state<_AnotherTestWidgetState>(find.byKey(const Key('widget3')));
+        final testState1 =
+            tester.state<_TestWidgetState>(find.byKey(const Key('widget1')));
+        final testState2 =
+            tester.state<_TestWidgetState>(find.byKey(const Key('widget2')));
+        final testState3 = tester
+            .state<_AnotherTestWidgetState>(find.byKey(const Key('widget3')));
 
         testState1.methodCalls.clear();
         testState2.methodCalls.clear();
         testState3.methodCalls.clear();
 
         // Send lifecycle event through binding
-        tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+        tester.binding
+            .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
         await tester.pump();
 
         // All observers should receive the event
@@ -546,7 +586,8 @@ void main() {
         expect(testState3.methodCalls, contains('onResume'));
       });
 
-      testWidgets('observer is removed after widget disposal', (WidgetTester tester) async {
+      testWidgets('observer is removed after widget disposal',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -580,7 +621,8 @@ void main() {
     });
 
     group('state transition scenarios', () {
-      testWidgets('handles typical app lifecycle flow', (WidgetTester tester) async {
+      testWidgets('handles typical app lifecycle flow',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -639,13 +681,18 @@ void main() {
 
         for (final state in rapidStates) {
           tester.binding.handleAppLifecycleStateChanged(state);
-          await tester.pump(Duration.zero); // Process microtasks but don't advance time
+          await tester
+              .pump(Duration.zero); // Process microtasks but don't advance time
         }
 
         expect(testState.receivedStates, equals(rapidStates));
-        expect(testState.methodCalls.where((call) => call == 'onResume').length, greaterThanOrEqualTo(2));
-        expect(testState.methodCalls.where((call) => call == 'onInactive').length, greaterThanOrEqualTo(2));
-        expect(testState.methodCalls.where((call) => call == 'onPause').length, greaterThanOrEqualTo(1));
+        expect(testState.methodCalls.where((call) => call == 'onResume').length,
+            greaterThanOrEqualTo(2));
+        expect(
+            testState.methodCalls.where((call) => call == 'onInactive').length,
+            greaterThanOrEqualTo(2));
+        expect(testState.methodCalls.where((call) => call == 'onPause').length,
+            greaterThanOrEqualTo(1));
       });
 
       testWidgets('handles hidden state properly', (WidgetTester tester) async {
@@ -667,13 +714,14 @@ void main() {
 
         expect(testState.receivedStates, contains(AppLifecycleState.hidden));
         expect(testState.methodCalls, contains('onHidden'));
-        expect(testState.methodCalls, contains('didChangeAppLifecycleState:hidden'));
+        expect(testState.methodCalls,
+            contains('didChangeAppLifecycleState:hidden'));
       });
     });
 
     group('error handling and edge cases', () {
-      testWidgets('handles disposal during lifecycle event', (WidgetTester tester) async {
-
+      testWidgets('handles disposal during lifecycle event',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -682,7 +730,8 @@ void main() {
           ),
         );
 
-        tester.state<_DisposalTestWidgetState>(find.byType(_DisposalTestWidget));
+        tester
+            .state<_DisposalTestWidgetState>(find.byType(_DisposalTestWidget));
 
         // Send lifecycle event while disposing
         tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
@@ -700,7 +749,8 @@ void main() {
         expect(find.byType(_DisposalTestWidget), findsNothing);
       });
 
-      testWidgets('works with empty override implementations', (WidgetTester tester) async {
+      testWidgets('works with empty override implementations',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -716,7 +766,8 @@ void main() {
         expect(find.byType(_EmptyImplementationWidget), findsOneWidget);
       });
 
-      testWidgets('handles consecutive dispose calls gracefully', (WidgetTester tester) async {
+      testWidgets('handles consecutive dispose calls gracefully',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -748,7 +799,8 @@ void main() {
         expect(find.byType(TestWidget), findsNothing);
       });
 
-      testWidgets('mixin works with custom initState and dispose', (WidgetTester tester) async {
+      testWidgets('mixin works with custom initState and dispose',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -757,14 +809,16 @@ void main() {
           ),
         );
 
-        final customState = tester.state<_CustomInitDisposeWidgetState>(find.byType(_CustomInitDisposeWidget));
+        final customState = tester.state<_CustomInitDisposeWidgetState>(
+            find.byType(_CustomInitDisposeWidget));
 
         expect(customState.initCalled, isTrue);
         expect(customState.methodCalls, isEmpty);
 
         customState.methodCalls.clear();
 
-        tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+        tester.binding
+            .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
         await tester.pump();
 
         expect(customState.methodCalls, contains('onResume'));
@@ -783,7 +837,8 @@ void main() {
     });
 
     group('memory management', () {
-      testWidgets('no memory leaks with multiple widget cycles', (WidgetTester tester) async {
+      testWidgets('no memory leaks with multiple widget cycles',
+          (WidgetTester tester) async {
         // Create and dispose widgets multiple times to test for memory leaks
         for (int i = 0; i < 10; i++) {
           await tester.pumpWidget(
@@ -800,10 +855,12 @@ void main() {
           );
 
           // Send some lifecycle events
-          tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+          tester.binding
+              .handleAppLifecycleStateChanged(AppLifecycleState.paused);
           await tester.pump();
 
-          tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+          tester.binding
+              .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
           await tester.pump();
 
           // Dispose all
@@ -821,7 +878,8 @@ void main() {
         expect(find.byType(_AnotherTestWidget), findsNothing);
       });
 
-      testWidgets('observer properly managed through widget lifecycle', (WidgetTester tester) async {
+      testWidgets('observer properly managed through widget lifecycle',
+          (WidgetTester tester) async {
         // Test observer management indirectly by ensuring no crashes occur
         // during multiple create/dispose cycles
         for (int i = 0; i < 3; i++) {
@@ -848,7 +906,8 @@ void main() {
     });
 
     group('callback order and timing', () {
-      testWidgets('didChangeAppLifecycleState called before specific callbacks', (WidgetTester tester) async {
+      testWidgets('didChangeAppLifecycleState called before specific callbacks',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -857,7 +916,8 @@ void main() {
           ),
         );
 
-        final orderState = tester.state<_OrderTestWidgetState>(find.byType(_OrderTestWidget));
+        final orderState =
+            tester.state<_OrderTestWidgetState>(find.byType(_OrderTestWidget));
         orderState.callOrder.clear();
 
         tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
@@ -869,7 +929,9 @@ void main() {
         expect(orderState.callOrder[1], equals('onPause'));
       });
 
-      testWidgets('callbacks called in correct order for multiple state changes', (WidgetTester tester) async {
+      testWidgets(
+          'callbacks called in correct order for multiple state changes',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -878,10 +940,15 @@ void main() {
           ),
         );
 
-        final orderState = tester.state<_OrderTestWidgetState>(find.byType(_OrderTestWidget));
+        final orderState =
+            tester.state<_OrderTestWidgetState>(find.byType(_OrderTestWidget));
         orderState.callOrder.clear();
 
-        final states = [AppLifecycleState.inactive, AppLifecycleState.paused, AppLifecycleState.resumed];
+        final states = [
+          AppLifecycleState.inactive,
+          AppLifecycleState.paused,
+          AppLifecycleState.resumed
+        ];
 
         for (final state in states) {
           tester.binding.handleAppLifecycleStateChanged(state);
@@ -899,7 +966,8 @@ void main() {
     });
 
     group('inheritance and composition', () {
-      testWidgets('works with widget inheritance hierarchies', (WidgetTester tester) async {
+      testWidgets('works with widget inheritance hierarchies',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -908,7 +976,8 @@ void main() {
           ),
         );
 
-        final inheritedState = tester.state<_InheritedTestWidgetState>(find.byType(_InheritedTestWidget));
+        final inheritedState = tester.state<_InheritedTestWidgetState>(
+            find.byType(_InheritedTestWidget));
         inheritedState.methodCalls.clear();
 
         tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
@@ -918,7 +987,8 @@ void main() {
         expect(inheritedState.methodCalls, contains('inherited_onPause'));
       });
 
-      testWidgets('mixin composition with multiple mixins', (WidgetTester tester) async {
+      testWidgets('mixin composition with multiple mixins',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -927,11 +997,13 @@ void main() {
           ),
         );
 
-        final multiState = tester.state<_MultiMixinWidgetState>(find.byType(_MultiMixinWidget));
+        final multiState = tester
+            .state<_MultiMixinWidgetState>(find.byType(_MultiMixinWidget));
         multiState.lifecycleCalls.clear();
         multiState.otherCalls.clear();
 
-        tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+        tester.binding
+            .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
         await tester.pump();
 
         expect(multiState.lifecycleCalls, contains('onResume'));
@@ -947,7 +1019,8 @@ class _MinimalTestWidget extends StatefulWidget {
   State<_MinimalTestWidget> createState() => _MinimalTestWidgetState();
 }
 
-class _MinimalTestWidgetState extends State<_MinimalTestWidget> with AppLifecycleObserver {
+class _MinimalTestWidgetState extends State<_MinimalTestWidget>
+    with AppLifecycleObserver {
   @override
   Widget build(BuildContext context) {
     return Text('Minimal');
@@ -961,7 +1034,8 @@ class _AnotherTestWidget extends StatefulWidget {
   State<_AnotherTestWidget> createState() => _AnotherTestWidgetState();
 }
 
-class _AnotherTestWidgetState extends State<_AnotherTestWidget> with AppLifecycleObserver {
+class _AnotherTestWidgetState extends State<_AnotherTestWidget>
+    with AppLifecycleObserver {
   List<String> methodCalls = [];
 
   @override
@@ -986,7 +1060,8 @@ class _DisposalTestWidget extends StatefulWidget {
   State<_DisposalTestWidget> createState() => _DisposalTestWidgetState();
 }
 
-class _DisposalTestWidgetState extends State<_DisposalTestWidget> with AppLifecycleObserver {
+class _DisposalTestWidgetState extends State<_DisposalTestWidget>
+    with AppLifecycleObserver {
   @override
   Widget build(BuildContext context) {
     return Text('Disposal Test');
@@ -996,10 +1071,12 @@ class _DisposalTestWidgetState extends State<_DisposalTestWidget> with AppLifecy
 // Test widget with empty implementations
 class _EmptyImplementationWidget extends StatefulWidget {
   @override
-  State<_EmptyImplementationWidget> createState() => _EmptyImplementationWidgetState();
+  State<_EmptyImplementationWidget> createState() =>
+      _EmptyImplementationWidgetState();
 }
 
-class _EmptyImplementationWidgetState extends State<_EmptyImplementationWidget> with AppLifecycleObserver {
+class _EmptyImplementationWidgetState extends State<_EmptyImplementationWidget>
+    with AppLifecycleObserver {
   @override
   Widget build(BuildContext context) {
     return Text('Empty Implementation');
@@ -1011,10 +1088,12 @@ class _EmptyImplementationWidgetState extends State<_EmptyImplementationWidget> 
 // Test widget with custom initState and dispose
 class _CustomInitDisposeWidget extends StatefulWidget {
   @override
-  State<_CustomInitDisposeWidget> createState() => _CustomInitDisposeWidgetState();
+  State<_CustomInitDisposeWidget> createState() =>
+      _CustomInitDisposeWidgetState();
 }
 
-class _CustomInitDisposeWidgetState extends State<_CustomInitDisposeWidget> with AppLifecycleObserver {
+class _CustomInitDisposeWidgetState extends State<_CustomInitDisposeWidget>
+    with AppLifecycleObserver {
   List<String> methodCalls = [];
   bool initCalled = false;
   bool disposeCalled = false;
@@ -1053,7 +1132,8 @@ class _OrderTestWidget extends StatefulWidget {
   State<_OrderTestWidget> createState() => _OrderTestWidgetState();
 }
 
-class _OrderTestWidgetState extends State<_OrderTestWidget> with AppLifecycleObserver {
+class _OrderTestWidgetState extends State<_OrderTestWidget>
+    with AppLifecycleObserver {
   List<String> callOrder = [];
 
   @override
@@ -1088,7 +1168,8 @@ class _BaseTestWidget extends StatefulWidget {
   State<_BaseTestWidget> createState() => _BaseTestWidgetState();
 }
 
-class _BaseTestWidgetState extends State<_BaseTestWidget> with AppLifecycleObserver {
+class _BaseTestWidgetState extends State<_BaseTestWidget>
+    with AppLifecycleObserver {
   List<String> methodCalls = [];
 
   @override
@@ -1107,7 +1188,8 @@ class _InheritedTestWidget extends StatefulWidget {
   State<_InheritedTestWidget> createState() => _InheritedTestWidgetState();
 }
 
-class _InheritedTestWidgetState extends State<_InheritedTestWidget> with AppLifecycleObserver {
+class _InheritedTestWidgetState extends State<_InheritedTestWidget>
+    with AppLifecycleObserver {
   List<String> methodCalls = [];
 
   @override
@@ -1137,7 +1219,8 @@ class _MultiMixinWidget extends StatefulWidget {
   State<_MultiMixinWidget> createState() => _MultiMixinWidgetState();
 }
 
-class _MultiMixinWidgetState extends State<_MultiMixinWidget> with AppLifecycleObserver, _OtherTestMixin {
+class _MultiMixinWidgetState extends State<_MultiMixinWidget>
+    with AppLifecycleObserver, _OtherTestMixin {
   List<String> lifecycleCalls = [];
 
   @override

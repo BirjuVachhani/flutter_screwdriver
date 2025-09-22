@@ -66,7 +66,7 @@ void main() {
 
       test('handles extreme values', () {
         const minValue = -2147483648; // int min value
-        const maxValue = 2147483647;  // int max value
+        const maxValue = 2147483647; // int max value
 
         final tween1 = minValue.tweenTo(maxValue);
         expect(tween1.begin, equals(minValue));
@@ -148,7 +148,7 @@ void main() {
 
       test('handles extreme values', () {
         const minValue = -2147483648; // int min value
-        const maxValue = 2147483647;  // int max value
+        const maxValue = 2147483647; // int max value
 
         final tween1 = maxValue.tweenFrom(minValue);
         expect(tween1.begin, equals(minValue));

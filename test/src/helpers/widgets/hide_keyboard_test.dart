@@ -30,7 +30,8 @@ void main() {
     });
 
     group('constructor and properties', () {
-      testWidgets('creates with required parameters', (WidgetTester tester) async {
+      testWidgets('creates with required parameters',
+          (WidgetTester tester) async {
         const child = Text('Test Child');
         const hideKeyboard = HideKeyboard(child: child);
 
@@ -39,7 +40,8 @@ void main() {
         expect(hideKeyboard.behavior, isNull); // default value
       });
 
-      testWidgets('creates with custom parameters', (WidgetTester tester) async {
+      testWidgets('creates with custom parameters',
+          (WidgetTester tester) async {
         const child = Text('Test Child');
         const hideKeyboard = HideKeyboard(
           child: child,
@@ -54,7 +56,8 @@ void main() {
     });
 
     group('build method', () {
-      testWidgets('wraps child in GestureDetector', (WidgetTester tester) async {
+      testWidgets('wraps child in GestureDetector',
+          (WidgetTester tester) async {
         const child = Text('Test Child');
 
         await tester.pumpWidget(
@@ -69,7 +72,8 @@ void main() {
         expect(find.text('Test Child'), findsOneWidget);
       });
 
-      testWidgets('sets GestureDetector behavior correctly', (WidgetTester tester) async {
+      testWidgets('sets GestureDetector behavior correctly',
+          (WidgetTester tester) async {
         const child = Text('Test Child');
 
         await tester.pumpWidget(
@@ -83,11 +87,13 @@ void main() {
           ),
         );
 
-        final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+        final gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector));
         expect(gestureDetector.behavior, equals(HitTestBehavior.opaque));
       });
 
-      testWidgets('uses default behavior when not specified', (WidgetTester tester) async {
+      testWidgets('uses default behavior when not specified',
+          (WidgetTester tester) async {
         const child = Text('Test Child');
 
         await tester.pumpWidget(
@@ -98,13 +104,15 @@ void main() {
           ),
         );
 
-        final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+        final gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector));
         expect(gestureDetector.behavior, isNull);
       });
     });
 
     group('keyboard hiding functionality', () {
-      testWidgets('calls hideKeyboard when tapped and hide is true', (WidgetTester tester) async {
+      testWidgets('calls hideKeyboard when tapped and hide is true',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -130,7 +138,8 @@ void main() {
         expect(find.text('Tap me'), findsOneWidget);
       });
 
-      testWidgets('does not hide keyboard on tap when hide is false', (WidgetTester tester) async {
+      testWidgets('does not hide keyboard on tap when hide is false',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -154,7 +163,8 @@ void main() {
         expect(hideKeyboardCalled, isFalse);
       });
 
-      testWidgets('GestureDetector has onTap when hide is true', (WidgetTester tester) async {
+      testWidgets('GestureDetector has onTap when hide is true',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -166,11 +176,13 @@ void main() {
           ),
         );
 
-        final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+        final gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector));
         expect(gestureDetector.onTap, isNotNull);
       });
 
-      testWidgets('GestureDetector has no onTap when hide is false', (WidgetTester tester) async {
+      testWidgets('GestureDetector has no onTap when hide is false',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -182,20 +194,23 @@ void main() {
           ),
         );
 
-        final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+        final gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector));
         expect(gestureDetector.onTap, isNull);
       });
     });
 
     group('integration with MaterialApp', () {
-      testWidgets('works as parent of MaterialApp', (WidgetTester tester) async {
+      testWidgets('works as parent of MaterialApp',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           HideKeyboard(
             child: MaterialApp(
               home: Scaffold(
                 body: Column(
                   children: [
-                    const TextField(decoration: InputDecoration(hintText: 'Enter text')),
+                    const TextField(
+                        decoration: InputDecoration(hintText: 'Enter text')),
                     Container(
                       width: 200,
                       height: 200,
@@ -225,7 +240,8 @@ void main() {
         expect(find.text('Background'), findsOneWidget);
       });
 
-      testWidgets('works with complex widget tree', (WidgetTester tester) async {
+      testWidgets('works with complex widget tree',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           HideKeyboard(
             child: MaterialApp(
@@ -235,9 +251,11 @@ void main() {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      const TextField(decoration: InputDecoration(labelText: 'Name')),
+                      const TextField(
+                          decoration: InputDecoration(labelText: 'Name')),
                       const SizedBox(height: 20),
-                      const TextField(decoration: InputDecoration(labelText: 'Email')),
+                      const TextField(
+                          decoration: InputDecoration(labelText: 'Email')),
                       const SizedBox(height: 20),
                       Expanded(
                         child: Container(
@@ -284,11 +302,13 @@ void main() {
           ),
         );
 
-        final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+        final gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector));
         expect(gestureDetector.behavior, equals(HitTestBehavior.opaque));
       });
 
-      testWidgets('works with translucent behavior', (WidgetTester tester) async {
+      testWidgets('works with translucent behavior',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -300,11 +320,13 @@ void main() {
           ),
         );
 
-        final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+        final gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector));
         expect(gestureDetector.behavior, equals(HitTestBehavior.translucent));
       });
 
-      testWidgets('works with deferToChild behavior', (WidgetTester tester) async {
+      testWidgets('works with deferToChild behavior',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -316,13 +338,15 @@ void main() {
           ),
         );
 
-        final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+        final gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector));
         expect(gestureDetector.behavior, equals(HitTestBehavior.deferToChild));
       });
     });
 
     group('edge cases', () {
-      testWidgets('works with empty container as child', (WidgetTester tester) async {
+      testWidgets('works with empty container as child',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -337,7 +361,8 @@ void main() {
         expect(find.byType(Container), findsOneWidget);
       });
 
-      testWidgets('works with SizedBox.shrink as child', (WidgetTester tester) async {
+      testWidgets('works with SizedBox.shrink as child',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -352,7 +377,8 @@ void main() {
         expect(find.byType(SizedBox), findsOneWidget);
       });
 
-      testWidgets('handles multiple HideKeyboard widgets', (WidgetTester tester) async {
+      testWidgets('handles multiple HideKeyboard widgets',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -382,7 +408,8 @@ void main() {
         expect(find.byType(GestureDetector), findsNWidgets(2));
       });
 
-      testWidgets('works when toggle hide property', (WidgetTester tester) async {
+      testWidgets('works when toggle hide property',
+          (WidgetTester tester) async {
         bool hideKeyboard = true;
 
         await tester.pumpWidget(
@@ -418,27 +445,31 @@ void main() {
         );
 
         // Initially hide is true
-        var gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector).first);
+        var gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector).first);
         expect(gestureDetector.onTap, isNotNull);
 
         // Toggle to false
         await tester.tap(find.text('Toggle'));
         await tester.pumpAndSettle();
 
-        gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector).first);
+        gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector).first);
         expect(gestureDetector.onTap, isNull);
 
         // Toggle back to true
         await tester.tap(find.text('Toggle'));
         await tester.pumpAndSettle();
 
-        gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector).first);
+        gestureDetector =
+            tester.widget<GestureDetector>(find.byType(GestureDetector).first);
         expect(gestureDetector.onTap, isNotNull);
       });
     });
 
     group('widget tree structure', () {
-      testWidgets('maintains proper widget hierarchy', (WidgetTester tester) async {
+      testWidgets('maintains proper widget hierarchy',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -470,7 +501,8 @@ void main() {
         expect(find.text('Child 2'), findsOneWidget);
       });
 
-      testWidgets('preserves child widget properties', (WidgetTester tester) async {
+      testWidgets('preserves child widget properties',
+          (WidgetTester tester) async {
         const key = Key('test-key');
 
         await tester.pumpWidget(
@@ -490,13 +522,15 @@ void main() {
         );
 
         final container = tester.widget<Container>(find.byKey(key));
-        expect(container.constraints?.tighten(width: 100, height: 100), isNotNull);
+        expect(
+            container.constraints?.tighten(width: 100, height: 100), isNotNull);
         expect(find.text('Test'), findsOneWidget);
       });
     });
 
     group('accessibility', () {
-      testWidgets('does not interfere with semantics', (WidgetTester tester) async {
+      testWidgets('does not interfere with semantics',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -518,7 +552,8 @@ void main() {
         expect(find.text('Test'), findsOneWidget);
       });
 
-      testWidgets('works with accessibility features', (WidgetTester tester) async {
+      testWidgets('works with accessibility features',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(

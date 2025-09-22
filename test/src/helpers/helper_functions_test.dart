@@ -25,7 +25,8 @@ void main() {
             .setMockMethodCallHandler(SystemChannels.platform, null);
       });
 
-      test('calls SystemNavigator.pop with default animated parameter', () async {
+      test('calls SystemNavigator.pop with default animated parameter',
+          () async {
         await closeApp();
 
         expect(methodCalls, hasLength(1));
@@ -204,7 +205,8 @@ void main() {
         expect(() => hideKeyboard(testContext), returnsNormally);
       });
 
-      testWidgets('unfocuses current focus when hasFocus is true', (WidgetTester tester) async {
+      testWidgets('unfocuses current focus when hasFocus is true',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -231,7 +233,8 @@ void main() {
         expect(() => hideKeyboard(testContext), returnsNormally);
       });
 
-      testWidgets('handles context without focus gracefully', (WidgetTester tester) async {
+      testWidgets('handles context without focus gracefully',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -249,7 +252,8 @@ void main() {
         expect(() => hideKeyboard(testContext), returnsNormally);
       });
 
-      testWidgets('works with multiple text fields', (WidgetTester tester) async {
+      testWidgets('works with multiple text fields',
+          (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -358,7 +362,8 @@ void main() {
       });
 
       group('focus management', () {
-        testWidgets('unfocuses focusedChild when present', (WidgetTester tester) async {
+        testWidgets('unfocuses focusedChild when present',
+            (WidgetTester tester) async {
           await tester.pumpWidget(
             MaterialApp(
               home: Scaffold(
@@ -477,7 +482,9 @@ void main() {
         await tester.pump();
 
         // Check that closeApp was called (filter for SystemNavigator.pop among other platform calls)
-        final closeAppCalls = platformCalls.where((call) => call.method == 'SystemNavigator.pop').toList();
+        final closeAppCalls = platformCalls
+            .where((call) => call.method == 'SystemNavigator.pop')
+            .toList();
         expect(closeAppCalls, hasLength(1));
         expect(closeAppCalls.first.method, equals('SystemNavigator.pop'));
 
@@ -490,7 +497,8 @@ void main() {
             .setMockMethodCallHandler(SystemChannels.textInput, null);
       });
 
-      testWidgets('functions are accessible from extension', (WidgetTester tester) async {
+      testWidgets('functions are accessible from extension',
+          (WidgetTester tester) async {
         // Test that these functions are available as part of the library
         expect(closeApp, isA<Function>());
         expect(hideKeyboard, isA<Function>());
@@ -518,7 +526,8 @@ void main() {
             .setMockMethodCallHandler(SystemChannels.platform, null);
       });
 
-      testWidgets('hideKeyboard with disposed context', (WidgetTester tester) async {
+      testWidgets('hideKeyboard with disposed context',
+          (WidgetTester tester) async {
         late BuildContext disposedContext;
 
         await tester.pumpWidget(
@@ -565,4 +574,3 @@ void main() {
     });
   });
 }
-

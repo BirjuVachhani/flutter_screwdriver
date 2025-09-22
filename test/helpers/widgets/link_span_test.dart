@@ -338,7 +338,8 @@ void main() {
       expect(containerWidget.padding, equals(padding));
     });
 
-    testWidgets('LinkSpan works without animation (Duration.zero)', (tester) async {
+    testWidgets('LinkSpan works without animation (Duration.zero)',
+        (tester) async {
       const text = 'No animation';
       const hoverColor = Colors.red;
 
@@ -369,7 +370,8 @@ void main() {
       expect(animatedContainer, findsNothing);
     });
 
-    testWidgets('LinkSpan applies animation with custom duration and curve', (tester) async {
+    testWidgets('LinkSpan applies animation with custom duration and curve',
+        (tester) async {
       const text = 'Animated text';
       const duration = Duration(milliseconds: 300);
       const curve = Curves.easeInOut;
@@ -403,8 +405,10 @@ void main() {
       expect(animatedTextStyles, findsWidgets);
 
       // Verify that at least one animated container has the correct duration
-      final animatedContainerWidgets = tester.widgetList<AnimatedContainer>(animatedContainers);
-      expect(animatedContainerWidgets.any((w) => w.duration == duration), isTrue);
+      final animatedContainerWidgets =
+          tester.widgetList<AnimatedContainer>(animatedContainers);
+      expect(
+          animatedContainerWidgets.any((w) => w.duration == duration), isTrue);
       expect(animatedContainerWidgets.any((w) => w.curve == curve), isTrue);
     });
 
@@ -466,7 +470,8 @@ void main() {
       expect(row.children.length, equals(2)); // text + suffix
     });
 
-    testWidgets('LinkSpan displays both prefix and suffix widgets', (tester) async {
+    testWidgets('LinkSpan displays both prefix and suffix widgets',
+        (tester) async {
       const text = 'With both';
       const prefixIcon = Icon(Icons.link, size: 16);
       const suffixIcon = Icon(Icons.open_in_new, size: 16);
@@ -499,7 +504,8 @@ void main() {
       expect(row.mainAxisSize, equals(MainAxisSize.min));
     });
 
-    testWidgets('LinkSpan applies IconTheme to prefix and suffix', (tester) async {
+    testWidgets('LinkSpan applies IconTheme to prefix and suffix',
+        (tester) async {
       const text = 'Icon theme';
       const prefixIcon = Icon(Icons.link);
       const suffixIcon = Icon(Icons.open_in_new);
@@ -620,7 +626,9 @@ void main() {
       await tester.pump();
     });
 
-    testWidgets('LinkSpan applies PlaceholderAlignment and TextBaseline from constructor', (tester) async {
+    testWidgets(
+        'LinkSpan applies PlaceholderAlignment and TextBaseline from constructor',
+        (tester) async {
       const text = 'Aligned text';
       const alignment = PlaceholderAlignment.top;
       const baseline = TextBaseline.ideographic;
@@ -649,7 +657,8 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('LinkSpan uses default PlaceholderAlignment and TextBaseline', (tester) async {
+    testWidgets('LinkSpan uses default PlaceholderAlignment and TextBaseline',
+        (tester) async {
       const text = 'Default alignment';
 
       await tester.pumpWidget(
@@ -674,7 +683,8 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('LinkSpan hoverColor defaults to color when not specified', (tester) async {
+    testWidgets('LinkSpan hoverColor defaults to color when not specified',
+        (tester) async {
       const text = 'Default hover color';
       const normalColor = Colors.blue;
 
@@ -725,14 +735,16 @@ void main() {
                   LinkSpan(
                     text: 'Terms of Service',
                     style: const TextStyle(color: Colors.blue),
-                    hoverStyle: const TextStyle(decoration: TextDecoration.underline),
+                    hoverStyle:
+                        const TextStyle(decoration: TextDecoration.underline),
                     onTap: () => link1Tapped = true,
                   ),
                   const TextSpan(text: ' and '),
                   LinkSpan(
                     text: 'Privacy Policy',
                     style: const TextStyle(color: Colors.blue),
-                    hoverStyle: const TextStyle(decoration: TextDecoration.underline),
+                    hoverStyle:
+                        const TextStyle(decoration: TextDecoration.underline),
                     onTap: () => link2Tapped = true,
                   ),
                   const TextSpan(text: '.'),
@@ -760,7 +772,8 @@ void main() {
       expect(link2Tapped, isTrue);
     });
 
-    testWidgets('LinkSpan with empty text still creates widget', (tester) async {
+    testWidgets('LinkSpan with empty text still creates widget',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -782,7 +795,8 @@ void main() {
       // Empty text won't be found by find.text, but the gesture detector should still exist
     });
 
-    testWidgets('LinkSpan GestureDetector has opaque hit test behavior', (tester) async {
+    testWidgets('LinkSpan GestureDetector has opaque hit test behavior',
+        (tester) async {
       const text = 'Hit test';
 
       await tester.pumpWidget(
@@ -802,7 +816,8 @@ void main() {
         ),
       );
 
-      final gestureDetector = tester.widget<GestureDetector>(find.byType(GestureDetector));
+      final gestureDetector =
+          tester.widget<GestureDetector>(find.byType(GestureDetector));
       expect(gestureDetector.behavior, equals(HitTestBehavior.opaque));
     });
   });
@@ -842,7 +857,8 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('LinkSpan applies EdgeInsets.zero when padding is null', (tester) async {
+    testWidgets('LinkSpan applies EdgeInsets.zero when padding is null',
+        (tester) async {
       const text = 'Zero padding';
 
       await tester.pumpWidget(
@@ -868,7 +884,8 @@ void main() {
     });
 
     testWidgets('LinkSpan works with very long text', (tester) async {
-      const longText = 'This is a very long text that might wrap across multiple lines and should still work correctly with the LinkSpan widget implementation.';
+      const longText =
+          'This is a very long text that might wrap across multiple lines and should still work correctly with the LinkSpan widget implementation.';
 
       await tester.pumpWidget(
         MaterialApp(
@@ -894,7 +911,8 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('LinkSpan works with special characters and Unicode', (tester) async {
+    testWidgets('LinkSpan works with special characters and Unicode',
+        (tester) async {
       const specialText = '🔗 Special & Unicode テキスト @#\$%^&*()';
 
       await tester.pumpWidget(
@@ -993,7 +1011,8 @@ void main() {
   });
 
   group('LinkSpan performance', () {
-    testWidgets('LinkSpan handles multiple instances efficiently', (tester) async {
+    testWidgets('LinkSpan handles multiple instances efficiently',
+        (tester) async {
       final links = List.generate(50, (index) => 'Link $index');
       final tappedLinks = <int>{};
 
@@ -1022,7 +1041,8 @@ void main() {
       );
 
       // Test that all links are created
-      for (int i = 0; i < 10; i++) { // Test first 10 for performance
+      for (int i = 0; i < 10; i++) {
+        // Test first 10 for performance
         expect(find.text(links[i]), findsOneWidget);
       }
 

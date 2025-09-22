@@ -7,7 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('AsyncLoadingBuilder widget tests', () {
-    testWidgets('AsyncLoadingBuilder creates basic widget with builder', (tester) async {
+    testWidgets('AsyncLoadingBuilder creates basic widget with builder',
+        (tester) async {
       bool isLoadingValue = false;
       SetFutureFunction? setFutureFunction;
 
@@ -30,7 +31,8 @@ void main() {
       expect(setFutureFunction, isNotNull);
     });
 
-    testWidgets('AsyncLoadingBuilder shows loading state when future is set', (tester) async {
+    testWidgets('AsyncLoadingBuilder shows loading state when future is set',
+        (tester) async {
       bool isLoadingValue = false;
       SetFutureFunction? setFutureFunction;
 
@@ -53,7 +55,8 @@ void main() {
       expect(isLoadingValue, isFalse);
 
       // Set a future that takes some time
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 100), () => 'done'));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 100), () => 'done'));
       await tester.pump();
 
       // Should now be loading
@@ -67,9 +70,12 @@ void main() {
       expect(find.text('Not Loading'), findsOneWidget);
     });
 
-    testWidgets('AsyncLoadingBuilder with initialFuture starts in loading state', (tester) async {
+    testWidgets(
+        'AsyncLoadingBuilder with initialFuture starts in loading state',
+        (tester) async {
       bool isLoadingValue = false;
-      final initialFuture = Future.delayed(const Duration(milliseconds: 100), () => 'initial');
+      final initialFuture =
+          Future.delayed(const Duration(milliseconds: 100), () => 'initial');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -96,7 +102,8 @@ void main() {
       expect(find.text('Initial Done'), findsOneWidget);
     });
 
-    testWidgets('AsyncLoadingBuilder setFuture returns the future', (tester) async {
+    testWidgets('AsyncLoadingBuilder setFuture returns the future',
+        (tester) async {
       SetFutureFunction? setFutureFunction;
       Future<String>? returnedFuture;
 
@@ -120,7 +127,8 @@ void main() {
       expect(await returnedFuture, equals('test result'));
     });
 
-    testWidgets('AsyncLoadingBuilder handles multiple sequential futures', (tester) async {
+    testWidgets('AsyncLoadingBuilder handles multiple sequential futures',
+        (tester) async {
       bool isLoadingValue = false;
       SetFutureFunction? setFutureFunction;
       String status = 'initial';
@@ -145,7 +153,8 @@ void main() {
 
       // First future
       status = 'first';
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 50), () => 'first'));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 50), () => 'first'));
       await tester.pump();
 
       expect(find.text('first - Loading'), findsOneWidget);
@@ -156,7 +165,8 @@ void main() {
 
       // Second future
       status = 'second';
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 50), () => 'second'));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 50), () => 'second'));
       await tester.pump();
 
       expect(find.text('second - Loading'), findsOneWidget);
@@ -166,7 +176,8 @@ void main() {
       expect(find.text('second - Done'), findsOneWidget);
     });
 
-    testWidgets('AsyncLoadingBuilder handles future with error', (tester) async {
+    testWidgets('AsyncLoadingBuilder handles future with error',
+        (tester) async {
       bool isLoadingValue = false;
       SetFutureFunction? setFutureFunction;
 
@@ -203,7 +214,8 @@ void main() {
       expect(isLoadingValue, isFalse);
     });
 
-    testWidgets('AsyncLoadingBuilder can access builder context', (tester) async {
+    testWidgets('AsyncLoadingBuilder can access builder context',
+        (tester) async {
       BuildContext? capturedContext;
 
       await tester.pumpWidget(
@@ -224,7 +236,8 @@ void main() {
       expect(capturedContext!.mounted, isTrue);
     });
 
-    testWidgets('AsyncLoadingBuilder works with different future types', (tester) async {
+    testWidgets('AsyncLoadingBuilder works with different future types',
+        (tester) async {
       SetFutureFunction? setFutureFunction;
       String result = '';
 
@@ -242,7 +255,8 @@ void main() {
       );
 
       // Test with String future
-      final stringFuture = setFutureFunction!<String>(Future.value('string result'));
+      final stringFuture =
+          setFutureFunction!<String>(Future.value('string result'));
       await tester.pump();
       result = await stringFuture;
       expect(result, equals('string result'));
@@ -259,7 +273,8 @@ void main() {
       await voidFuture; // Should complete without issues
     });
 
-    testWidgets('AsyncLoadingBuilder builder is called on each rebuild', (tester) async {
+    testWidgets('AsyncLoadingBuilder builder is called on each rebuild',
+        (tester) async {
       int buildCount = 0;
       SetFutureFunction? setFutureFunction;
 
@@ -291,7 +306,8 @@ void main() {
       expect(buildCount, equals(3));
     });
 
-    testWidgets('AsyncLoadingBuilder can be used in complex widget trees', (tester) async {
+    testWidgets('AsyncLoadingBuilder can be used in complex widget trees',
+        (tester) async {
       bool isLoadingValue = false;
 
       await tester.pumpWidget(
@@ -323,7 +339,8 @@ void main() {
                                             () => 'completed',
                                           ));
                                         },
-                                  child: Text(loading ? 'Please wait' : 'Start'),
+                                  child:
+                                      Text(loading ? 'Please wait' : 'Start'),
                                 ),
                               ],
                             ),
@@ -363,7 +380,8 @@ void main() {
       expect(isLoadingValue, isFalse);
     });
 
-    testWidgets('AsyncLoadingBuilder with key can be identified', (tester) async {
+    testWidgets('AsyncLoadingBuilder with key can be identified',
+        (tester) async {
       const testKey = Key('async-loading-builder');
 
       await tester.pumpWidget(
@@ -385,7 +403,8 @@ void main() {
   });
 
   group('AsyncLoadingBuilderState tests', () {
-    testWidgets('AsyncLoadingBuilderState exposes correct state properties', (tester) async {
+    testWidgets('AsyncLoadingBuilderState exposes correct state properties',
+        (tester) async {
       AsyncLoadingBuilderState? state;
       bool hasInitialSnapshot = false;
 
@@ -394,7 +413,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 hasInitialSnapshot = state?.snapshot != null;
                 return Text('State Test');
               },
@@ -404,7 +424,8 @@ void main() {
       );
 
       expect(state, isNotNull);
-      expect(hasInitialSnapshot, isTrue); // FutureBuilder always creates a snapshot
+      expect(hasInitialSnapshot,
+          isTrue); // FutureBuilder always creates a snapshot
       expect(state!.isLoading, isFalse);
       expect(state!.hasError, isFalse);
       expect(state!.hasData, isFalse);
@@ -412,7 +433,8 @@ void main() {
       expect(state!.state, equals(ConnectionState.none));
     });
 
-    testWidgets('AsyncLoadingBuilderState reflects loading state correctly', (tester) async {
+    testWidgets('AsyncLoadingBuilderState reflects loading state correctly',
+        (tester) async {
       AsyncLoadingBuilderState? state;
       SetFutureFunction? setFutureFunction;
 
@@ -421,7 +443,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 return Text('Loading State Test');
               },
@@ -435,7 +458,8 @@ void main() {
       expect(state!.state, equals(ConnectionState.none));
 
       // Set future and check loading state
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 100), () => 'result'));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 100), () => 'result'));
       await tester.pump();
 
       expect(state!.isLoading, isTrue);
@@ -449,7 +473,8 @@ void main() {
       expect(state!.hasData, isTrue);
     });
 
-    testWidgets('AsyncLoadingBuilderState handles error state correctly', (tester) async {
+    testWidgets('AsyncLoadingBuilderState handles error state correctly',
+        (tester) async {
       AsyncLoadingBuilderState? state;
       SetFutureFunction? setFutureFunction;
 
@@ -458,7 +483,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 return Text('Error State Test');
               },
@@ -486,9 +512,12 @@ void main() {
       expect(state!.hasData, isFalse);
     });
 
-    testWidgets('AsyncLoadingBuilderState with initialFuture has correct initial state', (tester) async {
+    testWidgets(
+        'AsyncLoadingBuilderState with initialFuture has correct initial state',
+        (tester) async {
       AsyncLoadingBuilderState? state;
-      final initialFuture = Future.delayed(const Duration(milliseconds: 100), () => 'initial result');
+      final initialFuture = Future.delayed(
+          const Duration(milliseconds: 100), () => 'initial result');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -496,7 +525,8 @@ void main() {
             body: AsyncLoadingBuilder(
               initialFuture: initialFuture,
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 return Text('Initial Future Test');
               },
             ),
@@ -519,7 +549,8 @@ void main() {
   });
 
   group('AsyncLoadingBuilder static methods tests', () {
-    testWidgets('AsyncLoadingBuilder.maybeOf returns null when no ancestor', (tester) async {
+    testWidgets('AsyncLoadingBuilder.maybeOf returns null when no ancestor',
+        (tester) async {
       AsyncLoadingBuilderState? foundState;
 
       await tester.pumpWidget(
@@ -538,7 +569,9 @@ void main() {
       expect(foundState, isNull);
     });
 
-    testWidgets('AsyncLoadingBuilder.maybeOf returns state when ancestor exists', (tester) async {
+    testWidgets(
+        'AsyncLoadingBuilder.maybeOf returns state when ancestor exists',
+        (tester) async {
       AsyncLoadingBuilderState? foundState;
 
       await tester.pumpWidget(
@@ -562,7 +595,8 @@ void main() {
       expect(foundState, isA<AsyncLoadingBuilderState>());
     });
 
-    testWidgets('AsyncLoadingBuilder.of throws when no ancestor', (tester) async {
+    testWidgets('AsyncLoadingBuilder.of throws when no ancestor',
+        (tester) async {
       Object? caughtError;
 
       await tester.pumpWidget(
@@ -585,7 +619,8 @@ void main() {
       expect(caughtError, isNotNull);
     });
 
-    testWidgets('AsyncLoadingBuilder.of returns state when ancestor exists', (tester) async {
+    testWidgets('AsyncLoadingBuilder.of returns state when ancestor exists',
+        (tester) async {
       AsyncLoadingBuilderState? foundState;
 
       await tester.pumpWidget(
@@ -611,7 +646,8 @@ void main() {
   });
 
   group('AsyncLoadingBuilder edge cases and error handling', () {
-    testWidgets('AsyncLoadingBuilder handles null initialFuture gracefully', (tester) async {
+    testWidgets('AsyncLoadingBuilder handles null initialFuture gracefully',
+        (tester) async {
       bool isLoadingValue = false;
 
       await tester.pumpWidget(
@@ -632,7 +668,8 @@ void main() {
       expect(isLoadingValue, isFalse);
     });
 
-    testWidgets('AsyncLoadingBuilder setFuture works after widget disposal', (tester) async {
+    testWidgets('AsyncLoadingBuilder setFuture works after widget disposal',
+        (tester) async {
       SetFutureFunction? setFutureFunction;
 
       await tester.pumpWidget(
@@ -661,7 +698,8 @@ void main() {
       expect(() => setFutureFunction!(Future.value('test')), returnsNormally);
     });
 
-    testWidgets('AsyncLoadingBuilder handles rapid future changes', (tester) async {
+    testWidgets('AsyncLoadingBuilder handles rapid future changes',
+        (tester) async {
       bool isLoadingValue = false;
       SetFutureFunction? setFutureFunction;
       int completedCount = 0;
@@ -704,7 +742,8 @@ void main() {
       expect(completedCount, equals(5));
     });
 
-    testWidgets('AsyncLoadingBuilder works with chained futures', (tester) async {
+    testWidgets('AsyncLoadingBuilder works with chained futures',
+        (tester) async {
       bool isLoadingValue = false;
       SetFutureFunction? setFutureFunction;
 
@@ -723,8 +762,7 @@ void main() {
       );
 
       // Create a simple future chain
-      setFutureFunction!(Future.value('step1')
-          .then((value) => '$value-step2'));
+      setFutureFunction!(Future.value('step1').then((value) => '$value-step2'));
 
       await tester.pump();
 
@@ -734,7 +772,8 @@ void main() {
       expect(isLoadingValue, isFalse);
     });
 
-    testWidgets('AsyncLoadingBuilder handles synchronous futures', (tester) async {
+    testWidgets('AsyncLoadingBuilder handles synchronous futures',
+        (tester) async {
       bool isLoadingValue = false;
       SetFutureFunction? setFutureFunction;
 
@@ -765,7 +804,8 @@ void main() {
   });
 
   group('AsyncLoadingBuilder performance tests', () {
-    testWidgets('AsyncLoadingBuilder handles multiple instances efficiently', (tester) async {
+    testWidgets('AsyncLoadingBuilder handles multiple instances efficiently',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -796,7 +836,8 @@ void main() {
   });
 
   group('AsyncLoadingBuilderState isSuccess getter tests', () {
-    testWidgets('isSuccess getter returns false in initial state', (tester) async {
+    testWidgets('isSuccess getter returns false in initial state',
+        (tester) async {
       AsyncLoadingBuilderState? state;
 
       await tester.pumpWidget(
@@ -804,7 +845,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 return const Text('Initial State Test');
               },
             ),
@@ -818,7 +860,8 @@ void main() {
       expect(state!.state, equals(ConnectionState.none));
     });
 
-    testWidgets('isSuccess getter returns false during loading state', (tester) async {
+    testWidgets('isSuccess getter returns false during loading state',
+        (tester) async {
       AsyncLoadingBuilderState? state;
       SetFutureFunction? setFutureFunction;
 
@@ -827,7 +870,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 return const Text('Loading State Test');
               },
@@ -837,7 +881,8 @@ void main() {
       );
 
       // Set future and check during loading
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 100), () => 'result'));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 100), () => 'result'));
       await tester.pump();
 
       expect(state!.isSuccess, isFalse);
@@ -857,7 +902,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 return const Text('Success State Test');
               },
@@ -867,7 +913,8 @@ void main() {
       );
 
       // Set future and wait for completion
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 50), () => 'success result'));
+      setFutureFunction!(Future.delayed(
+          const Duration(milliseconds: 50), () => 'success result'));
       await tester.pump();
 
       // During loading, isSuccess should be false
@@ -885,7 +932,8 @@ void main() {
       expect(state!.isSuccess, isFalse);
     });
 
-    testWidgets('isSuccess getter returns false when future has error', (tester) async {
+    testWidgets('isSuccess getter returns false when future has error',
+        (tester) async {
       AsyncLoadingBuilderState? state;
       SetFutureFunction? setFutureFunction;
 
@@ -894,7 +942,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 return const Text('Error State Test');
               },
@@ -928,7 +977,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 return const Text('Sync Future Test');
               },
@@ -954,7 +1004,8 @@ void main() {
 
     testWidgets('isSuccess getter with initial future', (tester) async {
       AsyncLoadingBuilderState? state;
-      final initialFuture = Future.delayed(const Duration(milliseconds: 50), () => 'initial data');
+      final initialFuture = Future.delayed(
+          const Duration(milliseconds: 50), () => 'initial data');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -962,7 +1013,8 @@ void main() {
             body: AsyncLoadingBuilder(
               initialFuture: initialFuture,
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 return const Text('Initial Future Test');
               },
             ),
@@ -993,7 +1045,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 isSuccessValues.add(state!.isSuccess);
                 return const Text('Transition Test');
@@ -1007,7 +1060,8 @@ void main() {
       expect(isSuccessValues.last, isFalse);
 
       // Set future
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 50), () => 'data'));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 50), () => 'data'));
       await tester.pump();
 
       // Loading state
@@ -1033,7 +1087,8 @@ void main() {
           home: Scaffold(
             body: AsyncLoadingBuilder(
               builder: (context, loading, setFuture) {
-                state = context.findAncestorStateOfType<AsyncLoadingBuilderState>();
+                state =
+                    context.findAncestorStateOfType<AsyncLoadingBuilderState>();
                 setFutureFunction = setFuture;
                 return const Text('Null Data Test');
               },
@@ -1043,7 +1098,8 @@ void main() {
       );
 
       // Set future that returns null
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 50), () => null));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 50), () => null));
       await tester.pump();
 
       // Wait for completion
@@ -1057,7 +1113,8 @@ void main() {
   });
 
   group('AsyncLoadingBuilder inherited widget tests', () {
-    testWidgets('_AsyncInheritedState notifies dependents on snapshot changes', (tester) async {
+    testWidgets('_AsyncInheritedState notifies dependents on snapshot changes',
+        (tester) async {
       int buildCount = 0;
       SetFutureFunction? setFutureFunction;
 
@@ -1084,7 +1141,8 @@ void main() {
       expect(buildCount, equals(1));
 
       // Setting a future should trigger rebuild of dependents
-      setFutureFunction!(Future.delayed(const Duration(milliseconds: 50), () => 'test'));
+      setFutureFunction!(
+          Future.delayed(const Duration(milliseconds: 50), () => 'test'));
       await tester.pump();
 
       expect(buildCount, equals(2));

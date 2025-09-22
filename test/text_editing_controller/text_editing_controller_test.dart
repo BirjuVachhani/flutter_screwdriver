@@ -201,7 +201,8 @@ void main() {
         controller.selection = const TextSelection.collapsed(offset: 2);
 
         expect(callCount, equals(1));
-        expect(receivedSelection, equals(const TextSelection.collapsed(offset: 2)));
+        expect(receivedSelection,
+            equals(const TextSelection.collapsed(offset: 2)));
 
         disposable();
       });
@@ -296,13 +297,15 @@ void main() {
 
         controller.text = 'Hello';
         controller.selection = const TextSelection.collapsed(offset: 2);
-        controller.selection = const TextSelection(baseOffset: 0, extentOffset: 5);
+        controller.selection =
+            const TextSelection(baseOffset: 0, extentOffset: 5);
 
         await Future.delayed(const Duration(milliseconds: 10));
 
         expect(events.length, equals(2));
         expect(events[0], equals(const TextSelection.collapsed(offset: 2)));
-        expect(events[1], equals(const TextSelection(baseOffset: 0, extentOffset: 5)));
+        expect(events[1],
+            equals(const TextSelection(baseOffset: 0, extentOffset: 5)));
 
         await subscription.cancel();
       });
@@ -353,7 +356,8 @@ void main() {
         var blankCount = 0;
 
         final textDisposable = controller.onChanged((text) => changeCount++);
-        final selectionDisposable = controller.onSelectionChanged((selection) => selectionCount++);
+        final selectionDisposable =
+            controller.onSelectionChanged((selection) => selectionCount++);
         controller.whenBlank(() => blankCount++);
 
         // Initial state
@@ -388,7 +392,8 @@ void main() {
         var selectionCount = 0;
 
         final textDisposable = controller.onChanged((text) => textCount++);
-        final selectionDisposable = controller.onSelectionChanged((selection) => selectionCount++);
+        final selectionDisposable =
+            controller.onSelectionChanged((selection) => selectionCount++);
 
         controller.text = 'Hello';
         controller.selection = const TextSelection.collapsed(offset: 2);
@@ -444,7 +449,8 @@ void main() {
         expect(controller.textChanges(), isA<Stream<String>>());
         expect(controller.selectionChanges(), isA<Stream<TextSelection>>());
         expect(controller.onChanged((text) {}), isA<Disposable>());
-        expect(controller.onSelectionChanged((selection) {}), isA<Disposable>());
+        expect(
+            controller.onSelectionChanged((selection) {}), isA<Disposable>());
       });
     });
   });

@@ -44,7 +44,8 @@ void main() {
       testWidgets('pushes route successfully', (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final route = MaterialPageRoute(builder: (context) => const TestPage(title: 'Test'));
+        final route = MaterialPageRoute(
+            builder: (context) => const TestPage(title: 'Test'));
         final future = route.push(capturedContext);
 
         await tester.pumpAndSettle();
@@ -57,7 +58,8 @@ void main() {
       testWidgets('returns correct Future type', (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final route = MaterialPageRoute<String>(builder: (context) => const TestPage(title: 'Test'));
+        final route = MaterialPageRoute<String>(
+            builder: (context) => const TestPage(title: 'Test'));
         final future = route.push(capturedContext);
 
         expect(future, isA<Future<String?>>());
@@ -65,10 +67,12 @@ void main() {
     });
 
     group('pushReplacement method', () {
-      testWidgets('replaces current route successfully', (WidgetTester tester) async {
+      testWidgets('replaces current route successfully',
+          (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final route = MaterialPageRoute(builder: (context) => const TestPage(title: 'Replacement'));
+        final route = MaterialPageRoute(
+            builder: (context) => const TestPage(title: 'Replacement'));
         final future = route.pushReplacement(capturedContext);
 
         await tester.pumpAndSettle();
@@ -82,7 +86,8 @@ void main() {
       testWidgets('returns correct Future type', (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final route = MaterialPageRoute<int>(builder: (context) => const TestPage(title: 'Test'));
+        final route = MaterialPageRoute<int>(
+            builder: (context) => const TestPage(title: 'Test'));
         final future = route.pushReplacement(capturedContext);
 
         expect(future, isA<Future<int?>>());
@@ -90,10 +95,12 @@ void main() {
     });
 
     group('pushAndRemoveUntil method', () {
-      testWidgets('pushes route and removes until predicate', (WidgetTester tester) async {
+      testWidgets('pushes route and removes until predicate',
+          (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final route = MaterialPageRoute(builder: (context) => const TestPage(title: 'Final'));
+        final route = MaterialPageRoute(
+            builder: (context) => const TestPage(title: 'Final'));
         final future = route.pushAndRemoveUntil(
           capturedContext,
           (route) => route.isFirst,
@@ -109,32 +116,44 @@ void main() {
       testWidgets('returns correct Future type', (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final route = MaterialPageRoute<bool>(builder: (context) => const TestPage(title: 'Test'));
-        final future = route.pushAndRemoveUntil(capturedContext, (route) => route.isFirst);
+        final route = MaterialPageRoute<bool>(
+            builder: (context) => const TestPage(title: 'Test'));
+        final future =
+            route.pushAndRemoveUntil(capturedContext, (route) => route.isFirst);
 
         expect(future, isA<Future<bool?>>());
       });
     });
 
     group('integration tests', () {
-      testWidgets('all methods return Future types', (WidgetTester tester) async {
+      testWidgets('all methods return Future types',
+          (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final route1 = MaterialPageRoute(builder: (context) => const TestPage(title: 'Test1'));
-        final route2 = MaterialPageRoute(builder: (context) => const TestPage(title: 'Test2'));
-        final route3 = MaterialPageRoute(builder: (context) => const TestPage(title: 'Test3'));
+        final route1 = MaterialPageRoute(
+            builder: (context) => const TestPage(title: 'Test1'));
+        final route2 = MaterialPageRoute(
+            builder: (context) => const TestPage(title: 'Test2'));
+        final route3 = MaterialPageRoute(
+            builder: (context) => const TestPage(title: 'Test3'));
 
         expect(route1.push(capturedContext), isA<Future>());
         expect(route2.pushReplacement(capturedContext), isA<Future>());
-        expect(route3.pushAndRemoveUntil(capturedContext, (route) => route.isFirst), isA<Future>());
+        expect(
+            route3.pushAndRemoveUntil(
+                capturedContext, (route) => route.isFirst),
+            isA<Future>());
       });
 
-      testWidgets('extension methods work with different route types', (WidgetTester tester) async {
+      testWidgets('extension methods work with different route types',
+          (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
-        final materialRoute = MaterialPageRoute(builder: (context) => const TestPage(title: 'Material'));
+        final materialRoute = MaterialPageRoute(
+            builder: (context) => const TestPage(title: 'Material'));
         final pageRoute = PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const TestPage(title: 'Custom'),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const TestPage(title: 'Custom'),
         );
 
         expect(materialRoute.push(capturedContext), isA<Future>());
@@ -143,26 +162,37 @@ void main() {
     });
 
     group('type safety', () {
-      testWidgets('preserves generic types correctly', (WidgetTester tester) async {
+      testWidgets('preserves generic types correctly',
+          (WidgetTester tester) async {
         await tester.pumpWidget(testApp);
 
         // Test String type
-        final stringRoute = MaterialPageRoute<String>(builder: (context) => const TestPage(title: 'String'));
+        final stringRoute = MaterialPageRoute<String>(
+            builder: (context) => const TestPage(title: 'String'));
         expect(stringRoute.push(capturedContext), isA<Future<String?>>());
 
         // Create fresh routes for each test to avoid reuse issues
-        final stringRoute2 = MaterialPageRoute<String>(builder: (context) => const TestPage(title: 'String2'));
-        expect(stringRoute2.pushReplacement(capturedContext), isA<Future<String?>>());
+        final stringRoute2 = MaterialPageRoute<String>(
+            builder: (context) => const TestPage(title: 'String2'));
+        expect(stringRoute2.pushReplacement(capturedContext),
+            isA<Future<String?>>());
 
-        final stringRoute3 = MaterialPageRoute<String>(builder: (context) => const TestPage(title: 'String3'));
-        expect(stringRoute3.pushAndRemoveUntil(capturedContext, (route) => route.isFirst), isA<Future<String?>>());
+        final stringRoute3 = MaterialPageRoute<String>(
+            builder: (context) => const TestPage(title: 'String3'));
+        expect(
+            stringRoute3.pushAndRemoveUntil(
+                capturedContext, (route) => route.isFirst),
+            isA<Future<String?>>());
 
         // Test other types with fresh routes
-        final intRoute = MaterialPageRoute<int>(builder: (context) => const TestPage(title: 'Int'));
+        final intRoute = MaterialPageRoute<int>(
+            builder: (context) => const TestPage(title: 'Int'));
         expect(intRoute.push(capturedContext), isA<Future<int?>>());
 
-        final boolRoute = MaterialPageRoute<bool>(builder: (context) => const TestPage(title: 'Bool'));
-        expect(boolRoute.pushReplacement(capturedContext), isA<Future<bool?>>());
+        final boolRoute = MaterialPageRoute<bool>(
+            builder: (context) => const TestPage(title: 'Bool'));
+        expect(
+            boolRoute.pushReplacement(capturedContext), isA<Future<bool?>>());
       });
     });
   });
