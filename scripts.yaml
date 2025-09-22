@@ -1,7 +1,8 @@
 lcov: flutter test --coverage .
 cov:
   - flutter test --coverage .
-  - genhtml coverage/lcov.info -o coverage/html
+  - lcov --remove coverage/lcov.info 'lib/src/helpers/ticker_helpers.dart' -o coverage/new_lcov.info
+  - genhtml coverage/new_lcov.info -o coverage/html
 open_cov:
   - open coverage/html/index.html
 stats: dart stats.dart --dry

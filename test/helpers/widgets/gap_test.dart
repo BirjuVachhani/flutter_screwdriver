@@ -102,6 +102,8 @@ void main() {
 
     testWidgets('Gap throws error when not in Flex or scrollable',
         (tester) async {
+      // In Flutter tests, layout errors are caught by the test framework
+      // We need to check that the error is properly thrown using takeException
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -112,8 +114,14 @@ void main() {
         ),
       );
 
-      // Gap should throw an error when not in a Flex widget
-      expect(tester.takeException(), isNotNull);
+      // Check that an exception was thrown during the widget test
+      final exception = tester.takeException();
+      expect(exception, isNotNull);
+      // The exception might be wrapped by the test framework, so check the string content
+      expect(exception.toString(), anyOf([
+        contains('Gap widget can only be used inside a Flex widget'),
+        contains('Multiple exceptions'),  // Framework may wrap the error
+      ]));
     });
 
     testWidgets('Gap handles zero size', (tester) async {

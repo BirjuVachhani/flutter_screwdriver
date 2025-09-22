@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// Alias for closing the app by invoking [SystemNavigator.pop]
-Future<void> closeApp({bool animated = true}) =>
-    SystemNavigator.pop(animated: animated);
+Future<void> closeApp({bool animated = true}) => SystemNavigator.pop(animated: animated);
 
 /// hides soft keyboard using platform channel
 void hideKeyboard(BuildContext context) {
+  if (!context.mounted) return;
   final currentFocus = FocusScope.of(context);
-  SystemChannels.textInput.invokeMethod<dynamic>('TextInput.hide');
+  SystemChannels.textInput.invokeMethod<dynamic>('TextInput.hide').ignore();
   if (currentFocus.hasFocus) {
     currentFocus.unfocus();
     currentFocus.focusedChild?.unfocus();
