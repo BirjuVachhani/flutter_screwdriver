@@ -12,14 +12,12 @@ void main() {
       testWidgets('shows widget as dialog with default parameters',
           (WidgetTester tester) async {
         const testWidget = Text('Test Dialog Content');
-        late BuildContext capturedContext;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: Builder(
                 builder: (context) {
-                  capturedContext = context;
                   return ElevatedButton(
                     onPressed: () => testWidget.showAsDialog(context),
                     child: const Text('Show Dialog'),
@@ -106,7 +104,7 @@ void main() {
       testWidgets('returns Future that completes when dialog is dismissed',
           (WidgetTester tester) async {
         const testWidget = Text('Dismissible Dialog');
-        late Future result;
+        late Future<dynamic> result;
 
         await tester.pumpWidget(
           MaterialApp(
@@ -129,7 +127,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('Dismissible Dialog'), findsOneWidget);
-        expect(result, isA<Future>());
+        expect(result, isA<Future<dynamic>>());
       });
 
       testWidgets('works with complex widgets', (WidgetTester tester) async {
@@ -361,7 +359,7 @@ void main() {
                   return ElevatedButton(
                     onPressed: () async {
                       final result = testWidget.showAsDialog(context);
-                      expect(result, isA<Future>());
+                      expect(result, isA<Future<dynamic>>());
                     },
                     child: const Text('Show Dialog'),
                   );

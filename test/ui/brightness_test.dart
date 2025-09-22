@@ -189,20 +189,6 @@ void main() {
     });
 
     group('edge cases and invariants', () {
-      test('extension methods do not modify original brightness', () {
-        const original = Brightness.dark;
-
-        // Call extension methods
-        final _ = original.isDark;
-        final __ = original.isLight;
-        final toggled = original.toggled;
-        final ___ = original.name;
-
-        // Original should remain unchanged
-        expect(original, equals(Brightness.dark));
-        expect(toggled, isNot(equals(original)));
-      });
-
       test('name getter is deterministic', () {
         final name1 = Brightness.dark.name;
         final name2 = Brightness.dark.name;

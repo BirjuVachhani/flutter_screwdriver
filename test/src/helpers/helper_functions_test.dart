@@ -431,7 +431,6 @@ void main() {
 
     group('integration tests', () {
       testWidgets('both functions work together', (WidgetTester tester) async {
-        late BuildContext testContext;
         final platformCalls = <MethodCall>[];
         final textInputCalls = <MethodCall>[];
 
@@ -452,7 +451,6 @@ void main() {
             home: Scaffold(
               body: Builder(
                 builder: (context) {
-                  testContext = context;
                   return Column(
                     children: [
                       TextField(key: Key('input_field')),

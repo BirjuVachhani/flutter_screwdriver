@@ -561,28 +561,22 @@ void main() {
 
       testWidgets('handles disposal during navigation',
           (WidgetTester tester) async {
-        bool showApp = true;
-
         await tester.pumpWidget(
-          showApp
-              ? MaterialApp(
-                  navigatorKey: navigatorKey,
-                  navigatorObservers: [observer],
-                  home: TestPage(title: 'Home', hasFocus: true),
-                )
-              : Container(),
+          MaterialApp(
+            navigatorKey: navigatorKey,
+            navigatorObservers: [observer],
+            home: TestPage(title: 'Home', hasFocus: true),
+          ),
         );
 
         await tester.pumpAndSettle();
 
-        if (showApp) {
-          // Start navigation
-          navigatorKey.currentState?.push(
-            MaterialPageRoute(
-              builder: (context) => TestPage(title: 'Second'),
-            ),
-          );
-        }
+        // Start navigation
+        navigatorKey.currentState?.push(
+          MaterialPageRoute(
+            builder: (context) => TestPage(title: 'Second'),
+          ),
+        );
 
         // Dispose app during navigation
         await tester.pumpWidget(Container());

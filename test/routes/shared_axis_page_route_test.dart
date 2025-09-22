@@ -32,7 +32,7 @@ void main() {
           type: SharedAxisTransitionType.horizontal,
         );
 
-        expect(route, isA<PageRouteBuilder>());
+        expect(route, isA<PageRouteBuilder<void>>());
         expect(route.transitionDuration,
             equals(const Duration(milliseconds: 300)));
         expect(route.type, equals(SharedAxisTransitionType.horizontal));

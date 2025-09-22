@@ -8,7 +8,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('HideKeyboard widget tests', () {
-    late Widget testApp;
     bool hideKeyboardCalled = false;
 
     setUp(() {
@@ -44,9 +43,9 @@ void main() {
           (WidgetTester tester) async {
         const child = Text('Test Child');
         const hideKeyboard = HideKeyboard(
-          child: child,
           hide: false,
           behavior: HitTestBehavior.translucent,
+          child: child,
         );
 
         expect(hideKeyboard.child, equals(child));
@@ -477,9 +476,7 @@ void main() {
                 child: Column(
                   children: [
                     const Text('Child 1'),
-                    Container(
-                      child: const Text('Child 2'),
-                    ),
+                    const Text('Child 2'),
                   ],
                 ),
               ),
@@ -537,7 +534,7 @@ void main() {
               body: HideKeyboard(
                 child: Semantics(
                   label: 'Test semantic label',
-                  child: Container(
+                  child: SizedBox(
                     width: 100,
                     height: 100,
                     child: const Text('Test'),

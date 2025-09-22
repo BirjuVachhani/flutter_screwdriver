@@ -52,7 +52,7 @@ void main() {
 
         expect(find.text('Test'), findsOneWidget);
         expect(find.text('Home Page'), findsNothing);
-        expect(future, isA<Future>());
+        expect(future, isA<Future<dynamic>>());
       });
 
       testWidgets('returns correct Future type', (WidgetTester tester) async {
@@ -80,7 +80,7 @@ void main() {
         expect(find.text('Replacement'), findsOneWidget);
         expect(find.text('Home Page'), findsNothing);
         expect(find.byType(BackButton), findsNothing);
-        expect(future, isA<Future>());
+        expect(future, isA<Future<dynamic>>());
       });
 
       testWidgets('returns correct Future type', (WidgetTester tester) async {
@@ -110,7 +110,7 @@ void main() {
 
         expect(find.text('Final'), findsOneWidget);
         expect(find.text('Home Page'), findsNothing);
-        expect(future, isA<Future>());
+        expect(future, isA<Future<dynamic>>());
       });
 
       testWidgets('returns correct Future type', (WidgetTester tester) async {
@@ -137,12 +137,12 @@ void main() {
         final route3 = MaterialPageRoute(
             builder: (context) => const TestPage(title: 'Test3'));
 
-        expect(route1.push(capturedContext), isA<Future>());
-        expect(route2.pushReplacement(capturedContext), isA<Future>());
+        expect(route1.push(capturedContext), isA<Future<dynamic>>());
+        expect(route2.pushReplacement(capturedContext), isA<Future<dynamic>>());
         expect(
             route3.pushAndRemoveUntil(
                 capturedContext, (route) => route.isFirst),
-            isA<Future>());
+            isA<Future<dynamic>>());
       });
 
       testWidgets('extension methods work with different route types',
@@ -156,8 +156,8 @@ void main() {
               const TestPage(title: 'Custom'),
         );
 
-        expect(materialRoute.push(capturedContext), isA<Future>());
-        expect(pageRoute.push(capturedContext), isA<Future>());
+        expect(materialRoute.push(capturedContext), isA<Future<dynamic>>());
+        expect(pageRoute.push(capturedContext), isA<Future<dynamic>>());
       });
     });
 

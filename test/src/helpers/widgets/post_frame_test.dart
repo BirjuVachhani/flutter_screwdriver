@@ -12,13 +12,10 @@ void main() {
       testWidgets('creates with required parameters',
           (WidgetTester tester) async {
         const child = Text('Test Child');
-        bool callbackExecuted = false;
 
         final postFrame = PostFrame(
           child: child,
-          onPostFrame: (duration) {
-            callbackExecuted = true;
-          },
+          onPostFrame: (duration) {},
         );
 
         expect(postFrame.child, equals(child));

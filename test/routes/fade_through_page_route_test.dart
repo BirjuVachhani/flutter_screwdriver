@@ -28,7 +28,7 @@ void main() {
         const testWidget = Text('Test');
         final route = FadeThroughPageRoute(child: testWidget);
 
-        expect(route, isA<PageRouteBuilder>());
+        expect(route, isA<PageRouteBuilder<void>>());
         expect(route.transitionDuration,
             equals(const Duration(milliseconds: 300)));
       });
@@ -58,12 +58,12 @@ void main() {
         const testWidget = Text('Test');
         final route = FadeThroughPageRoute(child: testWidget);
 
-        expect(route, isA<PageRouteBuilder>());
-        expect(route, isA<PageRoute>());
-        expect(route, isA<ModalRoute>());
-        expect(route, isA<TransitionRoute>());
-        expect(route, isA<OverlayRoute>());
-        expect(route, isA<Route>());
+        expect(route, isA<PageRouteBuilder<void>>());
+        expect(route, isA<PageRoute<void>>());
+        expect(route, isA<ModalRoute<void>>());
+        expect(route, isA<TransitionRoute<void>>());
+        expect(route, isA<OverlayRoute<void>>());
+        expect(route, isA<Route<void>>());
       });
 
       test('has correct generic type', () {

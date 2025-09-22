@@ -1,6 +1,7 @@
 // Author: Birju Vachhani
 // Created Date: September 21, 2025
 
+// ignore_for_file: invalid_use_of_protected_member
 import 'package:flutter/animation.dart';
 import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 import 'package:flutter_test/flutter_test.dart';

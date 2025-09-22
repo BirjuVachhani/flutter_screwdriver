@@ -22,7 +22,6 @@ class _TestWidgetState extends State<TestWidget> {
 void main() {
   group('StateFS extension tests', () {
     late Widget testApp;
-    late _TestWidgetState capturedState;
 
     setUp(() {
       testApp = MaterialApp(
