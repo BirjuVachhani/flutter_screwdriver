@@ -28,10 +28,10 @@ Extensions:                    47
 Helper Classes:                16
 Helper Functions & Getters:    2
 Typedefs:                      6
-Mixins:                        3
+Mixins:                        4
 ```
 
-> *Last Updated: Mon, Sep 22, 2025 - 11:55 AM*
+> *Last Updated: Wed, Oct 29, 2025 - 04:14 PM*
 
 <!---stats_end-->
 
