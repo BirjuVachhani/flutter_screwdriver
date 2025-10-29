@@ -36,7 +36,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 
-/// A mixin that manages stream subscriptions.
+/// A mixin that manages stream subscriptions in a [StatefulWidget]s state and automatically
+/// cancels them when the state is disposed.
 mixin StreamSubscriptionStateMixin<W extends StatefulWidget> on State<W> {
   late final Map<String, List<StreamSubscription<dynamic>>> _scopes = {};
 
@@ -74,6 +75,7 @@ mixin StreamSubscriptionStateMixin<W extends StatefulWidget> on State<W> {
   }
 
   /// Only cancels the subscriptions in the given [scope].
+  /// This can be used to micro-manage the subscriptions and cancel them manually when needed.
   void cancelScopedSubscriptions(String scope) {
     _scopes[scope]?.forEach((subscription) => subscription.cancel());
     _scopes.remove(scope);
@@ -81,6 +83,7 @@ mixin StreamSubscriptionStateMixin<W extends StatefulWidget> on State<W> {
 
   /// Cancels all the subscriptions in the all scopes. This is suitable to be
   /// called when disposing the object.
+  /// This is automatically called in [dispose].
   void cancelSubscriptions() {
     for (final scope in _scopes.entries) {
       for (final subscription in scope.value) {
