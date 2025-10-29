@@ -180,7 +180,8 @@ void main() {
       await c2.close();
     });
 
-    testWidgets('dispose cancels all subscriptions', (WidgetTester tester) async {
+    testWidgets('dispose cancels all subscriptions',
+        (WidgetTester tester) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -252,7 +253,8 @@ void main() {
       expect(StreamSubscriptionStateMixin.defaultScope, equals('default'));
     });
 
-    testWidgets('multiple subscriptions in same scope', (WidgetTester tester) async {
+    testWidgets('multiple subscriptions in same scope',
+        (WidgetTester tester) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -289,7 +291,8 @@ void main() {
       await c2.close();
     });
 
-    testWidgets('cancelSubscriptions when empty is safe', (WidgetTester tester) async {
+    testWidgets('cancelSubscriptions when empty is safe',
+        (WidgetTester tester) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -297,7 +300,8 @@ void main() {
       expect(() => state.cancelSubscriptions(), returnsNormally);
     });
 
-    testWidgets('cancelSubscriptions multiple times is safe', (WidgetTester tester) async {
+    testWidgets('cancelSubscriptions multiple times is safe',
+        (WidgetTester tester) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
