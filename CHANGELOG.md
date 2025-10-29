@@ -1,3 +1,7 @@
+## 3.3.1
+
+- Add `StreamSubscriptionStateMixin` for easier management of stream subscriptions in stateful widgets.
+
 ## 3.3.0
 
 - [Deprecation] `TickingWidget` and `TickingStateMixin` are deprecated in favor of separate
