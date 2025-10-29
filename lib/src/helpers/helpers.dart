@@ -8,6 +8,7 @@
 export 'app_lifecycle_observer_mixin.dart';
 export 'clear_focus_navigator_observer.dart';
 export 'helper_functions.dart';
+export 'mixins/stream_subscription_state_mixin.dart';
 export 'ticker_helpers.dart';
 export 'widgets/affinity_widgets.dart';
 export 'widgets/async_builder.dart';
