@@ -32,7 +32,7 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final controller = StreamController<int>();
+      final controller = StreamController<int>.broadcast();
 
       state.listenTo(controller.stream, (data) {
         state.receivedData.add(data);
@@ -50,7 +50,7 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final controller = StreamController<int>();
+      final controller = StreamController<int>.broadcast();
 
       state.listenTo(
         controller.stream,
@@ -69,8 +69,8 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final c1 = StreamController<int>();
-      final c2 = StreamController<int>();
+      final c1 = StreamController<int>.broadcast();
+      final c2 = StreamController<int>.broadcast();
 
       state.listenTo(
         c1.stream,
@@ -98,8 +98,8 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final c1 = StreamController<int>();
-      final c2 = StreamController<int>();
+      final c1 = StreamController<int>.broadcast();
+      final c2 = StreamController<int>.broadcast();
 
       state.listenTo(
         c1.stream,
@@ -148,8 +148,8 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final c1 = StreamController<int>();
-      final c2 = StreamController<int>();
+      final c1 = StreamController<int>.broadcast();
+      final c2 = StreamController<int>.broadcast();
 
       state.listenTo(
         c1.stream,
@@ -184,7 +184,7 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final controller = StreamController<int>();
+      final controller = StreamController<int>.broadcast();
 
       state.listenTo(
         controller.stream,
@@ -209,7 +209,7 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final controller = StreamController<int>();
+      final controller = StreamController<int>.broadcast();
 
       state.listenTo(
         controller.stream,
@@ -232,7 +232,7 @@ void main() {
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
       int doneCount = 0;
-      final controller = StreamController<int>();
+      final controller = StreamController<int>.broadcast();
 
       state.listenTo(
         controller.stream,
@@ -256,8 +256,8 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final c1 = StreamController<int>();
-      final c2 = StreamController<int>();
+      final c1 = StreamController<int>.broadcast();
+      final c2 = StreamController<int>.broadcast();
 
       state.listenTo(
         c1.stream,
@@ -301,7 +301,7 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
-      final controller = StreamController<int>();
+      final controller = StreamController<int>.broadcast();
 
       state.listenTo(controller.stream, (data) {});
 
