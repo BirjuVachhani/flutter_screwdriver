@@ -150,11 +150,7 @@ class LinkSpan extends WidgetSpan {
           if (prefix != null || suffix != null) {
             child = Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
-                if (prefix != null) prefix!,
-                child,
-                if (suffix != null) suffix!,
-              ],
+              children: [?prefix, child, ?suffix],
             );
           }
 
@@ -163,13 +159,10 @@ class LinkSpan extends WidgetSpan {
             return DefaultTextStyle.merge(
               style: style,
               child: IconTheme.merge(
-                data: IconThemeData(
-                  color: hovering ? hoverColor : color,
-                ),
+                data: IconThemeData(color: hovering ? hoverColor : color),
                 child: Container(
                   padding: padding ?? EdgeInsets.zero,
-                  decoration:
-                      hovering ? hoverBackground ?? background : background,
+                  decoration: hovering ? hoverBackground ?? background : background,
                   child: child,
                 ),
               ),
@@ -181,15 +174,12 @@ class LinkSpan extends WidgetSpan {
             curve: curve,
             style: DefaultTextStyle.of(context).style.merge(style),
             child: IconTheme.merge(
-              data: IconThemeData(
-                color: hovering ? hoverColor : color,
-              ),
+              data: IconThemeData(color: hovering ? hoverColor : color),
               child: AnimatedContainer(
                 duration: duration,
                 curve: curve,
                 padding: padding ?? EdgeInsets.zero,
-                decoration:
-                    hovering ? hoverBackground ?? background : background,
+                decoration: hovering ? hoverBackground ?? background : background,
                 child: child,
               ),
             ),

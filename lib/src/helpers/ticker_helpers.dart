@@ -17,7 +17,8 @@ import 'package:flutter/scheduler.dart';
 /// The default mode is [TickingMode.second].
 /// The mode can be changed at runtime using [TickingInterface.setMode] method.
 @Deprecated(
-    'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
+  'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.',
+)
 enum TickingMode {
   /// Represents the mode when the widget should rebuild every millisecond.
   /// This is the most frequent mode and should be used with caution.
@@ -57,9 +58,9 @@ enum TickingMode {
 
 /// A builder function type that is used to build the ticking widget.
 @Deprecated(
-    'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
-typedef TickingWidgetBuilder = Widget Function(
-    BuildContext context, DateTime currentTime, Widget? child);
+  'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.',
+)
+typedef TickingWidgetBuilder = Widget Function(BuildContext context, DateTime currentTime, Widget? child);
 
 /// A widget that rebuilds itself at a given interval.
 /// This widget is useful for building widgets that need to be updated at a given interval.
@@ -76,7 +77,8 @@ typedef TickingWidgetBuilder = Widget Function(
 ///  ),
 ///  ```
 @Deprecated(
-    'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
+  'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.',
+)
 class TickingWidget extends StatefulWidget {
   /// The builder function that is used to build the ticking widget.
   /// This function is called every time the widget needs to be rebuilt.
@@ -122,8 +124,10 @@ class TickingWidget extends StatefulWidget {
     this.child,
     required this.mode,
     this.autoStart = true,
-  }) : assert(builder != null || child != null,
-            'Either builder or child must be provided');
+  }) : assert(
+         builder != null || child != null,
+         'Either builder or child must be provided',
+       );
 
   /// Returns the [TickingInterface] of the nearest [TickingWidget] ancestor.
   /// This method can be used to access the [TickingInterface] of the nearest
@@ -135,8 +139,7 @@ class TickingWidget extends StatefulWidget {
   /// ```
   /// This method throws an error if the [TickingInterface] is not found in the
   /// ancestor tree.
-  static TickingInterface of(BuildContext context) =>
-      context.findAncestorStateOfType<_TickingWidgetState>()!;
+  static TickingInterface of(BuildContext context) => context.findAncestorStateOfType<_TickingWidgetState>()!;
 
   /// Returns the [TickingInterface] of the nearest [TickingWidget] ancestor.
   /// This method can be used to access the [TickingInterface] of the nearest
@@ -148,17 +151,16 @@ class TickingWidget extends StatefulWidget {
   /// ```
   /// This method returns null if the [TickingInterface] is not found in the
   /// ancestor tree.
-  static TickingInterface? maybeOf(BuildContext context) =>
-      context.findAncestorStateOfType<_TickingWidgetState>();
+  static TickingInterface? maybeOf(BuildContext context) => context.findAncestorStateOfType<_TickingWidgetState>();
 
   @override
   State<TickingWidget> createState() => _TickingWidgetState();
 }
 
 @Deprecated(
-    'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
-class _TickingWidgetState extends State<TickingWidget>
-    with SingleTickerProviderStateMixin, TickingStateMixin {
+  'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.',
+)
+class _TickingWidgetState extends State<TickingWidget> with SingleTickerProviderStateMixin, TickingStateMixin {
   @override
   void initState() {
     // set the autoStart and mode from the widget.
@@ -180,9 +182,8 @@ class _TickingWidgetState extends State<TickingWidget>
   @override
   Widget build(BuildContext context) {
     return Builder(
-        builder: (context) =>
-            widget.builder?.call(context, currentTime, widget.child) ??
-            widget.child!);
+      builder: (context) => widget.builder?.call(context, currentTime, widget.child) ?? widget.child!,
+    );
   }
 }
 
@@ -202,10 +203,9 @@ class _TickingWidgetState extends State<TickingWidget>
 /// Note that [SingleTickingStateMixin] must be defined after [TickerProvider]
 /// in the mixin list, otherwise, it will throw a compile-time error.
 @Deprecated(
-    'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
-mixin TickingStateMixin<T extends StatefulWidget>
-    on State<T>, TickerProvider
-    implements TickingInterface {
+  'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.',
+)
+mixin TickingStateMixin<T extends StatefulWidget> on State<T>, TickerProvider implements TickingInterface {
   @override
   late Ticker ticker;
 
@@ -246,8 +246,7 @@ mixin TickingStateMixin<T extends StatefulWidget>
     final newTime = DateTime.now();
     // rebuild only if change is detected on given mode instead of every frame.
     switch (mode) {
-      case TickingMode.millisecond
-          when currentTime.millisecond != newTime.millisecond:
+      case TickingMode.millisecond when currentTime.millisecond != newTime.millisecond:
       case TickingMode.second when currentTime.second != newTime.second:
       case TickingMode.minute when currentTime.minute != newTime.minute:
       case TickingMode.hour when currentTime.hour != newTime.hour:
@@ -282,7 +281,8 @@ mixin TickingStateMixin<T extends StatefulWidget>
 
 /// A ticking interface that provides methods to control the ticking of the widget.
 @Deprecated(
-    'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.')
+  'This is moved to another package. Please use the `ticking_widget` package instead. This package will be removed in the next major version.',
+)
 abstract interface class TickingInterface {
   /// The ticker that is used to control the ticking of the widget.
   abstract Ticker ticker;

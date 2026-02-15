@@ -15,9 +15,7 @@ class _TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Test Page')),
-      body: Center(
-        child: Text(text),
-      ),
+      body: Center(child: Text(text)),
     );
   }
 }
@@ -33,8 +31,10 @@ void main() {
         );
 
         expect(route, isA<PageRouteBuilder<void>>());
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 300)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 300)),
+        );
         expect(route.type, equals(SharedAxisTransitionType.horizontal));
       });
 
@@ -46,8 +46,10 @@ void main() {
           duration: 500,
         );
 
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 500)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 500)),
+        );
         expect(route.type, equals(SharedAxisTransitionType.vertical));
       });
 
@@ -70,8 +72,10 @@ void main() {
         final route = SharedAxisPageRoute.vertical(child: testWidget);
 
         expect(route.type, equals(SharedAxisTransitionType.vertical));
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 300)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 300)),
+        );
       });
 
       test('vertical constructor with custom duration', () {
@@ -82,8 +86,10 @@ void main() {
         );
 
         expect(route.type, equals(SharedAxisTransitionType.vertical));
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 600)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 600)),
+        );
       });
 
       test('horizontal constructor creates correct route', () {
@@ -91,8 +97,10 @@ void main() {
         final route = SharedAxisPageRoute.horizontal(child: testWidget);
 
         expect(route.type, equals(SharedAxisTransitionType.horizontal));
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 300)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 300)),
+        );
       });
 
       test('horizontal constructor with custom duration', () {
@@ -103,8 +111,10 @@ void main() {
         );
 
         expect(route.type, equals(SharedAxisTransitionType.horizontal));
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 400)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 400)),
+        );
       });
 
       test('scaled constructor creates correct route', () {
@@ -112,8 +122,10 @@ void main() {
         final route = SharedAxisPageRoute.scaled(child: testWidget);
 
         expect(route.type, equals(SharedAxisTransitionType.scaled));
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 300)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 300)),
+        );
       });
 
       test('scaled constructor with custom duration', () {
@@ -124,14 +136,17 @@ void main() {
         );
 
         expect(route.type, equals(SharedAxisTransitionType.scaled));
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 800)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 800)),
+        );
       });
     });
 
     group('buildTransitions functionality', () {
-      testWidgets('buildTransitions creates SharedAxisTransition',
-          (WidgetTester tester) async {
+      testWidgets('buildTransitions creates SharedAxisTransition', (
+        WidgetTester tester,
+      ) async {
         const testWidget = Text('Test Child');
         final route = SharedAxisPageRoute(
           child: testWidget,
@@ -157,15 +172,13 @@ void main() {
         expect(find.text('Test Child'), findsOneWidget);
       });
 
-      testWidgets('buildTransitions passes correct transition type',
-          (WidgetTester tester) async {
+      testWidgets('buildTransitions passes correct transition type', (
+        WidgetTester tester,
+      ) async {
         const testWidget = Text('Test Child');
 
         for (final type in SharedAxisTransitionType.values) {
-          final route = SharedAxisPageRoute(
-            child: testWidget,
-            type: type,
-          );
+          final route = SharedAxisPageRoute(child: testWidget, type: type);
 
           await tester.pumpWidget(
             MaterialApp(
@@ -187,8 +200,9 @@ void main() {
         }
       });
 
-      testWidgets('buildTransitions handles secondary animation',
-          (WidgetTester tester) async {
+      testWidgets('buildTransitions handles secondary animation', (
+        WidgetTester tester,
+      ) async {
         const testWidget = Text('Test Child');
         final route = SharedAxisPageRoute(
           child: testWidget,
@@ -216,8 +230,9 @@ void main() {
     });
 
     group('integration with Navigator', () {
-      testWidgets('vertical route works with Navigator.push',
-          (WidgetTester tester) async {
+      testWidgets('vertical route works with Navigator.push', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -245,8 +260,9 @@ void main() {
         expect(find.text('Vertical Page'), findsOneWidget);
       });
 
-      testWidgets('horizontal route works with Navigator.push',
-          (WidgetTester tester) async {
+      testWidgets('horizontal route works with Navigator.push', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -274,8 +290,9 @@ void main() {
         expect(find.text('Horizontal Page'), findsOneWidget);
       });
 
-      testWidgets('scaled route works with Navigator.push',
-          (WidgetTester tester) async {
+      testWidgets('scaled route works with Navigator.push', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -339,8 +356,9 @@ void main() {
     });
 
     group('animation duration behavior', () {
-      testWidgets('respects custom duration for vertical transition',
-          (WidgetTester tester) async {
+      testWidgets('respects custom duration for vertical transition', (
+        WidgetTester tester,
+      ) async {
         final route = SharedAxisPageRoute.vertical(
           child: _TestPage(text: 'Custom Duration'),
           duration: 1000,
@@ -372,8 +390,9 @@ void main() {
         expect(find.text('Custom Duration'), findsOneWidget);
       });
 
-      testWidgets('zero duration completes immediately',
-          (WidgetTester tester) async {
+      testWidgets('zero duration completes immediately', (
+        WidgetTester tester,
+      ) async {
         final route = SharedAxisPageRoute.horizontal(
           child: _TestPage(text: 'Instant'),
           duration: 0,
@@ -402,8 +421,9 @@ void main() {
     });
 
     group('transition type variations', () {
-      testWidgets('all transition types work independently',
-          (WidgetTester tester) async {
+      testWidgets('all transition types work independently', (
+        WidgetTester tester,
+      ) async {
         final types = [
           (SharedAxisTransitionType.vertical, 'Vertical'),
           (SharedAxisTransitionType.horizontal, 'Horizontal'),
@@ -444,8 +464,9 @@ void main() {
         }
       });
 
-      testWidgets('different constructors create equivalent routes',
-          (WidgetTester tester) async {
+      testWidgets('different constructors create equivalent routes', (
+        WidgetTester tester,
+      ) async {
         const testWidget = Text('Test');
 
         final primaryVertical = SharedAxisPageRoute(
@@ -460,8 +481,10 @@ void main() {
         );
 
         expect(primaryVertical.type, equals(namedVertical.type));
-        expect(primaryVertical.transitionDuration,
-            equals(namedVertical.transitionDuration));
+        expect(
+          primaryVertical.transitionDuration,
+          equals(namedVertical.transitionDuration),
+        );
 
         final primaryHorizontal = SharedAxisPageRoute(
           child: testWidget,
@@ -475,8 +498,10 @@ void main() {
         );
 
         expect(primaryHorizontal.type, equals(namedHorizontal.type));
-        expect(primaryHorizontal.transitionDuration,
-            equals(namedHorizontal.transitionDuration));
+        expect(
+          primaryHorizontal.transitionDuration,
+          equals(namedHorizontal.transitionDuration),
+        );
 
         final primaryScaled = SharedAxisPageRoute(
           child: testWidget,
@@ -490,14 +515,17 @@ void main() {
         );
 
         expect(primaryScaled.type, equals(namedScaled.type));
-        expect(primaryScaled.transitionDuration,
-            equals(namedScaled.transitionDuration));
+        expect(
+          primaryScaled.transitionDuration,
+          equals(namedScaled.transitionDuration),
+        );
       });
     });
 
     group('edge cases and complex scenarios', () {
-      testWidgets('works with complex widget trees',
-          (WidgetTester tester) async {
+      testWidgets('works with complex widget trees', (
+        WidgetTester tester,
+      ) async {
         final complexChild = DefaultTabController(
           length: 2,
           child: Scaffold(
@@ -506,18 +534,14 @@ void main() {
               children: [
                 ListView.builder(
                   itemCount: 5,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text('Item $index'),
-                  ),
+                  itemBuilder: (context, index) => ListTile(title: Text('Item $index')),
                 ),
                 GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                   ),
                   itemCount: 4,
-                  itemBuilder: (context, index) => Card(
-                    child: Center(child: Text('Card $index')),
-                  ),
+                  itemBuilder: (context, index) => Card(child: Center(child: Text('Card $index'))),
                 ),
               ],
             ),
@@ -551,63 +575,65 @@ void main() {
         expect(find.text('Item 0'), findsOneWidget);
       });
 
-      testWidgets('handles rapid navigation between different transition types',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: Column(
-                children: [
-                  Builder(
-                    builder: (context) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            SharedAxisPageRoute.vertical(
-                              child: _TestPage(text: 'Vertical'),
-                            ),
-                          );
-                        },
-                        child: Text('Vertical'),
-                      );
-                    },
-                  ),
-                  Builder(
-                    builder: (context) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            SharedAxisPageRoute.horizontal(
-                              child: _TestPage(text: 'Horizontal'),
-                            ),
-                          );
-                        },
-                        child: Text('Horizontal'),
-                      );
-                    },
-                  ),
-                ],
+      testWidgets(
+        'handles rapid navigation between different transition types',
+        (WidgetTester tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: Column(
+                  children: [
+                    Builder(
+                      builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              SharedAxisPageRoute.vertical(
+                                child: _TestPage(text: 'Vertical'),
+                              ),
+                            );
+                          },
+                          child: Text('Vertical'),
+                        );
+                      },
+                    ),
+                    Builder(
+                      builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              SharedAxisPageRoute.horizontal(
+                                child: _TestPage(text: 'Horizontal'),
+                              ),
+                            );
+                          },
+                          child: Text('Horizontal'),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
+          );
 
-        // Navigate to vertical
-        await tester.tap(find.text('Vertical'));
-        await tester.pumpAndSettle();
-        expect(find.text('Vertical'), findsOneWidget);
+          // Navigate to vertical
+          await tester.tap(find.text('Vertical'));
+          await tester.pumpAndSettle();
+          expect(find.text('Vertical'), findsOneWidget);
 
-        // Navigate to horizontal from vertical page
-        final context = tester.element(find.text('Vertical'));
-        Navigator.of(context).push(
-          SharedAxisPageRoute.horizontal(
-            child: _TestPage(text: 'Horizontal from Vertical'),
-          ),
-        );
-        await tester.pumpAndSettle();
+          // Navigate to horizontal from vertical page
+          final context = tester.element(find.text('Vertical'));
+          Navigator.of(context).push(
+            SharedAxisPageRoute.horizontal(
+              child: _TestPage(text: 'Horizontal from Vertical'),
+            ),
+          );
+          await tester.pumpAndSettle();
 
-        expect(find.text('Horizontal from Vertical'), findsOneWidget);
-      });
+          expect(find.text('Horizontal from Vertical'), findsOneWidget);
+        },
+      );
 
       testWidgets('works with nested navigation', (WidgetTester tester) async {
         await tester.pumpWidget(

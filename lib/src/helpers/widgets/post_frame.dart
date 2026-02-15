@@ -16,11 +16,7 @@ class PostFrame extends StatefulWidget {
   final FrameCallback onPostFrame;
 
   /// Creates a new [PostFrame] instance.
-  const PostFrame({
-    super.key,
-    required this.child,
-    required this.onPostFrame,
-  });
+  const PostFrame({super.key, required this.child, required this.onPostFrame});
 
   @override
   State<PostFrame> createState() => _PostFrameState();
@@ -39,8 +35,9 @@ mixin PostFrameCallbackMixin<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance
-        .addPostFrameCallback((duration) => onPostFrame(duration));
+    SchedulerBinding.instance.addPostFrameCallback(
+      (duration) => onPostFrame(duration),
+    );
   }
 
   /// The callback to be executed after the first frame is rendered.

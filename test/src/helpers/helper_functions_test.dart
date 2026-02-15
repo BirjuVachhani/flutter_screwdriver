@@ -13,26 +13,32 @@ void main() {
 
       setUp(() {
         methodCalls = [];
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.platform, (call) async {
-          methodCalls.add(call);
-          return null;
-        });
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          (call) async {
+            methodCalls.add(call);
+            return null;
+          },
+        );
       });
 
       tearDown(() {
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.platform, null);
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          null,
+        );
       });
 
-      test('calls SystemNavigator.pop with default animated parameter',
-          () async {
-        await closeApp();
+      test(
+        'calls SystemNavigator.pop with default animated parameter',
+        () async {
+          await closeApp();
 
-        expect(methodCalls, hasLength(1));
-        expect(methodCalls.first.method, equals('SystemNavigator.pop'));
-        expect(methodCalls.first.arguments, isTrue);
-      });
+          expect(methodCalls, hasLength(1));
+          expect(methodCalls.first.method, equals('SystemNavigator.pop'));
+          expect(methodCalls.first.arguments, isTrue);
+        },
+      );
 
       test('calls SystemNavigator.pop with animated=true', () async {
         await closeApp(animated: true);
@@ -73,18 +79,17 @@ void main() {
 
       test('handles platform channel errors gracefully', () async {
         // Mock a platform error
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.platform, (call) async {
-          throw PlatformException(
-            code: 'UNAVAILABLE',
-            message: 'Platform not available',
-          );
-        });
-
-        await expectLater(
-          closeApp(),
-          throwsA(isA<PlatformException>()),
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          (call) async {
+            throw PlatformException(
+              code: 'UNAVAILABLE',
+              message: 'Platform not available',
+            );
+          },
         );
+
+        await expectLater(closeApp(), throwsA(isA<PlatformException>()));
       });
 
       testWidgets('works in integration context', (WidgetTester tester) async {
@@ -109,9 +114,7 @@ void main() {
         await tester.tap(find.text('Close App'));
         await tester.pump();
 
-        final popCalls = methodCalls
-            .where((call) => call.method == 'SystemNavigator.pop')
-            .toList();
+        final popCalls = methodCalls.where((call) => call.method == 'SystemNavigator.pop').toList();
 
         expect(popCalls, hasLength(1));
       });
@@ -142,10 +145,7 @@ void main() {
         });
 
         test('can be used with Future.wait', () async {
-          final futures = [
-            closeApp(animated: true),
-            closeApp(animated: false),
-          ];
+          final futures = [closeApp(animated: true), closeApp(animated: false)];
 
           await Future.wait(futures);
 
@@ -171,16 +171,20 @@ void main() {
 
       setUp(() {
         methodCalls = [];
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.textInput, (call) async {
-          methodCalls.add(call);
-          return null;
-        });
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.textInput,
+          (call) async {
+            methodCalls.add(call);
+            return null;
+          },
+        );
       });
 
       tearDown(() {
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.textInput, null);
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.textInput,
+          null,
+        );
       });
 
       testWidgets('executes without errors', (WidgetTester tester) async {
@@ -205,18 +209,16 @@ void main() {
         expect(() => hideKeyboard(testContext), returnsNormally);
       });
 
-      testWidgets('unfocuses current focus when hasFocus is true',
-          (WidgetTester tester) async {
+      testWidgets('unfocuses current focus when hasFocus is true', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: Builder(
                 builder: (context) {
                   testContext = context;
-                  return TextField(
-                    key: Key('test_field'),
-                    autofocus: true,
-                  );
+                  return TextField(key: Key('test_field'), autofocus: true);
                 },
               ),
             ),
@@ -233,8 +235,9 @@ void main() {
         expect(() => hideKeyboard(testContext), returnsNormally);
       });
 
-      testWidgets('handles context without focus gracefully',
-          (WidgetTester tester) async {
+      testWidgets('handles context without focus gracefully', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -252,8 +255,9 @@ void main() {
         expect(() => hideKeyboard(testContext), returnsNormally);
       });
 
-      testWidgets('works with multiple text fields',
-          (WidgetTester tester) async {
+      testWidgets('works with multiple text fields', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -336,7 +340,10 @@ void main() {
                 appBar: AppBar(
                   title: Text('Test'),
                   bottom: TabBar(
-                    tabs: [Tab(text: 'Tab 1'), Tab(text: 'Tab 2')],
+                    tabs: [
+                      Tab(text: 'Tab 1'),
+                      Tab(text: 'Tab 2'),
+                    ],
                   ),
                 ),
                 body: TabBarView(
@@ -362,8 +369,9 @@ void main() {
       });
 
       group('focus management', () {
-        testWidgets('unfocuses focusedChild when present',
-            (WidgetTester tester) async {
+        testWidgets('unfocuses focusedChild when present', (
+          WidgetTester tester,
+        ) async {
           await tester.pumpWidget(
             MaterialApp(
               home: Scaffold(
@@ -405,9 +413,7 @@ void main() {
                       child: Column(
                         children: [
                           TextField(key: Key('outer_field')),
-                          FocusScope(
-                            child: TextField(key: Key('inner_field')),
-                          ),
+                          FocusScope(child: TextField(key: Key('inner_field'))),
                         ],
                       ),
                     );
@@ -434,17 +440,21 @@ void main() {
         final platformCalls = <MethodCall>[];
         final textInputCalls = <MethodCall>[];
 
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.platform, (call) async {
-          platformCalls.add(call);
-          return null;
-        });
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          (call) async {
+            platformCalls.add(call);
+            return null;
+          },
+        );
 
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.textInput, (call) async {
-          textInputCalls.add(call);
-          return null;
-        });
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.textInput,
+          (call) async {
+            textInputCalls.add(call);
+            return null;
+          },
+        );
 
         await tester.pumpWidget(
           MaterialApp(
@@ -480,23 +490,26 @@ void main() {
         await tester.pump();
 
         // Check that closeApp was called (filter for SystemNavigator.pop among other platform calls)
-        final closeAppCalls = platformCalls
-            .where((call) => call.method == 'SystemNavigator.pop')
-            .toList();
+        final closeAppCalls = platformCalls.where((call) => call.method == 'SystemNavigator.pop').toList();
         expect(closeAppCalls, hasLength(1));
         expect(closeAppCalls.first.method, equals('SystemNavigator.pop'));
 
         // Note: hideKeyboard calls may not be captured in test environment due to error handling
 
         // Cleanup
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.platform, null);
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.textInput, null);
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          null,
+        );
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.textInput,
+          null,
+        );
       });
 
-      testWidgets('functions are accessible from extension',
-          (WidgetTester tester) async {
+      testWidgets('functions are accessible from extension', (
+        WidgetTester tester,
+      ) async {
         // Test that these functions are available as part of the library
         expect(closeApp, isA<Function>());
         expect(hideKeyboard, isA<Function>());
@@ -506,11 +519,13 @@ void main() {
     group('edge cases', () {
       test('closeApp with extreme parameter values', () async {
         final methodCalls = <MethodCall>[];
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.platform, (call) async {
-          methodCalls.add(call);
-          return null;
-        });
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          (call) async {
+            methodCalls.add(call);
+            return null;
+          },
+        );
 
         // These should all work
         await closeApp(animated: true);
@@ -520,12 +535,15 @@ void main() {
         expect(methodCalls[0].arguments, isTrue);
         expect(methodCalls[1].arguments, isFalse);
 
-        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-            .setMockMethodCallHandler(SystemChannels.platform, null);
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          null,
+        );
       });
 
-      testWidgets('hideKeyboard with disposed context',
-          (WidgetTester tester) async {
+      testWidgets('hideKeyboard with disposed context', (
+        WidgetTester tester,
+      ) async {
         late BuildContext disposedContext;
 
         await tester.pumpWidget(
@@ -543,11 +561,7 @@ void main() {
 
         // Replace with different widget to dispose context
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: Text('Different content'),
-            ),
-          ),
+          MaterialApp(home: Scaffold(body: Text('Different content'))),
         );
 
         // This should not crash even with disposed context

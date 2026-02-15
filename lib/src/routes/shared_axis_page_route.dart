@@ -17,29 +17,29 @@ class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.vertical]
   SharedAxisPageRoute.vertical({required Widget child, int duration = 300})
-      : type = SharedAxisTransitionType.vertical,
-        super(
-          pageBuilder: (context, animation, secondaryAnimation) => child,
-          transitionDuration: Duration(milliseconds: duration),
-        );
+    : type = SharedAxisTransitionType.vertical,
+      super(
+        pageBuilder: (context, animation, secondaryAnimation) => child,
+        transitionDuration: Duration(milliseconds: duration),
+      );
 
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.horizontal]
   SharedAxisPageRoute.horizontal({required Widget child, int duration = 300})
-      : type = SharedAxisTransitionType.horizontal,
-        super(
-          pageBuilder: (context, animation, secondaryAnimation) => child,
-          transitionDuration: Duration(milliseconds: duration),
-        );
+    : type = SharedAxisTransitionType.horizontal,
+      super(
+        pageBuilder: (context, animation, secondaryAnimation) => child,
+        transitionDuration: Duration(milliseconds: duration),
+      );
 
   /// Secondary constructor which sets [type] to
   /// [SharedAxisTransitionType.scaled]
   SharedAxisPageRoute.scaled({required Widget child, int duration = 300})
-      : type = SharedAxisTransitionType.scaled,
-        super(
-          pageBuilder: (context, animation, secondaryAnimation) => child,
-          transitionDuration: Duration(milliseconds: duration),
-        );
+    : type = SharedAxisTransitionType.scaled,
+      super(
+        pageBuilder: (context, animation, secondaryAnimation) => child,
+        transitionDuration: Duration(milliseconds: duration),
+      );
 
   /// Primary constructor
   /// duration is in milliseconds
@@ -48,13 +48,17 @@ class SharedAxisPageRoute<T> extends PageRouteBuilder<T> {
     required this.type,
     int duration = 300,
   }) : super(
-          pageBuilder: (context, animation, secondaryAnimation) => child,
-          transitionDuration: Duration(milliseconds: duration),
-        );
+         pageBuilder: (context, animation, secondaryAnimation) => child,
+         transitionDuration: Duration(milliseconds: duration),
+       );
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     return SharedAxisTransition(
       animation: animation,
       secondaryAnimation: secondaryAnimation,

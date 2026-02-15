@@ -30,49 +30,52 @@ void main() {
 
   group('DirectionalAffinity widget tests', () {
     testWidgets(
-        'DirectionalAffinity creates basic horizontal widget with leading',
-        (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DirectionalAffinity(
-              direction: Axis.horizontal,
-              leading: const Icon(Icons.star),
-              child: const Text('Content'),
+      'DirectionalAffinity creates basic horizontal widget with leading',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: DirectionalAffinity(
+                direction: Axis.horizontal,
+                leading: const Icon(Icons.star),
+                child: const Text('Content'),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byIcon(Icons.star), findsOneWidget);
-      expect(find.text('Content'), findsOneWidget);
-      expect(find.byType(DirectionalAffinity), findsOneWidget);
+        expect(find.byIcon(Icons.star), findsOneWidget);
+        expect(find.text('Content'), findsOneWidget);
+        expect(find.byType(DirectionalAffinity), findsOneWidget);
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
-      expect(widget.direction, equals(Axis.horizontal));
-      expect(widget.affinity, equals(Affinity.start));
-    });
+        final widget = tester.widget<DirectionalAffinity>(
+          find.byType(DirectionalAffinity),
+        );
+        expect(widget.direction, equals(Axis.horizontal));
+        expect(widget.affinity, equals(Affinity.start));
+      },
+    );
 
     testWidgets(
-        'DirectionalAffinity creates basic horizontal widget with trailing',
-        (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DirectionalAffinity(
-              direction: Axis.horizontal,
-              trailing: const Icon(Icons.arrow_forward),
-              child: const Text('Content'),
+      'DirectionalAffinity creates basic horizontal widget with trailing',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: DirectionalAffinity(
+                direction: Axis.horizontal,
+                trailing: const Icon(Icons.arrow_forward),
+                child: const Text('Content'),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
-      expect(find.text('Content'), findsOneWidget);
-      expect(find.byType(DirectionalAffinity), findsOneWidget);
-    });
+        expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
+        expect(find.text('Content'), findsOneWidget);
+        expect(find.byType(DirectionalAffinity), findsOneWidget);
+      },
+    );
 
     testWidgets('DirectionalAffinity creates vertical widget', (tester) async {
       await tester.pumpWidget(
@@ -90,13 +93,15 @@ void main() {
       expect(find.byIcon(Icons.keyboard_arrow_up), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget.direction, equals(Axis.vertical));
     });
 
-    testWidgets('DirectionalAffinity with both leading and trailing',
-        (tester) async {
+    testWidgets('DirectionalAffinity with both leading and trailing', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -116,33 +121,36 @@ void main() {
     });
 
     testWidgets(
-        'DirectionalAffinity with Affinity.end places widgets correctly',
-        (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DirectionalAffinity(
-              direction: Axis.horizontal,
-              affinity: Affinity.end,
-              leading: const Icon(Icons.star),
-              trailing: const Icon(Icons.arrow_forward),
-              child: const Text('Content'),
+      'DirectionalAffinity with Affinity.end places widgets correctly',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: DirectionalAffinity(
+                direction: Axis.horizontal,
+                affinity: Affinity.end,
+                leading: const Icon(Icons.star),
+                trailing: const Icon(Icons.arrow_forward),
+                child: const Text('Content'),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byIcon(Icons.star), findsOneWidget);
-      expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
-      expect(find.text('Content'), findsOneWidget);
+        expect(find.byIcon(Icons.star), findsOneWidget);
+        expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
+        expect(find.text('Content'), findsOneWidget);
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
-      expect(widget.affinity, equals(Affinity.end));
-    });
+        final widget = tester.widget<DirectionalAffinity>(
+          find.byType(DirectionalAffinity),
+        );
+        expect(widget.affinity, equals(Affinity.end));
+      },
+    );
 
-    testWidgets('DirectionalAffinity respects mainAxisAlignment',
-        (tester) async {
+    testWidgets('DirectionalAffinity respects mainAxisAlignment', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -156,13 +164,15 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget.mainAxisAlignment, equals(MainAxisAlignment.center));
     });
 
-    testWidgets('DirectionalAffinity respects crossAxisAlignment',
-        (tester) async {
+    testWidgets('DirectionalAffinity respects crossAxisAlignment', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -176,8 +186,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget.crossAxisAlignment, equals(CrossAxisAlignment.end));
     });
 
@@ -195,8 +206,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget.mainAxisSize, equals(MainAxisSize.max));
     });
 
@@ -214,8 +226,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget.spacing, equals(16));
     });
 
@@ -232,8 +245,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget.affinity, equals(Affinity.start));
       expect(widget.mainAxisSize, equals(MainAxisSize.min));
       expect(widget.mainAxisAlignment, equals(MainAxisAlignment.start));
@@ -261,8 +275,9 @@ void main() {
   });
 
   group('HorizontalAffinity widget tests', () {
-    testWidgets('HorizontalAffinity creates horizontal layout with leading',
-        (tester) async {
+    testWidgets('HorizontalAffinity creates horizontal layout with leading', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -278,13 +293,15 @@ void main() {
       expect(find.text('Content'), findsOneWidget);
       expect(find.byType(HorizontalAffinity), findsOneWidget);
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.direction, equals(Axis.horizontal));
     });
 
-    testWidgets('HorizontalAffinity creates horizontal layout with trailing',
-        (tester) async {
+    testWidgets('HorizontalAffinity creates horizontal layout with trailing', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -300,8 +317,9 @@ void main() {
       expect(find.text('Content'), findsOneWidget);
     });
 
-    testWidgets('HorizontalAffinity with both leading and trailing',
-        (tester) async {
+    testWidgets('HorizontalAffinity with both leading and trailing', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -332,8 +350,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.affinity, equals(Affinity.end));
     });
 
@@ -350,13 +369,15 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.spacing, equals(16));
     });
 
-    testWidgets('HorizontalAffinity respects mainAxisAlignment',
-        (tester) async {
+    testWidgets('HorizontalAffinity respects mainAxisAlignment', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -369,13 +390,15 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.mainAxisAlignment, equals(MainAxisAlignment.center));
     });
 
-    testWidgets('HorizontalAffinity respects crossAxisAlignment',
-        (tester) async {
+    testWidgets('HorizontalAffinity respects crossAxisAlignment', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -388,8 +411,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.crossAxisAlignment, equals(CrossAxisAlignment.end));
     });
 
@@ -406,8 +430,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.mainAxisSize, equals(MainAxisSize.max));
     });
 
@@ -423,8 +448,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.affinity, equals(Affinity.start));
       expect(widget.mainAxisSize, equals(MainAxisSize.min));
       expect(widget.mainAxisAlignment, equals(MainAxisAlignment.start));
@@ -451,8 +477,9 @@ void main() {
   });
 
   group('VerticalAffinity widget tests', () {
-    testWidgets('VerticalAffinity creates vertical layout with leading',
-        (tester) async {
+    testWidgets('VerticalAffinity creates vertical layout with leading', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -468,13 +495,15 @@ void main() {
       expect(find.text('Content'), findsOneWidget);
       expect(find.byType(VerticalAffinity), findsOneWidget);
 
-      final widget =
-          tester.widget<VerticalAffinity>(find.byType(VerticalAffinity));
+      final widget = tester.widget<VerticalAffinity>(
+        find.byType(VerticalAffinity),
+      );
       expect(widget.direction, equals(Axis.vertical));
     });
 
-    testWidgets('VerticalAffinity creates vertical layout with trailing',
-        (tester) async {
+    testWidgets('VerticalAffinity creates vertical layout with trailing', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -490,8 +519,9 @@ void main() {
       expect(find.text('Content'), findsOneWidget);
     });
 
-    testWidgets('VerticalAffinity with both leading and trailing',
-        (tester) async {
+    testWidgets('VerticalAffinity with both leading and trailing', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -522,8 +552,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<VerticalAffinity>(find.byType(VerticalAffinity));
+      final widget = tester.widget<VerticalAffinity>(
+        find.byType(VerticalAffinity),
+      );
       expect(widget.affinity, equals(Affinity.end));
     });
 
@@ -540,8 +571,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<VerticalAffinity>(find.byType(VerticalAffinity));
+      final widget = tester.widget<VerticalAffinity>(
+        find.byType(VerticalAffinity),
+      );
       expect(widget.spacing, equals(12));
     });
 
@@ -557,8 +589,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<VerticalAffinity>(find.byType(VerticalAffinity));
+      final widget = tester.widget<VerticalAffinity>(
+        find.byType(VerticalAffinity),
+      );
       expect(widget.affinity, equals(Affinity.start));
       expect(widget.mainAxisSize, equals(MainAxisSize.min));
       expect(widget.mainAxisAlignment, equals(MainAxisAlignment.start));
@@ -569,43 +602,43 @@ void main() {
 
   group('Assertion tests', () {
     testWidgets(
-        'DirectionalAffinity throws assertion when both leading and trailing are null',
-        (tester) async {
-      expect(
-        () => DirectionalAffinity(
-          direction: Axis.horizontal,
-          child: const Text('Content'),
-        ),
-        throwsAssertionError,
-      );
-    });
+      'DirectionalAffinity throws assertion when both leading and trailing are null',
+      (tester) async {
+        expect(
+          () => DirectionalAffinity(
+            direction: Axis.horizontal,
+            child: const Text('Content'),
+          ),
+          throwsAssertionError,
+        );
+      },
+    );
 
     testWidgets(
-        'HorizontalAffinity throws assertion when both leading and trailing are null',
-        (tester) async {
-      expect(
-        () => HorizontalAffinity(
-          child: const Text('Content'),
-        ),
-        throwsAssertionError,
-      );
-    });
+      'HorizontalAffinity throws assertion when both leading and trailing are null',
+      (tester) async {
+        expect(
+          () => HorizontalAffinity(child: const Text('Content')),
+          throwsAssertionError,
+        );
+      },
+    );
 
     testWidgets(
-        'VerticalAffinity throws assertion when both leading and trailing are null',
-        (tester) async {
-      expect(
-        () => VerticalAffinity(
-          child: const Text('Content'),
-        ),
-        throwsAssertionError,
-      );
-    });
+      'VerticalAffinity throws assertion when both leading and trailing are null',
+      (tester) async {
+        expect(
+          () => VerticalAffinity(child: const Text('Content')),
+          throwsAssertionError,
+        );
+      },
+    );
   });
 
   group('Edge cases', () {
-    testWidgets('DirectionalAffinity with only leading and Affinity.start',
-        (tester) async {
+    testWidgets('DirectionalAffinity with only leading and Affinity.start', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -623,8 +656,9 @@ void main() {
       expect(find.text('Content'), findsOneWidget);
     });
 
-    testWidgets('DirectionalAffinity with only trailing and Affinity.end',
-        (tester) async {
+    testWidgets('DirectionalAffinity with only trailing and Affinity.end', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -655,8 +689,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.spacing, equals(0));
     });
 
@@ -673,25 +708,22 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<VerticalAffinity>(find.byType(VerticalAffinity));
+      final widget = tester.widget<VerticalAffinity>(
+        find.byType(VerticalAffinity),
+      );
       expect(widget.spacing, equals(24));
     });
 
-    testWidgets('DirectionalAffinity with complex child widget',
-        (tester) async {
+    testWidgets('DirectionalAffinity with complex child widget', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: DirectionalAffinity(
               direction: Axis.vertical,
               leading: const Icon(Icons.star),
-              child: const Column(
-                children: [
-                  Text('Line 1'),
-                  Text('Line 2'),
-                ],
-              ),
+              child: const Column(children: [Text('Line 1'), Text('Line 2')]),
             ),
           ),
         ),
@@ -717,8 +749,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget, isA<DirectionalAffinity>());
       expect(find.byType(HorizontalAffinity), findsOneWidget);
     });
@@ -735,8 +768,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<VerticalAffinity>(find.byType(VerticalAffinity));
+      final widget = tester.widget<VerticalAffinity>(
+        find.byType(VerticalAffinity),
+      );
       expect(widget, isA<DirectionalAffinity>());
       expect(find.byType(VerticalAffinity), findsOneWidget);
     });
@@ -754,16 +788,18 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget, isA<Flex>());
       expect(find.byType(DirectionalAffinity), findsOneWidget);
     });
   });
 
   group('Property access tests', () {
-    testWidgets('DirectionalAffinity exposes all properties correctly',
-        (tester) async {
+    testWidgets('DirectionalAffinity exposes all properties correctly', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -782,8 +818,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<DirectionalAffinity>(find.byType(DirectionalAffinity));
+      final widget = tester.widget<DirectionalAffinity>(
+        find.byType(DirectionalAffinity),
+      );
       expect(widget.affinity, equals(Affinity.end));
       expect(widget.leading, isA<Icon>());
       expect(widget.trailing, isA<Icon>());
@@ -795,8 +832,9 @@ void main() {
       expect(widget.spacing, equals(16));
     });
 
-    testWidgets('HorizontalAffinity exposes inherited properties',
-        (tester) async {
+    testWidgets('HorizontalAffinity exposes inherited properties', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -808,16 +846,18 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<HorizontalAffinity>(find.byType(HorizontalAffinity));
+      final widget = tester.widget<HorizontalAffinity>(
+        find.byType(HorizontalAffinity),
+      );
       expect(widget.direction, equals(Axis.horizontal));
       expect(widget.affinity, equals(Affinity.start));
       expect(widget.leading, isA<Icon>());
       expect(widget.child, isA<Text>());
     });
 
-    testWidgets('VerticalAffinity exposes inherited properties',
-        (tester) async {
+    testWidgets('VerticalAffinity exposes inherited properties', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -829,8 +869,9 @@ void main() {
         ),
       );
 
-      final widget =
-          tester.widget<VerticalAffinity>(find.byType(VerticalAffinity));
+      final widget = tester.widget<VerticalAffinity>(
+        find.byType(VerticalAffinity),
+      );
       expect(widget.direction, equals(Axis.vertical));
       expect(widget.affinity, equals(Affinity.start));
       expect(widget.leading, isA<Icon>());
@@ -839,8 +880,9 @@ void main() {
   });
 
   group('Real-world usage tests', () {
-    testWidgets('HorizontalAffinity in button with icon and text',
-        (tester) async {
+    testWidgets('HorizontalAffinity in button with icon and text', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -878,8 +920,9 @@ void main() {
       expect(find.text('42'), findsOneWidget);
     });
 
-    testWidgets('HorizontalAffinity in card with status indicator',
-        (tester) async {
+    testWidgets('HorizontalAffinity in card with status indicator', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

@@ -9,14 +9,12 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('PostFrame widget tests', () {
     group('constructor and properties', () {
-      testWidgets('creates with required parameters',
-          (WidgetTester tester) async {
+      testWidgets('creates with required parameters', (
+        WidgetTester tester,
+      ) async {
         const child = Text('Test Child');
 
-        final postFrame = PostFrame(
-          child: child,
-          onPostFrame: (duration) {},
-        );
+        final postFrame = PostFrame(child: child, onPostFrame: (duration) {});
 
         expect(postFrame.child, equals(child));
         expect(postFrame.onPostFrame, isA<FrameCallback>());
@@ -33,8 +31,9 @@ void main() {
     });
 
     group('callback execution', () {
-      testWidgets('executes callback after first frame',
-          (WidgetTester tester) async {
+      testWidgets('executes callback after first frame', (
+        WidgetTester tester,
+      ) async {
         bool callbackExecuted = false;
         Duration? receivedDuration;
 
@@ -88,8 +87,9 @@ void main() {
         expect(callbackCount, equals(1));
       });
 
-      testWidgets('callback receives valid duration',
-          (WidgetTester tester) async {
+      testWidgets('callback receives valid duration', (
+        WidgetTester tester,
+      ) async {
         Duration? receivedDuration;
 
         await tester.pumpWidget(
@@ -112,8 +112,9 @@ void main() {
         expect(receivedDuration!.inMicroseconds, greaterThanOrEqualTo(0));
       });
 
-      testWidgets('multiple PostFrame widgets execute independently',
-          (WidgetTester tester) async {
+      testWidgets('multiple PostFrame widgets execute independently', (
+        WidgetTester tester,
+      ) async {
         bool callback1Executed = false;
         bool callback2Executed = false;
 
@@ -148,8 +149,9 @@ void main() {
     });
 
     group('child widget rendering', () {
-      testWidgets('renders child widget correctly',
-          (WidgetTester tester) async {
+      testWidgets('renders child widget correctly', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -164,8 +166,9 @@ void main() {
         expect(find.text('Test Child'), findsOneWidget);
       });
 
-      testWidgets('preserves child widget properties',
-          (WidgetTester tester) async {
+      testWidgets('preserves child widget properties', (
+        WidgetTester tester,
+      ) async {
         const key = Key('test-key');
 
         await tester.pumpWidget(
@@ -190,11 +193,14 @@ void main() {
 
         final container = tester.widget<Container>(find.byKey(key));
         expect(
-            container.constraints?.tighten(width: 100, height: 100), isNotNull);
+          container.constraints?.tighten(width: 100, height: 100),
+          isNotNull,
+        );
       });
 
-      testWidgets('works with complex child widgets',
-          (WidgetTester tester) async {
+      testWidgets('works with complex child widgets', (
+        WidgetTester tester,
+      ) async {
         bool callbackExecuted = false;
 
         await tester.pumpWidget(
@@ -216,7 +222,8 @@ void main() {
                       ),
                     ),
                     const TextField(
-                        decoration: InputDecoration(hintText: 'Enter text')),
+                      decoration: InputDecoration(hintText: 'Enter text'),
+                    ),
                   ],
                 ),
                 onPostFrame: (duration) {
@@ -238,8 +245,9 @@ void main() {
     });
 
     group('widget lifecycle', () {
-      testWidgets('callback executes during initState',
-          (WidgetTester tester) async {
+      testWidgets('callback executes during initState', (
+        WidgetTester tester,
+      ) async {
         bool callbackExecuted = false;
         bool initStateCompleted = false;
 
@@ -313,13 +321,16 @@ void main() {
         await tester.tap(find.text('Rebuild'));
         await tester.pumpAndSettle();
 
-        expect(callbackCount,
-            equals(1)); // Should still be 1 as initState is not called again
+        expect(
+          callbackCount,
+          equals(1),
+        ); // Should still be 1 as initState is not called again
         expect(find.text('Rebuild count: 1'), findsOneWidget);
       });
 
-      testWidgets('handles widget disposal correctly',
-          (WidgetTester tester) async {
+      testWidgets('handles widget disposal correctly', (
+        WidgetTester tester,
+      ) async {
         bool callbackExecuted = false;
         bool showPostFrame = true;
 
@@ -367,8 +378,9 @@ void main() {
     });
 
     group('timing and frame callback', () {
-      testWidgets('callback executes after build but before next frame',
-          (WidgetTester tester) async {
+      testWidgets('callback executes after build but before next frame', (
+        WidgetTester tester,
+      ) async {
         final callbackTimes = <DateTime>[];
         final buildTimes = <DateTime>[];
 
@@ -397,15 +409,16 @@ void main() {
 
         // Callback should execute after build
         expect(
-            callbackTimes.first.isAfter(buildTimes.first) ||
-                callbackTimes.first.isAtSameMomentAs(buildTimes.first),
-            isTrue);
+          callbackTimes.first.isAfter(buildTimes.first) || callbackTimes.first.isAtSameMomentAs(buildTimes.first),
+          isTrue,
+        );
       });
     });
 
     group('error handling', () {
-      testWidgets('callback can access duration parameter',
-          (WidgetTester tester) async {
+      testWidgets('callback can access duration parameter', (
+        WidgetTester tester,
+      ) async {
         Duration? receivedDuration;
         bool callbackExecuted = false;
 
@@ -430,8 +443,9 @@ void main() {
         expect(receivedDuration!.inMicroseconds, greaterThanOrEqualTo(0));
       });
 
-      testWidgets('works with null-safe operations',
-          (WidgetTester tester) async {
+      testWidgets('works with null-safe operations', (
+        WidgetTester tester,
+      ) async {
         Duration? receivedDuration;
         bool callbackExecuted = false;
 
@@ -467,15 +481,10 @@ void main() {
     });
 
     group('mixin functionality', () {
-      testWidgets('mixin calls onPostFrame after initState',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: testWidget,
-            ),
-          ),
-        );
+      testWidgets('mixin calls onPostFrame after initState', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(MaterialApp(home: Scaffold(body: testWidget)));
 
         await tester.pumpAndSettle();
 
@@ -485,15 +494,10 @@ void main() {
         expect(testState.receivedDuration, isA<Duration>());
       });
 
-      testWidgets('mixin works with custom StatefulWidget',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: testWidget,
-            ),
-          ),
-        );
+      testWidgets('mixin works with custom StatefulWidget', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(MaterialApp(home: Scaffold(body: testWidget)));
 
         await tester.pumpAndSettle();
 
@@ -504,15 +508,10 @@ void main() {
         expect(find.text('Mixin Test Widget'), findsOneWidget);
       });
 
-      testWidgets('mixin callback executes only once per widget lifecycle',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: testWidget,
-            ),
-          ),
-        );
+      testWidgets('mixin callback executes only once per widget lifecycle', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(MaterialApp(home: Scaffold(body: testWidget)));
 
         await tester.pumpAndSettle();
 
@@ -528,15 +527,10 @@ void main() {
         expect(testState.callbackCount, equals(initialCount));
       });
 
-      testWidgets('mixin works with widget rebuild',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: testWidget,
-            ),
-          ),
-        );
+      testWidgets('mixin works with widget rebuild', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(MaterialApp(home: Scaffold(body: testWidget)));
 
         await tester.pumpAndSettle();
 
@@ -546,31 +540,27 @@ void main() {
         // Trigger rebuild by changing widget key
         await tester.pumpWidget(
           MaterialApp(
-            home: Scaffold(
-              body: _TestWidget(key: const Key('new-key')),
-            ),
+            home: Scaffold(body: _TestWidget(key: const Key('new-key'))),
           ),
         );
 
         await tester.pumpAndSettle();
 
-        final newState =
-            tester.state<_TestWidgetState>(find.byType(_TestWidget));
-        expect(newState.callbackCount,
-            equals(1)); // New instance should have callback executed once
+        final newState = tester.state<_TestWidgetState>(
+          find.byType(_TestWidget),
+        );
+        expect(
+          newState.callbackCount,
+          equals(1),
+        ); // New instance should have callback executed once
       });
     });
 
     group('mixin lifecycle', () {
-      testWidgets('mixin integrates properly with State lifecycle',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: testWidget,
-            ),
-          ),
-        );
+      testWidgets('mixin integrates properly with State lifecycle', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(MaterialApp(home: Scaffold(body: testWidget)));
 
         await tester.pumpAndSettle();
 

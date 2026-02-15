@@ -16,9 +16,8 @@ extension StringFS on String {
     try {
       var colorString = startsWith('#') ? substring(1) : this;
       if (colorString.length == 3) {
-        colorString = (colorString.substring(0, 1) * 2) +
-            (colorString.substring(1, 2) * 2) +
-            colorString.substring(2) * 2;
+        colorString =
+            (colorString.substring(0, 1) * 2) + (colorString.substring(1, 2) * 2) + colorString.substring(2) * 2;
       }
       final hexNumber = int.parse(colorString, radix: 16);
       return Color.fromARGB(

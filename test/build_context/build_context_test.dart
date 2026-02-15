@@ -24,9 +24,7 @@ void main() {
         home: Builder(
           builder: (context) {
             capturedContext = context;
-            return const Scaffold(
-              body: Text('Test'),
-            );
+            return const Scaffold(body: Text('Test'));
           },
         ),
       );
@@ -44,8 +42,9 @@ void main() {
         expect(theme.colorScheme.primary, equals(Colors.blue));
       });
 
-      testWidgets('returns same theme as Theme.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same theme as Theme.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final extensionTheme = capturedContext.theme;
@@ -68,8 +67,9 @@ void main() {
         expect(textTheme.bodyLarge?.color, equals(Colors.black));
       });
 
-      testWidgets('returns same textTheme as Theme.of(context).textTheme',
-          (WidgetTester tester) async {
+      testWidgets('returns same textTheme as Theme.of(context).textTheme', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final extensionTextTheme = capturedContext.textTheme;
@@ -92,8 +92,9 @@ void main() {
         expect(colorScheme.secondary, equals(Colors.green));
       });
 
-      testWidgets('returns same colorScheme as Theme.of(context).colorScheme',
-          (WidgetTester tester) async {
+      testWidgets('returns same colorScheme as Theme.of(context).colorScheme', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final extensionColorScheme = capturedContext.colorScheme;
@@ -104,8 +105,9 @@ void main() {
     });
 
     group('mediaQuery getter', () {
-      testWidgets('returns correct MediaQueryData',
-          (WidgetTester tester) async {
+      testWidgets('returns correct MediaQueryData', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final mediaQuery = capturedContext.mediaQuery;
@@ -117,8 +119,9 @@ void main() {
         expect(mediaQuery.devicePixelRatio, isA<double>());
       });
 
-      testWidgets('returns same mediaQuery as MediaQuery.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same mediaQuery as MediaQuery.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final extensionMediaQuery = capturedContext.mediaQuery;
@@ -129,8 +132,9 @@ void main() {
     });
 
     group('focusScope getter', () {
-      testWidgets('returns correct FocusScopeNode',
-          (WidgetTester tester) async {
+      testWidgets('returns correct FocusScopeNode', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final focusScope = capturedContext.focusScope;
@@ -140,8 +144,9 @@ void main() {
         expect(focusScope, isA<FocusScopeNode>());
       });
 
-      testWidgets('returns same focusScope as FocusScope.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same focusScope as FocusScope.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final extensionFocusScope = capturedContext.focusScope;
@@ -152,8 +157,9 @@ void main() {
     });
 
     group('navigator getter', () {
-      testWidgets('returns correct NavigatorState',
-          (WidgetTester tester) async {
+      testWidgets('returns correct NavigatorState', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final navigator = capturedContext.navigator;
@@ -163,8 +169,9 @@ void main() {
         expect(navigator, isA<NavigatorState>());
       });
 
-      testWidgets('returns same navigator as Navigator.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same navigator as Navigator.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         final extensionNavigator = capturedContext.navigator;
@@ -175,15 +182,17 @@ void main() {
     });
 
     group('hideKeyboard method', () {
-      testWidgets('calls hideKeyboard without throwing',
-          (WidgetTester tester) async {
+      testWidgets('calls hideKeyboard without throwing', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         expect(() => capturedContext.hideKeyboard(), returnsNormally);
       });
 
-      testWidgets('hideKeyboard method exists and is callable',
-          (WidgetTester tester) async {
+      testWidgets('hideKeyboard method exists and is callable', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         // Test that the method exists and can be called
@@ -193,8 +202,9 @@ void main() {
     });
 
     group('integration tests', () {
-      testWidgets('all extension methods work together',
-          (WidgetTester tester) async {
+      testWidgets('all extension methods work together', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         // Test that all methods return expected types
@@ -209,8 +219,9 @@ void main() {
         expect(() => capturedContext.hideKeyboard(), returnsNormally);
       });
 
-      testWidgets('extension methods return consistent values',
-          (WidgetTester tester) async {
+      testWidgets('extension methods return consistent values', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testWidget);
 
         // Call methods multiple times to ensure consistency
@@ -257,9 +268,7 @@ void main() {
           home: Builder(
             builder: (context) {
               capturedContext = context;
-              return const Scaffold(
-                body: Text('Test'),
-              );
+              return const Scaffold(body: Text('Test'));
             },
           ),
         );
@@ -269,13 +278,16 @@ void main() {
         expect(capturedContext.theme.colorScheme.primary, equals(Colors.red));
         expect(capturedContext.textTheme.bodyLarge?.fontSize, equals(18));
         expect(
-            capturedContext.textTheme.bodyLarge?.color, equals(Colors.white));
+          capturedContext.textTheme.bodyLarge?.color,
+          equals(Colors.white),
+        );
         expect(capturedContext.colorScheme.primary, equals(Colors.red));
         expect(capturedContext.colorScheme.secondary, equals(Colors.orange));
       });
 
-      testWidgets('works with different media query settings',
-          (WidgetTester tester) async {
+      testWidgets('works with different media query settings', (
+        WidgetTester tester,
+      ) async {
         const testSize = Size(300, 600);
 
         await tester.binding.setSurfaceSize(testSize);

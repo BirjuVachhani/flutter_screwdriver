@@ -14,8 +14,7 @@ class TestWidget extends StatefulWidget {
   State<TestWidget> createState() => _TestWidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget>
-    with StreamSubscriptionStateMixin {
+class _TestWidgetState extends State<TestWidget> with StreamSubscriptionStateMixin {
   List<int> receivedData = [];
   List<String> receivedErrors = [];
 
@@ -27,8 +26,9 @@ class _TestWidgetState extends State<TestWidget>
 
 void main() {
   group('StreamSubscriptionStateMixin', () {
-    testWidgets('listenTo adds subscription and receives data',
-        (WidgetTester tester) async {
+    testWidgets('listenTo adds subscription and receives data', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -93,8 +93,9 @@ void main() {
       await c2.close();
     });
 
-    testWidgets('cancelScopedSubscriptions cancels only targeted scope',
-        (WidgetTester tester) async {
+    testWidgets('cancelScopedSubscriptions cancels only targeted scope', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -131,8 +132,9 @@ void main() {
       await c2.close();
     });
 
-    testWidgets('cancelScopedSubscriptions on nonexistent scope is safe',
-        (WidgetTester tester) async {
+    testWidgets('cancelScopedSubscriptions on nonexistent scope is safe', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -143,18 +145,16 @@ void main() {
       );
     });
 
-    testWidgets('cancelSubscriptions cancels all subscriptions',
-        (WidgetTester tester) async {
+    testWidgets('cancelSubscriptions cancels all subscriptions', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
       final c1 = StreamController<int>.broadcast();
       final c2 = StreamController<int>.broadcast();
 
-      state.listenTo(
-        c1.stream,
-        (data) => state.receivedData.add(data),
-      );
+      state.listenTo(c1.stream, (data) => state.receivedData.add(data));
 
       state.listenTo(
         c2.stream,
@@ -180,17 +180,15 @@ void main() {
       await c2.close();
     });
 
-    testWidgets('dispose cancels all subscriptions',
-        (WidgetTester tester) async {
+    testWidgets('dispose cancels all subscriptions', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
       final controller = StreamController<int>.broadcast();
 
-      state.listenTo(
-        controller.stream,
-        (data) => state.receivedData.add(data),
-      );
+      state.listenTo(controller.stream, (data) => state.receivedData.add(data));
 
       controller.add(1);
       await tester.pumpAndSettle();
@@ -253,8 +251,9 @@ void main() {
       expect(StreamSubscriptionStateMixin.defaultScope, equals('default'));
     });
 
-    testWidgets('multiple subscriptions in same scope',
-        (WidgetTester tester) async {
+    testWidgets('multiple subscriptions in same scope', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -291,8 +290,9 @@ void main() {
       await c2.close();
     });
 
-    testWidgets('cancelSubscriptions when empty is safe',
-        (WidgetTester tester) async {
+    testWidgets('cancelSubscriptions when empty is safe', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -300,8 +300,9 @@ void main() {
       expect(() => state.cancelSubscriptions(), returnsNormally);
     });
 
-    testWidgets('cancelSubscriptions multiple times is safe',
-        (WidgetTester tester) async {
+    testWidgets('cancelSubscriptions multiple times is safe', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const MaterialApp(home: TestWidget()));
 
       final state = tester.state<_TestWidgetState>(find.byType(TestWidget));

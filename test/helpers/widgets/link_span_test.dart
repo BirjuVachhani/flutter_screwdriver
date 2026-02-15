@@ -20,10 +20,7 @@ void main() {
               TextSpan(
                 text: 'Before ',
                 children: [
-                  LinkSpan(
-                    text: text,
-                    onTap: () => tapped = true,
-                  ),
+                  LinkSpan(text: text, onTap: () => tapped = true),
                   const TextSpan(text: ' After'),
                 ],
               ),
@@ -49,12 +46,7 @@ void main() {
           home: Scaffold(
             body: Text.rich(
               TextSpan(
-                children: [
-                  LinkSpan(
-                    text: text,
-                    onTap: () {},
-                  ),
-                ],
+                children: [LinkSpan(text: text, onTap: () {})],
               ),
             ),
           ),
@@ -83,11 +75,7 @@ void main() {
             body: Text.rich(
               TextSpan(
                 children: [
-                  LinkSpan(
-                    text: text,
-                    cursor: customCursor,
-                    onTap: () {},
-                  ),
+                  LinkSpan(text: text, cursor: customCursor, onTap: () {}),
                 ],
               ),
             ),
@@ -114,11 +102,7 @@ void main() {
             body: Text.rich(
               TextSpan(
                 children: [
-                  LinkSpan(
-                    text: text,
-                    style: textStyle,
-                    onTap: () {},
-                  ),
+                  LinkSpan(text: text, style: textStyle, onTap: () {}),
                 ],
               ),
             ),
@@ -248,11 +232,7 @@ void main() {
             body: Text.rich(
               TextSpan(
                 children: [
-                  LinkSpan(
-                    text: text,
-                    background: background,
-                    onTap: () {},
-                  ),
+                  LinkSpan(text: text, background: background, onTap: () {}),
                 ],
               ),
             ),
@@ -319,11 +299,7 @@ void main() {
             body: Text.rich(
               TextSpan(
                 children: [
-                  LinkSpan(
-                    text: text,
-                    padding: padding,
-                    onTap: () {},
-                  ),
+                  LinkSpan(text: text, padding: padding, onTap: () {}),
                 ],
               ),
             ),
@@ -338,8 +314,9 @@ void main() {
       expect(containerWidget.padding, equals(padding));
     });
 
-    testWidgets('LinkSpan works without animation (Duration.zero)',
-        (tester) async {
+    testWidgets('LinkSpan works without animation (Duration.zero)', (
+      tester,
+    ) async {
       const text = 'No animation';
       const hoverColor = Colors.red;
 
@@ -370,8 +347,9 @@ void main() {
       expect(animatedContainer, findsNothing);
     });
 
-    testWidgets('LinkSpan applies animation with custom duration and curve',
-        (tester) async {
+    testWidgets('LinkSpan applies animation with custom duration and curve', (
+      tester,
+    ) async {
       const text = 'Animated text';
       const duration = Duration(milliseconds: 300);
       const curve = Curves.easeInOut;
@@ -405,10 +383,13 @@ void main() {
       expect(animatedTextStyles, findsWidgets);
 
       // Verify that at least one animated container has the correct duration
-      final animatedContainerWidgets =
-          tester.widgetList<AnimatedContainer>(animatedContainers);
+      final animatedContainerWidgets = tester.widgetList<AnimatedContainer>(
+        animatedContainers,
+      );
       expect(
-          animatedContainerWidgets.any((w) => w.duration == duration), isTrue);
+        animatedContainerWidgets.any((w) => w.duration == duration),
+        isTrue,
+      );
       expect(animatedContainerWidgets.any((w) => w.curve == curve), isTrue);
     });
 
@@ -422,11 +403,7 @@ void main() {
             body: Text.rich(
               TextSpan(
                 children: [
-                  LinkSpan(
-                    text: text,
-                    prefix: prefixIcon,
-                    onTap: () {},
-                  ),
+                  LinkSpan(text: text, prefix: prefixIcon, onTap: () {}),
                 ],
               ),
             ),
@@ -451,11 +428,7 @@ void main() {
             body: Text.rich(
               TextSpan(
                 children: [
-                  LinkSpan(
-                    text: text,
-                    suffix: suffixIcon,
-                    onTap: () {},
-                  ),
+                  LinkSpan(text: text, suffix: suffixIcon, onTap: () {}),
                 ],
               ),
             ),
@@ -470,8 +443,9 @@ void main() {
       expect(row.children.length, equals(2)); // text + suffix
     });
 
-    testWidgets('LinkSpan displays both prefix and suffix widgets',
-        (tester) async {
+    testWidgets('LinkSpan displays both prefix and suffix widgets', (
+      tester,
+    ) async {
       const text = 'With both';
       const prefixIcon = Icon(Icons.link, size: 16);
       const suffixIcon = Icon(Icons.open_in_new, size: 16);
@@ -504,8 +478,9 @@ void main() {
       expect(row.mainAxisSize, equals(MainAxisSize.min));
     });
 
-    testWidgets('LinkSpan applies IconTheme to prefix and suffix',
-        (tester) async {
+    testWidgets('LinkSpan applies IconTheme to prefix and suffix', (
+      tester,
+    ) async {
       const text = 'Icon theme';
       const prefixIcon = Icon(Icons.link);
       const suffixIcon = Icon(Icons.open_in_new);
@@ -627,38 +602,40 @@ void main() {
     });
 
     testWidgets(
-        'LinkSpan applies PlaceholderAlignment and TextBaseline from constructor',
-        (tester) async {
-      const text = 'Aligned text';
-      const alignment = PlaceholderAlignment.top;
-      const baseline = TextBaseline.ideographic;
+      'LinkSpan applies PlaceholderAlignment and TextBaseline from constructor',
+      (tester) async {
+        const text = 'Aligned text';
+        const alignment = PlaceholderAlignment.top;
+        const baseline = TextBaseline.ideographic;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Text.rich(
-              TextSpan(
-                children: [
-                  LinkSpan(
-                    text: text,
-                    alignment: alignment,
-                    baseline: baseline,
-                    onTap: () {},
-                  ),
-                ],
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Text.rich(
+                TextSpan(
+                  children: [
+                    LinkSpan(
+                      text: text,
+                      alignment: alignment,
+                      baseline: baseline,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      // Verify the widget renders correctly with custom alignment and baseline
-      expect(find.text(text), findsOneWidget);
-      expect(find.byType(GestureDetector), findsOneWidget);
-    });
+        // Verify the widget renders correctly with custom alignment and baseline
+        expect(find.text(text), findsOneWidget);
+        expect(find.byType(GestureDetector), findsOneWidget);
+      },
+    );
 
-    testWidgets('LinkSpan uses default PlaceholderAlignment and TextBaseline',
-        (tester) async {
+    testWidgets('LinkSpan uses default PlaceholderAlignment and TextBaseline', (
+      tester,
+    ) async {
       const text = 'Default alignment';
 
       await tester.pumpWidget(
@@ -666,12 +643,7 @@ void main() {
           home: Scaffold(
             body: Text.rich(
               TextSpan(
-                children: [
-                  LinkSpan(
-                    text: text,
-                    onTap: () {},
-                  ),
-                ],
+                children: [LinkSpan(text: text, onTap: () {})],
               ),
             ),
           ),
@@ -683,8 +655,9 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('LinkSpan hoverColor defaults to color when not specified',
-        (tester) async {
+    testWidgets('LinkSpan hoverColor defaults to color when not specified', (
+      tester,
+    ) async {
       const text = 'Default hover color';
       const normalColor = Colors.blue;
 
@@ -735,16 +708,18 @@ void main() {
                   LinkSpan(
                     text: 'Terms of Service',
                     style: const TextStyle(color: Colors.blue),
-                    hoverStyle:
-                        const TextStyle(decoration: TextDecoration.underline),
+                    hoverStyle: const TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
                     onTap: () => link1Tapped = true,
                   ),
                   const TextSpan(text: ' and '),
                   LinkSpan(
                     text: 'Privacy Policy',
                     style: const TextStyle(color: Colors.blue),
-                    hoverStyle:
-                        const TextStyle(decoration: TextDecoration.underline),
+                    hoverStyle: const TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
                     onTap: () => link2Tapped = true,
                   ),
                   const TextSpan(text: '.'),
@@ -772,19 +747,15 @@ void main() {
       expect(link2Tapped, isTrue);
     });
 
-    testWidgets('LinkSpan with empty text still creates widget',
-        (tester) async {
+    testWidgets('LinkSpan with empty text still creates widget', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Text.rich(
               TextSpan(
-                children: [
-                  LinkSpan(
-                    text: '',
-                    onTap: () {},
-                  ),
-                ],
+                children: [LinkSpan(text: '', onTap: () {})],
               ),
             ),
           ),
@@ -795,8 +766,9 @@ void main() {
       // Empty text won't be found by find.text, but the gesture detector should still exist
     });
 
-    testWidgets('LinkSpan GestureDetector has opaque hit test behavior',
-        (tester) async {
+    testWidgets('LinkSpan GestureDetector has opaque hit test behavior', (
+      tester,
+    ) async {
       const text = 'Hit test';
 
       await tester.pumpWidget(
@@ -804,20 +776,16 @@ void main() {
           home: Scaffold(
             body: Text.rich(
               TextSpan(
-                children: [
-                  LinkSpan(
-                    text: text,
-                    onTap: () {},
-                  ),
-                ],
+                children: [LinkSpan(text: text, onTap: () {})],
               ),
             ),
           ),
         ),
       );
 
-      final gestureDetector =
-          tester.widget<GestureDetector>(find.byType(GestureDetector));
+      final gestureDetector = tester.widget<GestureDetector>(
+        find.byType(GestureDetector),
+      );
       expect(gestureDetector.behavior, equals(HitTestBehavior.opaque));
     });
   });
@@ -857,8 +825,9 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('LinkSpan applies EdgeInsets.zero when padding is null',
-        (tester) async {
+    testWidgets('LinkSpan applies EdgeInsets.zero when padding is null', (
+      tester,
+    ) async {
       const text = 'Zero padding';
 
       await tester.pumpWidget(
@@ -866,13 +835,7 @@ void main() {
           home: Scaffold(
             body: Text.rich(
               TextSpan(
-                children: [
-                  LinkSpan(
-                    text: text,
-                    padding: null,
-                    onTap: () {},
-                  ),
-                ],
+                children: [LinkSpan(text: text, padding: null, onTap: () {})],
               ),
             ),
           ),
@@ -894,12 +857,7 @@ void main() {
               width: 200, // Force wrapping
               child: Text.rich(
                 TextSpan(
-                  children: [
-                    LinkSpan(
-                      text: longText,
-                      onTap: () {},
-                    ),
-                  ],
+                  children: [LinkSpan(text: longText, onTap: () {})],
                 ),
               ),
             ),
@@ -911,8 +869,9 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('LinkSpan works with special characters and Unicode',
-        (tester) async {
+    testWidgets('LinkSpan works with special characters and Unicode', (
+      tester,
+    ) async {
       const specialText = '🔗 Special & Unicode テキスト @#\$%^&*()';
 
       await tester.pumpWidget(
@@ -920,12 +879,7 @@ void main() {
           home: Scaffold(
             body: Text.rich(
               TextSpan(
-                children: [
-                  LinkSpan(
-                    text: specialText,
-                    onTap: () {},
-                  ),
-                ],
+                children: [LinkSpan(text: specialText, onTap: () {})],
               ),
             ),
           ),
@@ -987,12 +941,7 @@ void main() {
           home: Scaffold(
             body: Text.rich(
               TextSpan(
-                children: [
-                  LinkSpan(
-                    text: text,
-                    onTap: () {},
-                  ),
-                ],
+                children: [LinkSpan(text: text, onTap: () {})],
               ),
             ),
           ),
@@ -1011,8 +960,9 @@ void main() {
   });
 
   group('LinkSpan performance', () {
-    testWidgets('LinkSpan handles multiple instances efficiently',
-        (tester) async {
+    testWidgets('LinkSpan handles multiple instances efficiently', (
+      tester,
+    ) async {
       final links = List.generate(50, (index) => 'Link $index');
       final tappedLinks = <int>{};
 

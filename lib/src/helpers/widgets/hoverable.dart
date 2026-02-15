@@ -11,11 +11,7 @@ import 'package:flutter/widgets.dart';
 /// indicating whether the widget is currently being hovered or not.
 /// [child] is the child widget of [Hoverable] which won't be rebuilt
 /// when [hovering] changes.
-typedef HoverWidgetBuilder = Widget Function(
-  BuildContext context,
-  bool hovering,
-  Widget? child,
-);
+typedef HoverWidgetBuilder = Widget Function(BuildContext context, bool hovering, Widget? child);
 
 /// A widget that detects mouse hover events and notifies its child.
 /// This widget is useful when you want to change the appearance of a widget

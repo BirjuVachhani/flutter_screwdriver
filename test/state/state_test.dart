@@ -71,8 +71,9 @@ void main() {
         expect(theme.colorScheme.primary, equals(Colors.blue));
       });
 
-      testWidgets('returns same theme as Theme.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same theme as Theme.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -97,8 +98,9 @@ void main() {
         expect(colorScheme.secondary, equals(Colors.green));
       });
 
-      testWidgets('returns same colorScheme as Theme.of(context).colorScheme',
-          (WidgetTester tester) async {
+      testWidgets('returns same colorScheme as Theme.of(context).colorScheme', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -123,8 +125,9 @@ void main() {
         expect(textTheme.bodyLarge?.color, equals(Colors.black));
       });
 
-      testWidgets('returns same textTheme as Theme.of(context).textTheme',
-          (WidgetTester tester) async {
+      testWidgets('returns same textTheme as Theme.of(context).textTheme', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -136,8 +139,9 @@ void main() {
     });
 
     group('mediaQuery getter', () {
-      testWidgets('returns correct MediaQueryData',
-          (WidgetTester tester) async {
+      testWidgets('returns correct MediaQueryData', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -150,8 +154,9 @@ void main() {
         expect(mediaQuery.devicePixelRatio, isA<double>());
       });
 
-      testWidgets('returns same mediaQuery as MediaQuery.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same mediaQuery as MediaQuery.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -163,8 +168,9 @@ void main() {
     });
 
     group('focusScope getter', () {
-      testWidgets('returns correct FocusScopeNode',
-          (WidgetTester tester) async {
+      testWidgets('returns correct FocusScopeNode', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -175,8 +181,9 @@ void main() {
         expect(focusScope, isA<FocusScopeNode>());
       });
 
-      testWidgets('returns same focusScope as FocusScope.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same focusScope as FocusScope.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -188,8 +195,9 @@ void main() {
     });
 
     group('navigator getter', () {
-      testWidgets('returns correct NavigatorState',
-          (WidgetTester tester) async {
+      testWidgets('returns correct NavigatorState', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -200,8 +208,9 @@ void main() {
         expect(navigator, isA<NavigatorState>());
       });
 
-      testWidgets('returns same navigator as Navigator.of(context)',
-          (WidgetTester tester) async {
+      testWidgets('returns same navigator as Navigator.of(context)', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -213,8 +222,9 @@ void main() {
     });
 
     group('hideKeyboard method', () {
-      testWidgets('calls hideKeyboard without throwing',
-          (WidgetTester tester) async {
+      testWidgets('calls hideKeyboard without throwing', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -222,8 +232,9 @@ void main() {
         expect(() => state.hideKeyboard(), returnsNormally);
       });
 
-      testWidgets('hideKeyboard method exists and is callable',
-          (WidgetTester tester) async {
+      testWidgets('hideKeyboard method exists and is callable', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -234,8 +245,9 @@ void main() {
     });
 
     group('integration tests', () {
-      testWidgets('all extension methods work together',
-          (WidgetTester tester) async {
+      testWidgets('all extension methods work together', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -252,8 +264,9 @@ void main() {
         expect(() => state.hideKeyboard(), returnsNormally);
       });
 
-      testWidgets('extension methods return consistent values',
-          (WidgetTester tester) async {
+      testWidgets('extension methods return consistent values', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -284,8 +297,9 @@ void main() {
         expect(navigator1, equals(navigator2));
       });
 
-      testWidgets('works with different widget hierarchies',
-          (WidgetTester tester) async {
+      testWidgets('works with different widget hierarchies', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
@@ -321,8 +335,9 @@ void main() {
     });
 
     group('edge cases and invariants', () {
-      testWidgets('extension methods work with custom themes',
-          (WidgetTester tester) async {
+      testWidgets('extension methods work with custom themes', (
+        WidgetTester tester,
+      ) async {
         final customTheme = ThemeData(
           colorScheme: const ColorScheme.dark(
             primary: Colors.purple,
@@ -336,9 +351,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             theme: customTheme,
-            home: Scaffold(
-              body: TestWidget(),
-            ),
+            home: Scaffold(body: TestWidget()),
           ),
         );
 
@@ -350,8 +363,9 @@ void main() {
         expect(state.textTheme.bodyLarge?.color, equals(Colors.white));
       });
 
-      testWidgets('methods are deterministic across multiple calls',
-          (WidgetTester tester) async {
+      testWidgets('methods are deterministic across multiple calls', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -369,9 +383,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
-              colorScheme: const ColorScheme.light(
-                primary: Colors.blue,
-              ),
+              colorScheme: const ColorScheme.light(primary: Colors.blue),
             ),
             home: Scaffold(
               body: Center(
@@ -380,13 +392,7 @@ void main() {
                   child: Column(
                     children: [
                       const Text('Header'),
-                      Expanded(
-                        child: ListView(
-                          children: [
-                            TestWidget(),
-                          ],
-                        ),
-                      ),
+                      Expanded(child: ListView(children: [TestWidget()])),
                     ],
                   ),
                 ),
@@ -408,45 +414,52 @@ void main() {
 
     group('comparison with BuildContext extension', () {
       testWidgets(
-          'State extension returns same values as BuildContext extension',
-          (WidgetTester tester) async {
-        late BuildContext capturedContext;
-        late _TestWidgetState capturedState;
+        'State extension returns same values as BuildContext extension',
+        (WidgetTester tester) async {
+          late BuildContext capturedContext;
+          late _TestWidgetState capturedState;
 
-        await tester.pumpWidget(
-          MaterialApp(
-            theme: ThemeData(
-              colorScheme: const ColorScheme.light(
-                primary: Colors.blue,
-                secondary: Colors.green,
+          await tester.pumpWidget(
+            MaterialApp(
+              theme: ThemeData(
+                colorScheme: const ColorScheme.light(
+                  primary: Colors.blue,
+                  secondary: Colors.green,
+                ),
+              ),
+              home: Scaffold(
+                body: Builder(
+                  builder: (context) {
+                    capturedContext = context;
+                    return TestWidget();
+                  },
+                ),
               ),
             ),
-            home: Scaffold(
-              body: Builder(
-                builder: (context) {
-                  capturedContext = context;
-                  return TestWidget();
-                },
-              ),
-            ),
-          ),
-        );
+          );
 
-        capturedState = tester.state<_TestWidgetState>(find.byType(TestWidget));
+          capturedState = tester.state<_TestWidgetState>(
+            find.byType(TestWidget),
+          );
 
-        // Compare extension results
-        expect(capturedState.theme, equals(capturedContext.theme));
-        expect(capturedState.colorScheme, equals(capturedContext.colorScheme));
-        expect(capturedState.textTheme, equals(capturedContext.textTheme));
-        expect(capturedState.mediaQuery, equals(capturedContext.mediaQuery));
-        expect(capturedState.focusScope, equals(capturedContext.focusScope));
-        expect(capturedState.navigator, equals(capturedContext.navigator));
-      });
+          // Compare extension results
+          expect(capturedState.theme, equals(capturedContext.theme));
+          expect(
+            capturedState.colorScheme,
+            equals(capturedContext.colorScheme),
+          );
+          expect(capturedState.textTheme, equals(capturedContext.textTheme));
+          expect(capturedState.mediaQuery, equals(capturedContext.mediaQuery));
+          expect(capturedState.focusScope, equals(capturedContext.focusScope));
+          expect(capturedState.navigator, equals(capturedContext.navigator));
+        },
+      );
     });
 
     group('type safety', () {
-      testWidgets('all getters return expected types',
-          (WidgetTester tester) async {
+      testWidgets('all getters return expected types', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(testApp);
 
         final state = tester.state<_TestWidgetState>(find.byType(TestWidget));
@@ -459,8 +472,9 @@ void main() {
         expect(state.navigator, isA<NavigatorState>());
       });
 
-      testWidgets('extension works with different StatefulWidget types',
-          (WidgetTester tester) async {
+      testWidgets('extension works with different StatefulWidget types', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -475,8 +489,9 @@ void main() {
           ),
         );
 
-        final testState =
-            tester.state<_TestWidgetState>(find.byType(TestWidget));
+        final testState = tester.state<_TestWidgetState>(
+          find.byType(TestWidget),
+        );
         final textFieldState = tester.state(find.byType(TextField));
 
         // Both should have access to extension methods

@@ -10,14 +10,18 @@ import 'package:flutter/material.dart';
 class FadeScalePageRoute<T> extends PageRouteBuilder<T> {
   /// duration is in milliseconds
   FadeScalePageRoute({required Widget child, int duration = 300})
-      : super(
-          pageBuilder: (context, animation, secondaryAnimation) => child,
-          transitionDuration: Duration(milliseconds: duration),
-        );
+    : super(
+        pageBuilder: (context, animation, secondaryAnimation) => child,
+        transitionDuration: Duration(milliseconds: duration),
+      );
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     return FadeScaleTransition(animation: animation, child: child);
   }
 }

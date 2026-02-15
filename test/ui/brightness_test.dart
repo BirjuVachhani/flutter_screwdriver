@@ -18,9 +18,13 @@ void main() {
 
       test('is consistent with direct comparison', () {
         expect(
-            Brightness.dark.isDark, equals(Brightness.dark == Brightness.dark));
-        expect(Brightness.light.isDark,
-            equals(Brightness.light == Brightness.dark));
+          Brightness.dark.isDark,
+          equals(Brightness.dark == Brightness.dark),
+        );
+        expect(
+          Brightness.light.isDark,
+          equals(Brightness.light == Brightness.dark),
+        );
       });
     });
 
@@ -34,10 +38,14 @@ void main() {
       });
 
       test('is consistent with direct comparison', () {
-        expect(Brightness.light.isLight,
-            equals(Brightness.light == Brightness.light));
-        expect(Brightness.dark.isLight,
-            equals(Brightness.dark == Brightness.light));
+        expect(
+          Brightness.light.isLight,
+          equals(Brightness.light == Brightness.light),
+        );
+        expect(
+          Brightness.dark.isLight,
+          equals(Brightness.dark == Brightness.light),
+        );
       });
     });
 
@@ -82,9 +90,13 @@ void main() {
 
       test('name is lowercase', () {
         expect(
-            Brightness.dark.name, equals(Brightness.dark.name.toLowerCase()));
+          Brightness.dark.name,
+          equals(Brightness.dark.name.toLowerCase()),
+        );
         expect(
-            Brightness.light.name, equals(Brightness.light.name.toLowerCase()));
+          Brightness.light.name,
+          equals(Brightness.light.name.toLowerCase()),
+        );
       });
 
       test('name matches expected string values', () {
@@ -99,7 +111,9 @@ void main() {
       test('isDark and isLight are mutually exclusive', () {
         expect(Brightness.dark.isDark, isNot(equals(Brightness.dark.isLight)));
         expect(
-            Brightness.light.isDark, isNot(equals(Brightness.light.isLight)));
+          Brightness.light.isDark,
+          isNot(equals(Brightness.light.isLight)),
+        );
       });
 
       test('exactly one of isDark or isLight is true', () {

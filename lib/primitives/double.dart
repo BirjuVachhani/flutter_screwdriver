@@ -15,6 +15,5 @@ extension DoubleFS on double {
 
   /// allows to create a tween that start with [begin] value
   /// and ends with [this] value.
-  Tween<double> tweenFrom(double begin) =>
-      Tween<double>(begin: begin, end: this);
+  Tween<double> tweenFrom(double begin) => Tween<double>(begin: begin, end: this);
 }

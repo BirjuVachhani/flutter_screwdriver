@@ -14,10 +14,10 @@ extension RouteFS<T> on Route<T> {
 
   /// Short for [Navigator.pushAndRemoveUntil]
   Future<T?> pushAndRemoveUntil(
-          BuildContext context, RoutePredicate predicate) =>
-      Navigator.pushAndRemoveUntil(context, this, predicate);
+    BuildContext context,
+    RoutePredicate predicate,
+  ) => Navigator.pushAndRemoveUntil(context, this, predicate);
 
   /// Short for [Navigator.pushReplacement]
-  Future<T?> pushReplacement(BuildContext context) =>
-      Navigator.pushReplacement(context, this);
+  Future<T?> pushReplacement(BuildContext context) => Navigator.pushReplacement(context, this);
 }

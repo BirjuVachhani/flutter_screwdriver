@@ -17,7 +17,7 @@ enum Affinity {
   /// Indicates that the [leading] widget is placed after the [child] widget
   /// and the [trailing] widget is placed before the [child] widget in
   /// affinity widgets.
-  end;
+  end,
 }
 
 /// Represents a widget that allows to place a widget before and after the
@@ -42,9 +42,11 @@ class HorizontalAffinity extends DirectionalAffinity {
     super.mainAxisAlignment = MainAxisAlignment.start,
     super.crossAxisAlignment = CrossAxisAlignment.center,
     super.spacing = 8,
-  })  : assert(leading != null || trailing != null,
-            'Either leading or trailing widget must be provided.'),
-        super(direction: Axis.horizontal);
+  }) : assert(
+         leading != null || trailing != null,
+         'Either leading or trailing widget must be provided.',
+       ),
+       super(direction: Axis.horizontal);
 }
 
 /// Represents a widget that allows to place a widget above and below the
@@ -69,9 +71,11 @@ class VerticalAffinity extends DirectionalAffinity {
     super.mainAxisAlignment = MainAxisAlignment.start,
     super.crossAxisAlignment = CrossAxisAlignment.center,
     super.spacing = 8,
-  })  : assert(leading != null || trailing != null,
-            'Either leading or trailing widget must be provided.'),
-        super(direction: Axis.vertical);
+  }) : assert(
+         leading != null || trailing != null,
+         'Either leading or trailing widget must be provided.',
+       ),
+       super(direction: Axis.vertical);
 }
 
 /// Represents a widget that allows to place a widget before and after the
@@ -121,15 +125,17 @@ class DirectionalAffinity extends Flex {
     super.mainAxisAlignment = MainAxisAlignment.start,
     super.crossAxisAlignment = CrossAxisAlignment.center,
     super.spacing = 8,
-  })  : assert(leading != null || trailing != null,
-            'Either leading or trailing widget must be provided.'),
-        super(
-          children: [
-            if (affinity == Affinity.start && leading != null) leading,
-            if (affinity == Affinity.end && trailing != null) trailing,
-            child,
-            if (affinity == Affinity.end && leading != null) leading,
-            if (affinity == Affinity.start && trailing != null) trailing,
-          ],
-        );
+  }) : assert(
+         leading != null || trailing != null,
+         'Either leading or trailing widget must be provided.',
+       ),
+       super(
+         children: [
+           if (affinity == Affinity.start && leading != null) leading,
+           if (affinity == Affinity.end && trailing != null) trailing,
+           child,
+           if (affinity == Affinity.end && leading != null) leading,
+           if (affinity == Affinity.start && trailing != null) trailing,
+         ],
+       );
 }

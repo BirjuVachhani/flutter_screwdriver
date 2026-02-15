@@ -14,9 +14,7 @@ class _TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Test Page')),
-      body: Center(
-        child: Text(text),
-      ),
+      body: Center(child: Text(text)),
     );
   }
 }
@@ -32,9 +30,7 @@ class _HomePage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(
-              FadeScalePageRoute(
-                child: _TestPage(text: 'Fade Scale Page'),
-              ),
+              FadeScalePageRoute(child: _TestPage(text: 'Fade Scale Page')),
             );
           },
           child: Text('Navigate with Fade Scale'),
@@ -52,27 +48,25 @@ void main() {
         final route = FadeScalePageRoute(child: testWidget);
 
         expect(route, isA<PageRouteBuilder<void>>());
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 300)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 300)),
+        );
       });
 
       test('creates with custom duration', () {
         const testWidget = Text('Test');
-        final route = FadeScalePageRoute(
-          child: testWidget,
-          duration: 500,
-        );
+        final route = FadeScalePageRoute(child: testWidget, duration: 500);
 
-        expect(route.transitionDuration,
-            equals(const Duration(milliseconds: 500)));
+        expect(
+          route.transitionDuration,
+          equals(const Duration(milliseconds: 500)),
+        );
       });
 
       test('creates with zero duration', () {
         const testWidget = Text('Test');
-        final route = FadeScalePageRoute(
-          child: testWidget,
-          duration: 0,
-        );
+        final route = FadeScalePageRoute(child: testWidget, duration: 0);
 
         expect(route.transitionDuration, equals(Duration.zero));
       });
@@ -123,8 +117,9 @@ void main() {
         expect(find.text(testText), findsOneWidget);
       });
 
-      testWidgets('pageBuilder returns provided child',
-          (WidgetTester tester) async {
+      testWidgets('pageBuilder returns provided child', (
+        WidgetTester tester,
+      ) async {
         final testWidget = Container(
           key: const Key('test-container'),
           child: const Text('Test'),
@@ -152,8 +147,9 @@ void main() {
     });
 
     group('buildTransitions functionality', () {
-      testWidgets('buildTransitions creates FadeScaleTransition',
-          (WidgetTester tester) async {
+      testWidgets('buildTransitions creates FadeScaleTransition', (
+        WidgetTester tester,
+      ) async {
         const testWidget = Text('Test Child');
         final route = FadeScalePageRoute(child: testWidget);
 
@@ -177,8 +173,9 @@ void main() {
         expect(find.text('Test Child'), findsOneWidget);
       });
 
-      testWidgets('buildTransitions works with different animation values',
-          (WidgetTester tester) async {
+      testWidgets('buildTransitions works with different animation values', (
+        WidgetTester tester,
+      ) async {
         const testWidget = Text('Test Child');
         final route = FadeScalePageRoute(child: testWidget);
 
@@ -221,8 +218,9 @@ void main() {
         expect(find.text('Test Child'), findsOneWidget);
       });
 
-      testWidgets('buildTransitions handles secondary animation',
-          (WidgetTester tester) async {
+      testWidgets('buildTransitions handles secondary animation', (
+        WidgetTester tester,
+      ) async {
         const testWidget = Text('Test Child');
         final route = FadeScalePageRoute(child: testWidget);
 
@@ -248,11 +246,7 @@ void main() {
 
     group('integration with Navigator', () {
       testWidgets('works with Navigator.push', (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: _HomePage(),
-          ),
-        );
+        await tester.pumpWidget(MaterialApp(home: _HomePage()));
 
         expect(find.text('Home'), findsOneWidget);
         expect(find.text('Navigate with Fade Scale'), findsOneWidget);
@@ -267,11 +261,7 @@ void main() {
       });
 
       testWidgets('supports back navigation', (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: _HomePage(),
-          ),
-        );
+        await tester.pumpWidget(MaterialApp(home: _HomePage()));
 
         // Navigate to the test page
         await tester.tap(find.text('Navigate with Fade Scale'));
@@ -288,8 +278,9 @@ void main() {
         expect(find.text('Navigate with Fade Scale'), findsOneWidget);
       });
 
-      testWidgets('works with Navigator.pushReplacement',
-          (WidgetTester tester) async {
+      testWidgets('works with Navigator.pushReplacement', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -321,8 +312,9 @@ void main() {
     });
 
     group('animation duration behavior', () {
-      testWidgets('respects custom duration during transition',
-          (WidgetTester tester) async {
+      testWidgets('respects custom duration during transition', (
+        WidgetTester tester,
+      ) async {
         final route = FadeScalePageRoute(
           child: _TestPage(text: 'Custom Duration'),
           duration: 1000, // 1 second
@@ -357,8 +349,9 @@ void main() {
         expect(find.text('Custom Duration'), findsOneWidget);
       });
 
-      testWidgets('zero duration completes immediately',
-          (WidgetTester tester) async {
+      testWidgets('zero duration completes immediately', (
+        WidgetTester tester,
+      ) async {
         final route = FadeScalePageRoute(
           child: _TestPage(text: 'Instant'),
           duration: 0,
@@ -387,8 +380,9 @@ void main() {
     });
 
     group('complex widget integration', () {
-      testWidgets('works with complex widget trees',
-          (WidgetTester tester) async {
+      testWidgets('works with complex widget trees', (
+        WidgetTester tester,
+      ) async {
         final complexChild = Scaffold(
           appBar: AppBar(title: Text('Complex Page')),
           body: Column(
@@ -401,15 +395,10 @@ void main() {
               Expanded(
                 child: ListView.builder(
                   itemCount: 10,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text('Item $index'),
-                  ),
+                  itemBuilder: (context, index) => ListTile(title: Text('Item $index')),
                 ),
               ),
-              FloatingActionButton(
-                onPressed: () {},
-                child: Icon(Icons.add),
-              ),
+              FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
             ],
           ),
         );
@@ -503,11 +492,7 @@ void main() {
       });
 
       testWidgets('works with nested routes', (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: _HomePage(),
-          ),
-        );
+        await tester.pumpWidget(MaterialApp(home: _HomePage()));
 
         // First navigation
         await tester.tap(find.text('Navigate with Fade Scale'));
@@ -525,11 +510,11 @@ void main() {
             home: _HomePage(),
             routes: {
               '/nested': (context) => Builder(
-                    builder: (context) {
-                      Navigator.of(context).push(nestedRoute);
-                      return Container();
-                    },
-                  ),
+                builder: (context) {
+                  Navigator.of(context).push(nestedRoute);
+                  return Container();
+                },
+              ),
             },
           ),
         );
@@ -542,8 +527,9 @@ void main() {
         expect(find.text('Nested Page'), findsOneWidget);
       });
 
-      testWidgets('route disposal works correctly',
-          (WidgetTester tester) async {
+      testWidgets('route disposal works correctly', (
+        WidgetTester tester,
+      ) async {
         final route = FadeScalePageRoute(
           child: _TestPage(text: 'Disposal Test'),
         );
@@ -578,8 +564,9 @@ void main() {
     });
 
     group('performance and behavior', () {
-      testWidgets('maintains widget state during transition',
-          (WidgetTester tester) async {
+      testWidgets('maintains widget state during transition', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -587,9 +574,9 @@ void main() {
                 builder: (context) {
                   return ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        FadeScalePageRoute(child: _StatefulTestPage()),
-                      );
+                      Navigator.of(
+                        context,
+                      ).push(FadeScalePageRoute(child: _StatefulTestPage()));
                     },
                     child: Text('Navigate'),
                   );
@@ -617,8 +604,9 @@ void main() {
         expect(find.text('Counter: 1'), findsOneWidget);
       });
 
-      testWidgets('does not interfere with other routes',
-          (WidgetTester tester) async {
+      testWidgets('does not interfere with other routes', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -630,7 +618,8 @@ void main() {
                         onPressed: () {
                           Navigator.of(context).push(
                             FadeScalePageRoute(
-                                child: _TestPage(text: 'Fade Scale')),
+                              child: _TestPage(text: 'Fade Scale'),
+                            ),
                           );
                         },
                         child: Text('Fade Scale Route'),
@@ -643,8 +632,8 @@ void main() {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (_) =>
-                                    _TestPage(text: 'Material Route')),
+                              builder: (_) => _TestPage(text: 'Material Route'),
+                            ),
                           );
                         },
                         child: Text('Material Route'),

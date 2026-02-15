@@ -8,22 +8,20 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('GlobalKeyExtension tests', () {
     group('globalPaintBounds getter', () {
-      testWidgets('returns null for unattached GlobalKey',
-          (WidgetTester tester) async {
+      testWidgets('returns null for unattached GlobalKey', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
 
         expect(globalKey.globalPaintBounds, isNull);
       });
 
-      testWidgets('returns null for GlobalKey without render object',
-          (WidgetTester tester) async {
+      testWidgets('returns null for GlobalKey without render object', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Container(key: globalKey),
-          ),
-        );
+        await tester.pumpWidget(MaterialApp(home: Container(key: globalKey)));
 
         // Before first frame, render object might not be available
         // Note: This test might be flaky depending on timing
@@ -31,8 +29,9 @@ void main() {
         expect(bounds, isA<Rect?>());
       });
 
-      testWidgets('returns Rect for properly attached GlobalKey',
-          (WidgetTester tester) async {
+      testWidgets('returns Rect for properly attached GlobalKey', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
 
         await tester.pumpWidget(
@@ -60,8 +59,9 @@ void main() {
         }
       });
 
-      testWidgets('returns correct bounds for positioned widget',
-          (WidgetTester tester) async {
+      testWidgets('returns correct bounds for positioned widget', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
 
         await tester.pumpWidget(
@@ -98,8 +98,9 @@ void main() {
         }
       });
 
-      testWidgets('handles multiple widgets with GlobalKeys',
-          (WidgetTester tester) async {
+      testWidgets('handles multiple widgets with GlobalKeys', (
+        WidgetTester tester,
+      ) async {
         final key1 = GlobalKey();
         final key2 = GlobalKey();
 
@@ -142,14 +143,15 @@ void main() {
 
           // Second widget should be positioned below the first
           expect(
-              bounds2.top,
-              greaterThan(
-                  bounds1.bottom - 1)); // Allow for small floating point errors
+            bounds2.top,
+            greaterThan(bounds1.bottom - 1),
+          ); // Allow for small floating point errors
         }
       });
 
-      testWidgets('works with different widget types',
-          (WidgetTester tester) async {
+      testWidgets('works with different widget types', (
+        WidgetTester tester,
+      ) async {
         final containerKey = GlobalKey();
         final textKey = GlobalKey();
         final iconKey = GlobalKey();
@@ -170,11 +172,7 @@ void main() {
                     key: textKey,
                     style: const TextStyle(fontSize: 16),
                   ),
-                  Icon(
-                    Icons.star,
-                    key: iconKey,
-                    size: 24,
-                  ),
+                  Icon(Icons.star, key: iconKey, size: 24),
                 ],
               ),
             ),
@@ -207,8 +205,9 @@ void main() {
         }
       });
 
-      testWidgets('returns null after widget is removed',
-          (WidgetTester tester) async {
+      testWidgets('returns null after widget is removed', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
         bool showWidget = true;
 
@@ -283,8 +282,9 @@ void main() {
         }
       });
 
-      testWidgets('handles widgets with transform',
-          (WidgetTester tester) async {
+      testWidgets('handles widgets with transform', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
 
         await tester.pumpWidget(
@@ -357,8 +357,9 @@ void main() {
     });
 
     group('consistency tests', () {
-      testWidgets('multiple calls return same result',
-          (WidgetTester tester) async {
+      testWidgets('multiple calls return same result', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
 
         await tester.pumpWidget(
@@ -384,8 +385,9 @@ void main() {
         expect(bounds2, equals(bounds3));
       });
 
-      testWidgets('bounds update when widget changes',
-          (WidgetTester tester) async {
+      testWidgets('bounds update when widget changes', (
+        WidgetTester tester,
+      ) async {
         final globalKey = GlobalKey();
         double width = 100;
 
@@ -442,11 +444,7 @@ void main() {
       testWidgets('returns proper Rect type', (WidgetTester tester) async {
         final globalKey = GlobalKey();
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Container(key: globalKey),
-          ),
-        );
+        await tester.pumpWidget(MaterialApp(home: Container(key: globalKey)));
 
         final bounds = globalKey.globalPaintBounds;
         if (bounds != null) {

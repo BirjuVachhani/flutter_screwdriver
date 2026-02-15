@@ -16,8 +16,7 @@ extension BrightnessFS<T> on Brightness {
   bool get isLight => this == Brightness.light;
 
   /// Returns toggled value of the brightness.
-  Brightness get toggled =>
-      this == Brightness.dark ? Brightness.light : Brightness.dark;
+  Brightness get toggled => this == Brightness.dark ? Brightness.light : Brightness.dark;
 
   /// Returns the brightness as [String]. example: dark | light
   String get name => toString().split('.').last;

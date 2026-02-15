@@ -88,6 +88,6 @@ extension TextEditingControllerFS on TextEditingController {
 
   /// Executes [block] function only when [text] is blank.
   void whenBlank(VoidCallback block) => onChanged((_) {
-        if (isBlank) block();
-      });
+    if (isBlank) block();
+  });
 }

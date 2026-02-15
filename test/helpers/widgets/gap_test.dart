@@ -97,20 +97,19 @@ void main() {
       expect(gapRenderBox.size.width, equals(gapSize));
       // In horizontal ListView, Gap takes the full height but only the specified width
       expect(
-          gapRenderBox.size.height, greaterThan(0)); // Takes available height
+        gapRenderBox.size.height,
+        greaterThan(0),
+      ); // Takes available height
     });
 
-    testWidgets('Gap throws error when not in Flex or scrollable',
-        (tester) async {
+    testWidgets('Gap throws error when not in Flex or scrollable', (
+      tester,
+    ) async {
       // In Flutter tests, layout errors are caught by the test framework
       // We need to check that the error is properly thrown using takeException
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: Center(
-              child: Gap(10),
-            ),
-          ),
+          home: Scaffold(body: Center(child: Gap(10))),
         ),
       );
 
@@ -119,11 +118,12 @@ void main() {
       expect(exception, isNotNull);
       // The exception might be wrapped by the test framework, so check the string content
       expect(
-          exception.toString(),
-          anyOf([
-            contains('Gap widget can only be used inside a Flex widget'),
-            contains('Multiple exceptions'), // Framework may wrap the error
-          ]));
+        exception.toString(),
+        anyOf([
+          contains('Gap widget can only be used inside a Flex widget'),
+          contains('Multiple exceptions'), // Framework may wrap the error
+        ]),
+      );
     });
 
     testWidgets('Gap handles zero size', (tester) async {
@@ -260,8 +260,9 @@ void main() {
   });
 
   group('Gap in scrollable widgets', () {
-    testWidgets('Gap works in SingleChildScrollView with Column',
-        (tester) async {
+    testWidgets('Gap works in SingleChildScrollView with Column', (
+      tester,
+    ) async {
       const gapSize = 20.0;
 
       await tester.pumpWidget(
@@ -285,8 +286,9 @@ void main() {
       expect(gapRenderBox.size.height, equals(gapSize));
     });
 
-    testWidgets('Gap works in SingleChildScrollView with Row (horizontal)',
-        (tester) async {
+    testWidgets('Gap works in SingleChildScrollView with Row (horizontal)', (
+      tester,
+    ) async {
       const gapSize = 30.0;
 
       await tester.pumpWidget(
@@ -311,8 +313,9 @@ void main() {
       expect(gapRenderBox.size.height, equals(0));
     });
 
-    testWidgets('Gap works in CustomScrollView with SliverList',
-        (tester) async {
+    testWidgets('Gap works in CustomScrollView with SliverList', (
+      tester,
+    ) async {
       const gapSize = 25.0;
 
       await tester.pumpWidget(
@@ -338,8 +341,9 @@ void main() {
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
 
-    testWidgets('Gap works in CustomScrollView with horizontal SliverList',
-        (tester) async {
+    testWidgets('Gap works in CustomScrollView with horizontal SliverList', (
+      tester,
+    ) async {
       const gapSize = 35.0;
 
       await tester.pumpWidget(
@@ -364,7 +368,9 @@ void main() {
       final gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
       expect(gapRenderBox.size.width, equals(gapSize));
       expect(
-          gapRenderBox.size.height, greaterThan(0)); // Takes available height
+        gapRenderBox.size.height,
+        greaterThan(0),
+      ); // Takes available height
     });
 
     testWidgets('Gap works in NestedScrollView', (tester) async {
@@ -469,8 +475,9 @@ void main() {
         ),
       );
 
-      final gapRenderBox =
-          tester.renderObject<RenderBox>(find.byKey(const Key('builder-gap')));
+      final gapRenderBox = tester.renderObject<RenderBox>(
+        find.byKey(const Key('builder-gap')),
+      );
       expect(gapRenderBox.size.height, equals(gapSize));
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
@@ -483,17 +490,16 @@ void main() {
           home: Scaffold(
             body: ListView.separated(
               itemCount: 2,
-              itemBuilder: (context, index) =>
-                  SizedBox(height: 50, child: Text('Item $index')),
-              separatorBuilder: (context, index) =>
-                  const Gap(gapSize, key: Key('separator-gap')),
+              itemBuilder: (context, index) => SizedBox(height: 50, child: Text('Item $index')),
+              separatorBuilder: (context, index) => const Gap(gapSize, key: Key('separator-gap')),
             ),
           ),
         ),
       );
 
-      final gapRenderBox = tester
-          .renderObject<RenderBox>(find.byKey(const Key('separator-gap')));
+      final gapRenderBox = tester.renderObject<RenderBox>(
+        find.byKey(const Key('separator-gap')),
+      );
       expect(gapRenderBox.size.height, equals(gapSize));
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
@@ -516,14 +522,16 @@ void main() {
         ),
       );
 
-      final gapRenderBox =
-          tester.renderObject<RenderBox>(find.byKey(const Key('gap')));
+      final gapRenderBox = tester.renderObject<RenderBox>(
+        find.byKey(const Key('gap')),
+      );
       expect(gapRenderBox.size.height, equals(gapSize));
       expect(gapRenderBox.size.width, greaterThan(0)); // Takes available width
     });
 
-    testWidgets('Gap works in complex nested scrollable structure',
-        (tester) async {
+    testWidgets('Gap works in complex nested scrollable structure', (
+      tester,
+    ) async {
       const outerGapSize = 30.0;
       const innerGapSize = 15.0;
 
@@ -554,10 +562,12 @@ void main() {
         ),
       );
 
-      final outerGapRenderBox =
-          tester.renderObject<RenderBox>(find.byKey(const Key('outer-gap')));
-      final innerGapRenderBox =
-          tester.renderObject<RenderBox>(find.byKey(const Key('inner-gap')));
+      final outerGapRenderBox = tester.renderObject<RenderBox>(
+        find.byKey(const Key('outer-gap')),
+      );
+      final innerGapRenderBox = tester.renderObject<RenderBox>(
+        find.byKey(const Key('inner-gap')),
+      );
 
       // Outer gap in CustomScrollView
       expect(outerGapRenderBox.size.height, equals(outerGapSize));
@@ -577,11 +587,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: Row(
-              children: const [
-                Gap(gapSize, key: testKey),
-              ],
-            ),
+            body: Row(children: const [Gap(gapSize, key: testKey)]),
           ),
         ),
       );
@@ -611,8 +617,9 @@ void main() {
   });
 
   group('Gap updateRenderObject tests', () {
-    testWidgets('Gap updates render object when scrollable context changes',
-        (tester) async {
+    testWidgets('Gap updates render object when scrollable context changes', (
+      tester,
+    ) async {
       const initialSize = 10.0;
       const updatedSize = 20.0;
 
@@ -628,10 +635,7 @@ void main() {
                 setStateCallback = setState;
                 return ListView(
                   scrollDirection: Axis.vertical,
-                  children: [
-                    Gap(currentSize),
-                    const SizedBox(height: 100),
-                  ],
+                  children: [Gap(currentSize), const SizedBox(height: 100)],
                 );
               },
             ),
@@ -654,8 +658,9 @@ void main() {
       expect(gapRenderBox.size.height, equals(updatedSize));
     });
 
-    testWidgets('Gap updateRenderObject handles context changes',
-        (tester) async {
+    testWidgets('Gap updateRenderObject handles context changes', (
+      tester,
+    ) async {
       const gapSize = 15.0;
 
       // Test that updateRenderObject is called when the widget rebuilds
@@ -663,10 +668,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Row(
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 100, height: 100),
-              ],
+              children: const [Gap(gapSize), SizedBox(width: 100, height: 100)],
             ),
           ),
         ),
@@ -682,10 +684,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Row(
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 100, height: 100),
-              ],
+              children: const [Gap(gapSize), SizedBox(width: 100, height: 100)],
             ),
           ),
         ),
@@ -699,19 +698,14 @@ void main() {
   });
 
   group('Gap debugFillProperties tests', () {
-    testWidgets('Gap debugFillProperties includes size property',
-        (tester) async {
+    testWidgets('Gap debugFillProperties includes size property', (
+      tester,
+    ) async {
       const gapSize = 25.0;
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: const [
-                Gap(gapSize),
-              ],
-            ),
-          ),
+          home: Scaffold(body: Row(children: const [Gap(gapSize)])),
         ),
       );
 
@@ -719,29 +713,24 @@ void main() {
       final properties = DiagnosticPropertiesBuilder();
       gap.debugFillProperties(properties);
 
-      final sizeProperty = properties.properties
-          .whereType<DiagnosticsProperty<double>>()
-          .firstWhere((prop) => prop.name == 'size');
+      final sizeProperty = properties.properties.whereType<DiagnosticsProperty<double>>().firstWhere(
+        (prop) => prop.name == 'size',
+      );
 
       expect(sizeProperty.value, equals(gapSize));
     });
   });
 
   group('RenderGap setter tests', () {
-    testWidgets('RenderGap gap setter triggers layout when value changes',
-        (tester) async {
+    testWidgets('RenderGap gap setter triggers layout when value changes', (
+      tester,
+    ) async {
       const initialSize = 10.0;
       const newSize = 20.0;
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: const [
-                Gap(initialSize),
-              ],
-            ),
-          ),
+          home: Scaffold(body: Row(children: const [Gap(initialSize)])),
         ),
       );
 
@@ -751,13 +740,7 @@ void main() {
       // Access the render object through a custom render widget
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: const [
-                Gap(newSize),
-              ],
-            ),
-          ),
+          home: Scaffold(body: Row(children: const [Gap(newSize)])),
         ),
       );
 
@@ -765,8 +748,9 @@ void main() {
       expect(updatedRenderGap.size.width, equals(newSize));
     });
 
-    testWidgets('RenderGap direction setter triggers layout when value changes',
-        (tester) async {
+    testWidgets('RenderGap direction setter triggers layout when value changes', (
+      tester,
+    ) async {
       const gapSize = 15.0;
 
       // Test in a context where direction can be explicitly set through scrollable changes
@@ -781,9 +765,7 @@ void main() {
                 setStateCallback = setState;
                 return ListView(
                   scrollDirection: scrollDirection,
-                  children: const [
-                    Gap(gapSize),
-                  ],
+                  children: const [Gap(gapSize)],
                 );
               },
             ),
@@ -806,8 +788,9 @@ void main() {
   });
 
   group('RenderGap intrinsic dimension tests', () {
-    testWidgets('RenderGap intrinsic dimensions work correctly in Row',
-        (tester) async {
+    testWidgets('RenderGap intrinsic dimensions work correctly in Row', (
+      tester,
+    ) async {
       const gapSize = 30.0;
 
       await tester.pumpWidget(
@@ -835,8 +818,9 @@ void main() {
       expect(gapRenderBox.getMaxIntrinsicHeight(gapSize), equals(0));
     });
 
-    testWidgets('RenderGap intrinsic dimensions work correctly in Column',
-        (tester) async {
+    testWidgets('RenderGap intrinsic dimensions work correctly in Column', (
+      tester,
+    ) async {
       const gapSize = 40.0;
 
       await tester.pumpWidget(
@@ -864,8 +848,9 @@ void main() {
       expect(gapRenderBox.getMaxIntrinsicWidth(gapSize), equals(0));
     });
 
-    testWidgets('RenderGap intrinsic dimensions work correctly in ListView',
-        (tester) async {
+    testWidgets('RenderGap intrinsic dimensions work correctly in ListView', (
+      tester,
+    ) async {
       const gapSize = 25.0;
 
       await tester.pumpWidget(
@@ -890,47 +875,43 @@ void main() {
     });
 
     testWidgets(
-        'RenderGap intrinsic dimensions work correctly in horizontal ListView',
-        (tester) async {
-      const gapSize = 35.0;
+      'RenderGap intrinsic dimensions work correctly in horizontal ListView',
+      (tester) async {
+        const gapSize = 35.0;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ListView(
-              scrollDirection: Axis.horizontal,
-              children: const [
-                SizedBox(width: 50, height: 100),
-                Gap(gapSize),
-                SizedBox(width: 50, height: 100),
-              ],
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  SizedBox(width: 50, height: 100),
+                  Gap(gapSize),
+                  SizedBox(width: 50, height: 100),
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      final gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
+        final gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
 
-      // In horizontal ListView, Gap should have horizontal size
-      expect(gapRenderBox.getMinIntrinsicWidth(0), equals(gapSize));
-      expect(gapRenderBox.getMaxIntrinsicWidth(0), equals(gapSize));
-    });
+        // In horizontal ListView, Gap should have horizontal size
+        expect(gapRenderBox.getMinIntrinsicWidth(0), equals(gapSize));
+        expect(gapRenderBox.getMaxIntrinsicWidth(0), equals(gapSize));
+      },
+    );
   });
 
   group('RenderGap debugFillProperties tests', () {
-    testWidgets('RenderGap debugFillProperties includes gap property',
-        (tester) async {
+    testWidgets('RenderGap debugFillProperties includes gap property', (
+      tester,
+    ) async {
       const gapSize = 20.0;
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: const [
-                Gap(gapSize),
-              ],
-            ),
-          ),
+          home: Scaffold(body: Row(children: const [Gap(gapSize)])),
         ),
       );
 
@@ -938,17 +919,18 @@ void main() {
       final properties = DiagnosticPropertiesBuilder();
       renderGap.debugFillProperties(properties);
 
-      final gapProperty = properties.properties
-          .whereType<DiagnosticsProperty<double>>()
-          .firstWhere((prop) => prop.name == 'gap');
+      final gapProperty = properties.properties.whereType<DiagnosticsProperty<double>>().firstWhere(
+        (prop) => prop.name == 'gap',
+      );
 
       expect(gapProperty.value, equals(gapSize));
     });
   });
 
   group('RenderGap direction getter tests', () {
-    testWidgets('RenderGap direction getter returns correct value',
-        (tester) async {
+    testWidgets('RenderGap direction getter returns correct value', (
+      tester,
+    ) async {
       const gapSize = 10.0;
 
       // Test direction getter in vertical scrollable
@@ -957,9 +939,7 @@ void main() {
           home: Scaffold(
             body: ListView(
               scrollDirection: Axis.vertical,
-              children: const [
-                Gap(gapSize),
-              ],
+              children: const [Gap(gapSize)],
             ),
           ),
         ),
@@ -974,9 +954,7 @@ void main() {
           home: Scaffold(
             body: ListView(
               scrollDirection: Axis.horizontal,
-              children: const [
-                Gap(gapSize),
-              ],
+              children: const [Gap(gapSize)],
             ),
           ),
         ),
@@ -984,18 +962,14 @@ void main() {
 
       final renderGapHorizontal = tester.renderObject(find.byType(Gap));
       expect(
-          (renderGapHorizontal as dynamic).direction, equals(Axis.horizontal));
+        (renderGapHorizontal as dynamic).direction,
+        equals(Axis.horizontal),
+      );
 
       // Test direction getter in Flex widget (should be null)
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: const [
-                Gap(gapSize),
-              ],
-            ),
-          ),
+          home: Scaffold(body: Row(children: const [Gap(gapSize)])),
         ),
       );
 
@@ -1005,19 +979,14 @@ void main() {
   });
 
   group('Gap setter edge cases', () {
-    testWidgets('RenderGap setter handles same value assignment correctly',
-        (tester) async {
+    testWidgets('RenderGap setter handles same value assignment correctly', (
+      tester,
+    ) async {
       const gapSize = 15.0;
 
       // Create a custom render widget to test setter behavior
       final testWidget = MaterialApp(
-        home: Scaffold(
-          body: Row(
-            children: const [
-              Gap(gapSize),
-            ],
-          ),
-        ),
+        home: Scaffold(body: Row(children: const [Gap(gapSize)])),
       );
 
       await tester.pumpWidget(testWidget);
@@ -1031,95 +1000,86 @@ void main() {
     });
 
     testWidgets(
-        'RenderGap direction setter executes assignment when direction actually changes',
-        (tester) async {
-      const gapSize = 20.0;
+      'RenderGap direction setter executes assignment when direction actually changes',
+      (tester) async {
+        const gapSize = 20.0;
 
-      // Start with a Row (horizontal direction)
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 50, height: 50),
-              ],
+        // Start with a Row (horizontal direction)
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Row(
+                children: const [Gap(gapSize), SizedBox(width: 50, height: 50)],
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      var gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
-      expect(gapRenderBox.size.width, equals(gapSize));
-      expect(gapRenderBox.size.height, equals(0));
+        var gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
+        expect(gapRenderBox.size.width, equals(gapSize));
+        expect(gapRenderBox.size.height, equals(0));
 
-      // Change to Column (vertical direction) - this should trigger the direction setter
-      // with a different value, executing lines 85-86
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Column(
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 50, height: 50),
-              ],
+        // Change to Column (vertical direction) - this should trigger the direction setter
+        // with a different value, executing lines 85-86
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Column(
+                children: const [Gap(gapSize), SizedBox(width: 50, height: 50)],
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
-      expect(gapRenderBox.size.width, equals(0));
-      expect(gapRenderBox.size.height, equals(gapSize));
-    });
+        gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
+        expect(gapRenderBox.size.width, equals(0));
+        expect(gapRenderBox.size.height, equals(gapSize));
+      },
+    );
 
     testWidgets(
-        'RenderGap direction setter executes assignment lines when direction value changes',
-        (tester) async {
-      const gapSize = 25.0;
+      'RenderGap direction setter executes assignment lines when direction value changes',
+      (tester) async {
+        const gapSize = 25.0;
 
-      // Start with a specific scrollable direction (vertical ListView)
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ListView(
-              scrollDirection: Axis.vertical,
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 50, height: 50),
-              ],
+        // Start with a specific scrollable direction (vertical ListView)
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ListView(
+                scrollDirection: Axis.vertical,
+                children: const [Gap(gapSize), SizedBox(width: 50, height: 50)],
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      // Verify initial state - direction should be Axis.vertical from scrollable context
-      var gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
-      expect(gapRenderBox.size.height, equals(gapSize));
+        // Verify initial state - direction should be Axis.vertical from scrollable context
+        var gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
+        expect(gapRenderBox.size.height, equals(gapSize));
 
-      // Now change to horizontal scrollable - this should trigger the direction setter
-      // with a DIFFERENT value (Axis.horizontal vs Axis.vertical), executing lines 85-86
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ListView(
-              scrollDirection: Axis.horizontal,
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 50, height: 50),
-              ],
+        // Now change to horizontal scrollable - this should trigger the direction setter
+        // with a DIFFERENT value (Axis.horizontal vs Axis.vertical), executing lines 85-86
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [Gap(gapSize), SizedBox(width: 50, height: 50)],
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      // The direction change should trigger _direction = value and markNeedsLayout()
-      gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
-      expect(gapRenderBox.size.width, equals(gapSize));
-    });
+        // The direction change should trigger _direction = value and markNeedsLayout()
+        gapRenderBox = tester.renderObject<RenderBox>(find.byType(Gap));
+        expect(gapRenderBox.size.width, equals(gapSize));
+      },
+    );
 
-    testWidgets('RenderGap direction setter from null to non-null value',
-        (tester) async {
+    testWidgets('RenderGap direction setter from null to non-null value', (
+      tester,
+    ) async {
       const gapSize = 30.0;
 
       // Start with a Flex widget (no scrollable context - direction will be null)
@@ -1127,10 +1087,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Row(
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 50, height: 50),
-              ],
+              children: const [Gap(gapSize), SizedBox(width: 50, height: 50)],
             ),
           ),
         ),
@@ -1147,10 +1104,7 @@ void main() {
           home: Scaffold(
             body: ListView(
               scrollDirection: Axis.vertical,
-              children: const [
-                Gap(gapSize),
-                SizedBox(width: 50, height: 50),
-              ],
+              children: const [Gap(gapSize), SizedBox(width: 50, height: 50)],
             ),
           ),
         ),
@@ -1161,9 +1115,9 @@ void main() {
       expect(gapRenderBox.size.height, equals(gapSize));
     });
 
-    testWidgets(
-        'RenderGap direction setter non-null to different non-null value',
-        (tester) async {
+    testWidgets('RenderGap direction setter non-null to different non-null value', (
+      tester,
+    ) async {
       const gapSize = 35.0;
 
       // This is the key test - start with a vertical PageView (scrollable context)
