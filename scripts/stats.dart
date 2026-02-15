@@ -1,0 +1,176 @@
+// Author: Birju Vachhani
+// Created Date: April 05, 2021
+
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:analyzer/dart/analysis/results.dart';
+import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/file_system/physical_file_system.dart';
+import 'package:analyzer/src/dart/analysis/analysis_context_collection.dart';
+import 'package:intl/intl.dart';
+
+class Stats {
+  List<String> functions = [];
+  List<String> classes = [];
+  List<String> variables = [];
+  List<String> extensionTypes = [];
+  int extensions = 0;
+  int typedefs = 0;
+  int mixins = 0;
+
+  Stats({
+    required this.functions,
+    required this.classes,
+    required this.variables,
+    required this.extensions,
+    required this.extensionTypes,
+    required this.typedefs,
+    required this.mixins,
+  });
+
+  Stats operator +(Stats other) => Stats(
+    functions: functions + other.functions,
+    classes: classes + other.classes,
+    variables: variables + other.variables,
+    extensions: extensions + other.extensions,
+    extensionTypes: extensionTypes + other.extensionTypes,
+    typedefs: typedefs + other.typedefs,
+    mixins: mixins + other.mixins,
+  );
+}
+
+/// Script to generate stats for this package.
+/// Usage: dart stats.dart [--dry]
+/// --dry: if provided, it will not update README.md file. It will only print
+/// the stats to console.
+void main(List<String> args) async {
+  final screwdriverStats = await getStats(
+    'package:screwdriver/screwdriver.dart',
+  );
+  final screwdriverIoStats = await getStats(
+    'package:screwdriver/screwdriver_io.dart',
+  );
+
+  final isDry = args.contains('--dry');
+
+  final stats = screwdriverStats + screwdriverIoStats;
+
+  final output =
+      '''
+
+```yaml  
+Extensions:                    ${stats.extensions}
+Extension Types:               ${stats.extensionTypes.length}
+Helper Classes:                ${stats.classes.length}
+Helper Functions & Getters:    ${stats.functions.length + stats.variables.length}
+Typedefs:                      ${stats.typedefs}
+Mixins:                        ${stats.mixins}
+```
+
+> *Last Updated: ${DateFormat('EEE, MMM dd, yyyy - hh:mm a').format(DateTime.now())}*
+
+''';
+
+  if (!isDry) {
+    log('Updating README.md...');
+    final readMeFile = File('README.md');
+    var content = readMeFile.readAsStringSync();
+    final prefix = '<!---stats_start-->';
+    final suffix = '<!---stats_end-->';
+
+    final start = content.indexOf(prefix) + prefix.length;
+    final end = content.indexOf(suffix);
+    content = content.replaceRange(start, end, output);
+    readMeFile.writeAsStringSync(content);
+  } else {
+    log('Dry run, not updating README.md...');
+  }
+
+  log('');
+  log('==================================================================');
+  log('STATS');
+  log('==================================================================');
+  log('Extensions:                    ${stats.extensions}');
+  log('Extension Types:               ${stats.extensionTypes.length}');
+  log('Helper Classes:                ${stats.classes.length}');
+  log(
+    'Helper Functions & Getters:    '
+    '${stats.functions.length + stats.variables.length}',
+  );
+  log('Typedefs:                      ${stats.typedefs}');
+  log('Mixins:                        ${stats.mixins}');
+  log('==================================================================');
+}
+
+Future<Stats> getStats(String library) async {
+  final collection = AnalysisContextCollectionImpl(
+    includedPaths: <String>[Directory('lib').absolute.path],
+    resourceProvider: PhysicalResourceProvider.INSTANCE,
+  );
+  final session = collection.contexts[0].currentSession;
+  final libPath = session.uriConverter.uriToPath(Uri.parse(library)) ?? '';
+  final result = await session.getResolvedLibrary(libPath) as ResolvedLibraryResult;
+  final lib = result.element;
+  final helpersFunctions = lib.topLevelFunctions.wherePublic().map((e) => e.displayName).toList();
+  final helpersClasses = lib.classes.wherePublic().map((e) => e.displayName).toList();
+  final helperVariables = lib.getters.wherePublic().map((e) => e.displayName).toList();
+  final extensionTypes = lib.extensionTypes.wherePublic().map((e) => e.displayName).toList();
+  var extensions = 0;
+  extensions += lib.extensions.wherePublic().expand((element) => element.fields).length;
+  extensions += lib.extensions.wherePublic().expand((element) => element.methods).length;
+  final typedefs = lib.typeAliases.wherePublic().length;
+  final mixins = lib.mixins.wherePublic().length;
+
+  final stats = Stats(
+    variables: helperVariables,
+    classes: helpersClasses,
+    functions: helpersFunctions,
+    extensions: extensions,
+    extensionTypes: extensionTypes,
+    typedefs: typedefs,
+    mixins: mixins,
+  );
+
+  collectExports(result.element.firstFragment, stats, checkForSrcDir: true);
+  return stats;
+}
+
+void collectExports(
+  LibraryFragment fragment,
+  Stats stats, {
+  bool checkForSrcDir = false,
+}) {
+  for (final exp in fragment.libraryExports) {
+    final uri = exp.uri;
+    if (uri is! DirectiveUriWithLibrary) continue;
+    if (!checkForSrcDir || uri.relativeUriString.startsWith('src')) {
+      final exportedLib = exp.exportedLibrary!;
+      stats.classes.addAll(
+        exportedLib.classes.wherePublic().map((e) => e.displayName),
+      );
+      stats.extensionTypes.addAll(
+        exportedLib.extensionTypes.wherePublic().map((e) => e.displayName),
+      );
+      stats.functions.addAll(
+        exportedLib.topLevelFunctions.wherePublic().map((e) => e.displayName),
+      );
+      stats.variables.addAll(
+        exportedLib.getters.wherePublic().map((e) => e.displayName),
+      );
+      stats.extensions += exportedLib.extensions.wherePublic().expand((element) => element.methods).length;
+      stats.extensions += exportedLib.extensions.wherePublic().expand((element) => element.fields).length;
+      stats.typedefs += exportedLib.typeAliases.wherePublic().length;
+      stats.mixins += exportedLib.mixins.wherePublic().length;
+
+      final exportedFragment = exportedLib.firstFragment;
+      if (exportedFragment.libraryExports.isNotEmpty) {
+        collectExports(exportedFragment, stats);
+      }
+    }
+  }
+}
+
+extension ElementListExt<T extends Element> on List<T> {
+  Iterable<T> wherePublic() => where((element) => element.isPublic);
+}
