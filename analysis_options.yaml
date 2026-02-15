@@ -7,6 +7,10 @@ analyzer:
   exclude:
     - test/.test_coverage.dart
 
+formatter:
+  page_width: 120
+  trailing_commas: preserve
+
 linter:
   rules:
     camel_case_types: true
