@@ -1,3 +1,11 @@
+## 4.0.0
+
+- [BREAKING] Bump up Dart SDK constraint to `>=3.13.0`.
+- [BREAKING] Bump up Flutter SDK constraint to `>=3.47.0`.
+- [BREAKING] Migrate to `material_ui` and `cupertino_ui` packages for Material and Cupertino related extensions.
+- Update analysis options for formatter settings.
+- Code formatting and lint fixes.
+
 ## 3.3.1
 
 - Add `StreamSubscriptionStateMixin` for easier management of stream subscriptions in stateful widgets.
