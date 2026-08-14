@@ -24,7 +24,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       - name: Generate Stats
-        run: dart stats.dart
+        run: dart scripts/stats.dart
+      - name: Generate Extensions Docs
+        run: dart scripts/extensions_docs_generator.dart -o EXTENSIONS.md
       - name: Update Stats on README.md
         uses: EndBug/add-and-commit@v7
         env:
