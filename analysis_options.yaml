@@ -6,6 +6,13 @@ analyzer:
     strict-raw-types: true
   exclude:
     - test/.test_coverage.dart
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
 
 formatter:
   page_width: 120
