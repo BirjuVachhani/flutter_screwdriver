@@ -1,7 +1,7 @@
 // Author: Claude Code
 // Created Date: September 17, 2025
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,7 +1,7 @@
 // Author: Birju Vachhani
 // Created Date: September 21, 2025
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screwdriver/src/helpers/app_lifecycle_observer_mixin.dart';
 import 'package:flutter_test/flutter_test.dart';
 

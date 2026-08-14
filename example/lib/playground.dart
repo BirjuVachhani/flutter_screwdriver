@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -51,7 +51,8 @@ class _PlaygroundHomeState extends State<PlaygroundHome> {
                 children: [
                   InkWell(
                     onTap: () => launchUrlString(
-                        'https://github.com/BirjuVachhani/flutter_screwdriver'),
+                      'https://github.com/BirjuVachhani/flutter_screwdriver',
+                    ),
                     customBorder: StadiumBorder(),
                     child: Padding(
                       padding: const EdgeInsets.all(8),
@@ -75,7 +76,8 @@ class _PlaygroundHomeState extends State<PlaygroundHome> {
                   ),
                   InkWell(
                     onTap: () => launchUrlString(
-                        'https://pub.dev/packages/flutter_screwdriver'),
+                      'https://pub.dev/packages/flutter_screwdriver',
+                    ),
                     customBorder: StadiumBorder(),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -116,8 +118,9 @@ class _PlaygroundHomeState extends State<PlaygroundHome> {
             ],
           ),
           VerticalDivider(
-              width: 1,
-              color: context.colorScheme.onSurface.withValues(alpha: 0.1)),
+            width: 1,
+            color: context.colorScheme.onSurface.withValues(alpha: 0.1),
+          ),
           Expanded(
             child: IndexedStack(
               index: selectedIndex,
@@ -158,7 +161,8 @@ class LinkSpanExamples extends StatelessWidget {
                 LinkSpan(
                   onTap: () {
                     launchUrlString(
-                        'https://github.com/birjuvachhani/flutter_screwdriver');
+                      'https://github.com/birjuvachhani/flutter_screwdriver',
+                    );
                   },
                   text: 'Link Span ',
                   style: TextStyle(fontWeight: FontWeight.w600),
@@ -177,7 +181,8 @@ class LinkSpanExamples extends StatelessWidget {
                 LinkSpan(
                   onTap: () {
                     launchUrlString(
-                        'https://github.com/birjuvachhani/flutter_screwdriver');
+                      'https://github.com/birjuvachhani/flutter_screwdriver',
+                    );
                   },
                   text: 'Link Span',
                   style: TextStyle(
@@ -199,7 +204,8 @@ class LinkSpanExamples extends StatelessWidget {
                 LinkSpan(
                   onTap: () {
                     launchUrlString(
-                        'https://github.com/birjuvachhani/flutter_screwdriver');
+                      'https://github.com/birjuvachhani/flutter_screwdriver',
+                    );
                   },
                   text: 'Link Span',
                   hoverStyle: TextStyle(
@@ -227,7 +233,8 @@ class LinkSpanExamples extends StatelessWidget {
                 LinkSpan(
                   onTap: () {
                     launchUrlString(
-                        'https://github.com/birjuvachhani/flutter_screwdriver');
+                      'https://github.com/birjuvachhani/flutter_screwdriver',
+                    );
                   },
                   text: 'Link Span',
                   prefix: Icon(Icons.link),
@@ -248,7 +255,8 @@ class LinkSpanExamples extends StatelessWidget {
                 LinkSpan(
                   onTap: () {
                     launchUrlString(
-                        'https://github.com/birjuvachhani/flutter_screwdriver');
+                      'https://github.com/birjuvachhani/flutter_screwdriver',
+                    );
                   },
                   text: 'Link Span',
                   suffix: Padding(
@@ -272,12 +280,11 @@ class LinkSpanExamples extends StatelessWidget {
                 LinkSpan(
                   onTap: () {
                     launchUrlString(
-                        'https://github.com/birjuvachhani/flutter_screwdriver');
+                      'https://github.com/birjuvachhani/flutter_screwdriver',
+                    );
                   },
                   text: 'Link Span',
-                  hoverStyle: TextStyle(
-                    color: Colors.white,
-                  ),
+                  hoverStyle: TextStyle(color: Colors.white),
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   background: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -306,28 +313,27 @@ class LinkSpanExamples extends StatelessWidget {
                 LinkSpan(
                   onTap: () {
                     launchUrlString(
-                        'https://github.com/birjuvachhani/flutter_screwdriver');
+                      'https://github.com/birjuvachhani/flutter_screwdriver',
+                    );
                   },
                   text: 'Link Span',
-                  hoverStyle: TextStyle(
-                    color: Colors.white,
-                  ),
+                  hoverStyle: TextStyle(color: Colors.white),
                   padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   background: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: context.colorScheme.surfaceContainer
-                        .withValues(alpha: 0.5),
+                    color: context.colorScheme.surfaceContainer.withValues(
+                      alpha: 0.5,
+                    ),
                     border: Border.all(
-                      color:
-                          context.colorScheme.onSurface.withValues(alpha: 0.1),
+                      color: context.colorScheme.onSurface.withValues(
+                        alpha: 0.1,
+                      ),
                     ),
                   ),
                   hoverBackground: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: Colors.blue.shade900,
-                    border: Border.all(
-                      color: Colors.blue.shade900,
-                    ),
+                    border: Border.all(color: Colors.blue.shade900),
                   ),
                   style: TextStyle(fontWeight: FontWeight.w600),
                   duration: Duration(milliseconds: 300),
@@ -350,10 +356,7 @@ class LinkSpanExamples extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: DefaultTextStyle.merge(
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
           overflow: TextOverflow.fade,
           softWrap: true,
           child: child,
@@ -409,8 +412,9 @@ class AsyncLoadingBuilderExamples extends StatelessWidget {
   Future<void> asyncOperation(BuildContext context) async {
     final messenger = ScaffoldMessenger.of(context);
     await Future.delayed(Duration(seconds: 3));
-    messenger
-        .showSnackBar(SnackBar(content: Text('Async operation completed!')));
+    messenger.showSnackBar(
+      SnackBar(content: Text('Async operation completed!')),
+    );
     // Simulate some work
   }
 }
@@ -426,14 +430,18 @@ class AffinityWidgetExamples extends StatelessWidget {
         SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Text('Affinity Widgets',
-              style: context.textTheme.titleLarge!
-                  .copyWith(fontWeight: FontWeight.w600)),
+          child: Text(
+            'Affinity Widgets',
+            style: context.textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Text(
-              'A collection of widgets to arrange leading/trailing widgets with a child widget with less boilerplate.'),
+            'A collection of widgets to arrange leading/trailing widgets with a child widget with less boilerplate.',
+          ),
         ),
         Expanded(
           child: GridView(
@@ -471,8 +479,7 @@ class AffinityWidgetExamples extends StatelessWidget {
               ),
               buildItem(
                 context,
-                title:
-                    'A HorizontalAffinity widget with leading and trailing icon and label.',
+                title: 'A HorizontalAffinity widget with leading and trailing icon and label.',
                 child: FilledButton(
                   onPressed: () {},
                   child: HorizontalAffinity(
@@ -491,18 +498,21 @@ class AffinityWidgetExamples extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: context.colorScheme.tertiaryContainer,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: context.colorScheme.tertiary,
-                    ),
+                    border: Border.all(color: context.colorScheme.tertiary),
                   ),
                   child: HorizontalAffinity(
-                    leading: Icon(Icons.info_outline,
-                        color: context.colorScheme.tertiary),
+                    leading: Icon(
+                      Icons.info_outline,
+                      color: context.colorScheme.tertiary,
+                    ),
                     mainAxisAlignment: MainAxisAlignment.start,
-                    child: Text('Title',
-                        style: TextStyle(
-                            color: context.colorScheme.tertiary,
-                            fontWeight: FontWeight.w600)),
+                    child: Text(
+                      'Title',
+                      style: TextStyle(
+                        color: context.colorScheme.tertiary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -515,45 +525,52 @@ class AffinityWidgetExamples extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: context.colorScheme.tertiaryContainer,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: context.colorScheme.tertiary,
-                    ),
+                    border: Border.all(color: context.colorScheme.tertiary),
                   ),
                   child: VerticalAffinity(
                     spacing: 0,
-                    leading: Icon(Icons.arrow_upward_rounded,
-                        color: context.colorScheme.tertiary),
-                    child: Text('Upvote',
-                        style: TextStyle(
-                            color: context.colorScheme.tertiary,
-                            fontWeight: FontWeight.w600)),
+                    leading: Icon(
+                      Icons.arrow_upward_rounded,
+                      color: context.colorScheme.tertiary,
+                    ),
+                    child: Text(
+                      'Upvote',
+                      style: TextStyle(
+                        color: context.colorScheme.tertiary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
               ),
               buildItem(
                 context,
-                title:
-                    'A VerticalAffinity widget with leading, trailing icon and label.',
+                title: 'A VerticalAffinity widget with leading, trailing icon and label.',
                 fontSize: 18,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: context.colorScheme.tertiaryContainer,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: context.colorScheme.tertiary,
-                    ),
+                    border: Border.all(color: context.colorScheme.tertiary),
                   ),
                   child: VerticalAffinity(
                     spacing: 0,
-                    leading:
-                        Icon(Icons.add, color: context.colorScheme.tertiary),
-                    trailing:
-                        Icon(Icons.remove, color: context.colorScheme.tertiary),
-                    child: Text('50',
-                        style: TextStyle(
-                            color: context.colorScheme.tertiary,
-                            fontWeight: FontWeight.w600)),
+                    leading: Icon(
+                      Icons.add,
+                      color: context.colorScheme.tertiary,
+                    ),
+                    trailing: Icon(
+                      Icons.remove,
+                      color: context.colorScheme.tertiary,
+                    ),
+                    child: Text(
+                      '50',
+                      style: TextStyle(
+                        color: context.colorScheme.tertiary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -584,7 +601,9 @@ class AffinityWidgetExamples extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                    fontWeight: FontWeight.w500, fontSize: fontSize ?? 20),
+                  fontWeight: FontWeight.w500,
+                  fontSize: fontSize ?? 20,
+                ),
               ),
             ),
             child,
@@ -597,8 +616,9 @@ class AffinityWidgetExamples extends StatelessWidget {
   Future<void> asyncOperation(BuildContext context) async {
     final messenger = ScaffoldMessenger.of(context);
     await Future.delayed(Duration(seconds: 3));
-    messenger
-        .showSnackBar(SnackBar(content: Text('Async operation completed!')));
+    messenger.showSnackBar(
+      SnackBar(content: Text('Async operation completed!')),
+    );
     // Simulate some work
   }
 }

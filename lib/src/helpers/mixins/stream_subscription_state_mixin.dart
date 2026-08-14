@@ -34,7 +34,7 @@
 
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
 /// A mixin that manages stream subscriptions in a [StatefulWidget]s state and automatically
 /// cancels them when the state is disposed.

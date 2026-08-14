@@ -1,7 +1,7 @@
 // Author: Claude Code
 // Created Date: September 22, 2025
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screwdriver/src/routes/fade_scale_page_route.dart';
 import 'package:flutter_test/flutter_test.dart';
 

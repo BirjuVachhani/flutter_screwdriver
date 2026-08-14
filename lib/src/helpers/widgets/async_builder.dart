@@ -7,12 +7,11 @@ typedef SetFutureFunction = Future<R> Function<R>(Future<R> future);
 /// [BuildContext], a boolean indicating whether the widget is currently
 /// loading, and a function to set a new future. The builder should return a
 /// widget that represents the current state of the asynchronous operation.
-typedef AsyncLoadingBuilderBuilder =
-    Widget Function(
-      BuildContext context,
-      bool loading,
-      SetFutureFunction setFuture,
-    );
+typedef AsyncLoadingBuilderBuilder = Widget Function(
+  BuildContext context,
+  bool loading,
+  SetFutureFunction setFuture,
+);
 
 /// A widget that builds itself based on the state of an asynchronous operation.
 /// It uses a [FutureBuilder] to manage the state of the asynchronous operation

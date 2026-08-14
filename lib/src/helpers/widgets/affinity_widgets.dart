@@ -4,7 +4,7 @@
  * found in the LICENSE file.
  */
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// Represents the affinity of the widget's [leading] and [trailing] widgets
 /// in affinity widgets ([HorizontalAffinity] and [VerticalAffinity]).

@@ -2,7 +2,7 @@
 // Created Date: September 21, 2025
 
 import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screwdriver/flutter_screwdriver.dart';
 import 'package:flutter_test/flutter_test.dart';
 

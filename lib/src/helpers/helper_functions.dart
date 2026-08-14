@@ -5,8 +5,8 @@
 // Author: Birju Vachhani
 // Created Date: September 01, 2020
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 /// Alias for closing the app by invoking [SystemNavigator.pop]
 Future<void> closeApp({bool animated = true}) => SystemNavigator.pop(animated: animated);

@@ -1,12 +1,13 @@
 name: example
 
 environment:
-  sdk: '>=3.5.0 <4.0.0'
-  flutter: '>=3.5.0 <4.0.0'
+  sdk: '>=3.13.0 <4.0.0'
+  flutter: '>=3.47.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  material_ui: ">=1.0.0 <2.0.0"
   flutter_screwdriver:
     path: ../
   url_launcher: ^6.3.2

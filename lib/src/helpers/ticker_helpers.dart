@@ -4,7 +4,7 @@
  * found in the LICENSE file.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/scheduler.dart';
 
 /// Represents the mode of ticking. It can be millisecond, second, minute, or hour.

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// Provides page route with fade-scale material transition
 /// from animations package.

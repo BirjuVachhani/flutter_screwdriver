@@ -4,8 +4,8 @@
  * found in the LICENSE file.
  */
 
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
 
 /// Provides a widget that runs a callback after the first frame is rendered.
 class PostFrame extends StatefulWidget {

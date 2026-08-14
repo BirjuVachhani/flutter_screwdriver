@@ -1,7 +1,7 @@
 // Author: Birju Vachhani
 // Created Date: September 21, 2025
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screwdriver/src/helpers/clear_focus_navigator_observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 

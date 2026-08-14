@@ -4,14 +4,15 @@ version: 3.3.1
 homepage: https://github.com/birjuvachhani/flutter_screwdriver
 
 environment:
-  sdk: '>=3.9.0 <4.0.0'
-  flutter: '>=3.10.0'
+  sdk: '>=3.13.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  animations: ">=2.0.0 <3.0.0"
-  args: ">=2.5.0 <3.0.0"
+  material_ui: ">=1.0.0 <2.0.0"
+  cupertino_ui: ">=1.0.0 <2.0.0"
+  animations: ">=2.2.0 <3.0.0"
 
 dev_dependencies:
   flutter_test:
@@ -20,5 +21,5 @@ dev_dependencies:
   analyzer: ^14.1.0
   intl: ^0.20.3
   mockito: ^5.8.1
-
+  args: ^2.7.0
 scripts: scripts.yaml
