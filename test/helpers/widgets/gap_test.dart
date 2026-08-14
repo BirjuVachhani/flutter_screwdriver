@@ -511,7 +511,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ReorderableListView(
-              onReorder: (oldIndex, newIndex) {},
+              onReorderItem: (oldIndex, newIndex) {},
               children: const [
                 SizedBox(key: Key('1'), height: 50),
                 Gap(gapSize, key: Key('gap')),
