@@ -1,3 +1,7 @@
+## 4.0.0+1
+
+- Upgrade `animations` package to `3.0.0`.
+
 ## 4.0.0
 
 - [BREAKING] Bump up Dart SDK constraint to `>=3.13.0`.
